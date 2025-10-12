@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Black Comedor — El Ritual del Hambre</title>
+
+  <!-- Tailwind + GSAP -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+  <!-- Ionicons -->
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="CSS/restaurante.css" />
+</head>
+
+<body class="bg-black text-gray-100 font-mono overflow-x-hidden relative crt-distortion">
+
+  <!-- SCANLINES / OVERLAY -->
+  <div class="scanlines pointer-events-none"></div>
+
+  <!-- NAVBAR -->
+  <nav class="fixed w-full z-50 bg-black bg-opacity-75 backdrop-blur-md border-b border-red-900 px-6 py-4 flex justify-between items-center">
+    <div class="chromatic text-2xl font-bold tracking-widest text-red-500">
+      BLACK COMEDOR
+    </div>
+    <ul class="flex space-x-6 text-lg">
+      <li><a href="#ritual" class="hover:text-red-500 flex items-center chromatic"><ion-icon name="flame-outline" class="mr-1"></ion-icon>Ritual</a></li>
+      <li><a href="#menu" class="hover:text-red-500 flex items-center chromatic"><ion-icon name="restaurant-outline" class="mr-1"></ion-icon>Carta</a></li>
+      <li><a href="#cocteles" class="hover:text-red-500 flex items-center chromatic"><ion-icon name="wine-outline" class="mr-1"></ion-icon>Coctelería</a></li>
+      <li><a href="#clips" class="hover:text-red-500 flex items-center chromatic"><ion-icon name="videocam-outline" class="mr-1"></ion-icon>Archivos VHS</a></li>
+      <li><a href="#testimonios" class="hover:text-red-500 flex items-center chromatic"><ion-icon name="people-outline" class="mr-1"></ion-icon>Testimonios</a></li>
+      <li><a href="#reserva" class="hover:text-red-500 flex items-center chromatic"><ion-icon name="calendar-outline" class="mr-1"></ion-icon>Convocatoria</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO BANNER -->
+  <header class="relative h-screen flex items-center justify-center text-center overflow-hidden">
+    <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover opacity-50">
+      <source src="./assets/vhs_intro.mp4" type="video/mp4">
+    </video>
+    <div class="absolute inset-0 bg-black bg-opacity-80"></div>
+    <div class="relative z-10 px-4">
+      <h1 class="text-6xl md:text-8xl chromatic mb-4 tracking-widest uppercase">
+        El Ritual del Hambre
+      </h1>
+      <p class="text-xl md:text-2xl max-w-3xl mx-auto text-gray-300 leading-relaxed">
+        Donde cada plato invoca un recuerdo prohibido.  
+        <span class="text-red-500 italic">El hambre no es física, es ancestral.</span>
+      </p>
+      <a href="#menu" class="mt-10 inline-block px-10 py-4 bg-gradient-to-r from-red-700 to-purple-700 text-black font-bold rounded hover:scale-105 transition-transform">
+        Iniciar el Banquete
+      </a>
+    </div>
+  </header>
+
+  <main class="space-y-40 relative z-10">
+
+    <!-- RITUAL / HISTORIA -->
+    <section id="ritual" class="py-20 px-6 max-w-6xl mx-auto vhs-section">
+      <h2 class="text-5xl text-center mb-12 chromatic">Origen del Comedor</h2>
+      <div class="grid md:grid-cols-2 gap-10 items-center">
+        <img src="./assets/chef_occulto.jpg" alt="Chef del Culto" class="rounded-lg shadow-xl hover:scale-105 transition-transform" />
+        <div class="space-y-4 text-lg text-gray-300 leading-relaxed">
+          <p>Fundado sobre los cimientos de un templo olvidado, Black Comedor mezcla la alta cocina con rituales de evocación. Cada plato es una ofrenda; cada sabor, un sacrificio.</p>
+          <p>Los comensales afirman sentir cómo las paredes respiran, y el sonido de una cinta girando acompaña cada bocado.</p>
+          <p class="italic text-red-400">“No vengas con hambre. Ven con devoción.”</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- MENÚ -->
+    <section id="menu" class="py-20 px-6 bg-black bg-opacity-80 border-t border-red-800">
+      <h2 class="text-5xl text-center mb-12 chromatic">Carta del Abismo</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-6xl mx-auto">
+        <!-- Items dinámicos listos para animación con JS si quieres -->
+        <div class="menu-item card p-6 text-center">
+          <img src="./assets/pizza_void.jpg" class="rounded mb-3 w-full h-56 object-cover" alt="Pizza del Vacío">
+          <h3 class="text-2xl font-bold mb-2 chromatic">Pizza del Vacío</h3>
+          <p class="text-gray-400">Fermentada bajo luna nueva, su masa palpita levemente antes de servirse.</p>
+        </div>
+        <div class="menu-item card p-6 text-center">
+          <img src="./assets/sopa_eco.jpg" class="rounded mb-3 w-full h-56 object-cover" alt="Sopa de Ecos">
+          <h3 class="text-2xl font-bold mb-2 chromatic">Sopa de Ecos</h3>
+          <p class="text-gray-400">El caldo murmura nombres olvidados. Algunos aseguran escuchar el suyo.</p>
+        </div>
+        <div class="menu-item card p-6 text-center">
+          <img src="./assets/carne_niebla.jpg" class="rounded mb-3 w-full h-56 object-cover" alt="Carne de la Niebla">
+          <h3 class="text-2xl font-bold mb-2 chromatic">Carne de la Niebla</h3>
+          <p class="text-gray-400">Servida envuelta en humo real. Inspirada en los mitos de Silent Hill.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- COCTELERÍA -->
+    <section id="cocteles" class="py-20 px-6 bg-black bg-opacity-90">
+      <h2 class="text-5xl text-center mb-12 chromatic">Coctelería del Culto</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-6xl mx-auto">
+        <div class="flip-card card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front p-6 text-center rounded-lg">
+              <img src="./assets/azathoth_eye.jpg" alt="Ojo de Azathoth" class="rounded mb-4">
+              <h3 class="text-2xl font-bold chromatic">Ojo de Azathoth</h3>
+            </div>
+            <div class="flip-card-back p-6 flex flex-col justify-center bg-black border border-red-700 rounded-lg">
+              <p class="text-gray-300 text-lg leading-relaxed">Vodka, jugo de granada, y un toque de “mirada”. Nunca parpadea.</p>
+            </div>
+          </div>
+        </div>
+        <div class="flip-card card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front p-6 text-center rounded-lg">
+              <img src="./assets/deep_tear.jpg" alt="Lágrimas del Mar Profundo" class="rounded mb-4">
+              <h3 class="text-2xl font-bold chromatic">Lágrimas del Mar Profundo</h3>
+            </div>
+            <div class="flip-card-back p-6 flex flex-col justify-center bg-black border border-blue-700 rounded-lg">
+              <p class="text-gray-300 text-lg leading-relaxed">Gin azul, agua tónica y sal marina ancestral. Brilla bajo luz UV.</p>
+            </div>
+          </div>
+        </div>
+        <div class="flip-card card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front p-6 text-center rounded-lg">
+              <img src="./assets/necronomix.jpg" alt="Necronomix" class="rounded mb-4">
+              <h3 class="text-2xl font-bold chromatic">Necronomix</h3>
+            </div>
+            <div class="flip-card-back p-6 flex flex-col justify-center bg-black border border-green-700 rounded-lg">
+              <p class="text-gray-300 text-lg leading-relaxed">Ron oscuro, café y polvo de “página arrancada”. Peligroso si se agita.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ARCHIVOS VHS -->
+    <section id="clips" class="py-20 px-6">
+      <h2 class="text-5xl text-center mb-12 chromatic">Archivos Perdidos</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        <video src="./assets/ritual1.mp4" controls class="rounded shadow-lg hover:scale-105 transition-transform"></video>
+        <video src="./assets/ritual2.mp4" controls class="rounded shadow-lg hover:scale-105 transition-transform"></video>
+        <video src="./assets/ritual3.mp4" controls class="rounded shadow-lg hover:scale-105 transition-transform"></video>
+      </div>
+    </section>
+
+    <!-- TESTIMONIOS -->
+    <section id="testimonios" class="py-20 px-6 bg-black bg-opacity-80">
+      <h2 class="text-5xl text-center mb-12 chromatic">Testimonios del Culto</h2>
+      <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+        <blockquote class="p-6 border border-red-700 rounded-lg bg-opacity-60">
+          <p class="italic text-gray-300">“La sopa me habló. Escuché mi nombre... y respondí.”</p>
+          <footer class="mt-4 text-sm text-red-400">— Anónimo, 2024</footer>
+        </blockquote>
+        <blockquote class="p-6 border border-purple-700 rounded-lg bg-opacity-60">
+          <p class="italic text-gray-300">“Después del Necronomix, el espejo me devolvió otra cara.”</p>
+          <footer class="mt-4 text-sm text-purple-400">— Invitado VIP</footer>
+        </blockquote>
+        <blockquote class="p-6 border border-green-700 rounded-lg bg-opacity-60">
+          <p class="italic text-gray-300">“Volvería... si el lugar siguiera existiendo.”</p>
+          <footer class="mt-4 text-sm text-green-400">— Última reseña registrada</footer>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- RESERVAS -->
+    <section id="reserva" class="py-20 px-6 vhs-section">
+      <h2 class="text-5xl text-center mb-12 chromatic">Convocatoria de Comensales</h2>
+      <div id="formContainer" class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Formulario dinámico se inyectará con JS -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="py-8 bg-black bg-opacity-95 text-center text-gray-400 border-t border-red-900 chromatic">
+    <p>&copy; 2025 Black Comedor | “El hambre también recuerda.”</p>
+  </footer>
+
+  <!-- JS -->
+  <script src="js/animacion.js"></script>
+  <script src="js/formulario.js"></script>
+</body>
+</html>

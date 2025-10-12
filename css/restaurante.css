@@ -1,0 +1,271 @@
+/* === RESET / BASE === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html, body {
+  scroll-behavior: smooth;
+  font-family: 'Share Tech Mono', monospace;
+  background-color: #000;
+  color: #e6e6e6;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* === SCANLINES / CRT OVERLAY === */
+.scanlines {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 90;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(255,255,255,0.02) 0px,
+    rgba(0,0,0,0.06) 2px
+  );
+  animation: flicker 0.12s infinite;
+  mix-blend-mode: overlay;
+}
+@keyframes flicker {
+  0%, 19%, 21%, 23%, 25%, 100% { opacity: 1; }
+  20%, 22%, 24% { opacity: 0.8; }
+}
+
+/* === CRT BORDER / GLOW === */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  border: 4px solid rgba(255,0,0,0.05);
+  box-shadow: 
+    inset 0 0 60px rgba(255,0,0,0.05),
+    inset 0 0 100px rgba(0,255,255,0.05),
+    0 0 80px rgba(255,0,0,0.1);
+  pointer-events: none;
+  z-index: 95;
+  animation: pulse-border 4s infinite ease-in-out;
+}
+@keyframes pulse-border {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 1; }
+}
+
+/* === CRT DISTORSIÓN / JITTER === */
+.crt-distortion {
+  animation: crt-wave 4s infinite linear, screen-jitter 0.15s infinite;
+  filter: contrast(1.2) brightness(0.95);
+}
+@keyframes crt-wave {
+  0%, 100% { transform: translateY(0) skewX(0deg); }
+  25% { transform: translateY(-1px) skewX(0.3deg); }
+  50% { transform: translateY(1px) skewX(-0.3deg); }
+  75% { transform: translateY(-0.5px) skewX(0.2deg); }
+}
+@keyframes screen-jitter {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(1px); }
+  50% { transform: translateX(-1px); }
+  75% { transform: translateX(0.5px); }
+}
+
+/* === CHROMATIC TEXT / GHOSTING === */
+.chromatic {
+  position: relative;
+  color: #fff;
+  text-shadow: 2px 0 red, -2px 0 cyan;
+  animation: chromatic-flicker 0.3s infinite;
+}
+@keyframes chromatic-flicker {
+  0%, 100% { text-shadow: 1px 0 red, -1px 0 cyan; }
+  25% { text-shadow: 2px 0 red, -2px 0 cyan; }
+  50% { text-shadow: 0.5px 0 red, -0.5px 0 cyan; }
+  75% { text-shadow: 1.5px 0 red, -1.5px 0 cyan; }
+}
+
+/* === NAVBAR === */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: rgba(0,0,0,0.75);
+  border-bottom: 1px solid rgba(255,0,0,0.1);
+  backdrop-filter: blur(6px);
+  z-index: 100;
+  transition: all 0.3s ease;
+}
+nav a {
+  color: #e6e6e6;
+  margin: 0 0.75rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+nav a:hover {
+  color: #ff0044;
+  text-shadow: 0 0 15px #ff0044;
+  transform: scale(1.05);
+}
+
+/* === HERO / BANNER === */
+header {
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  padding: 0 1rem;
+}
+header h1 {
+  font-size: clamp(3rem, 6vw, 6rem);
+  text-shadow:
+    2px 0 red,
+    -2px 0 cyan,
+    0 0 10px #ff0044,
+    0 0 20px #00ffff;
+}
+
+/* === SECCIONES === */
+section {
+  padding: 4rem 2rem;
+  max-width: 1200px;
+  margin: auto;
+}
+h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin-bottom: 2rem;
+  text-align: center;
+  color: #ff0044;
+  text-shadow: 0 0 10px #ff0044, 0 0 15px #00ffff;
+}
+
+/* === CARD SYSTEM === */
+.card {
+  background: rgba(15,15,15,0.85);
+  border: 1px solid rgba(255,0,0,0.05);
+  border-radius: 0.7rem;
+  padding: 1.5rem;
+  transition: transform 0.4s, box-shadow 0.4s;
+  backdrop-filter: blur(6px);
+  filter: contrast(1.2);
+}
+.card:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 0 35px rgba(255,0,0,0.5), 0 0 45px rgba(0,255,255,0.35);
+}
+
+/* === FLIP CARDS === */
+.flip-card {
+  perspective: 1200px;
+}
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 0.7rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.flip-card-back {
+  transform: rotateY(180deg);
+  background: rgba(0,0,0,0.85);
+  border: 1px solid rgba(255,0,0,0.3);
+  padding: 1.5rem;
+}
+
+/* === BUTTONS === */
+button, a.button {
+  background: linear-gradient(90deg, #ff0044, #00ffff);
+  color: #000;
+  padding: 0.9rem 1.8rem;
+  border: none;
+  font-weight: bold;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease, box-shadow 0.2s;
+}
+button:hover, a.button:hover {
+  filter: brightness(1.4);
+  transform: scale(1.05) rotate(-1deg);
+  box-shadow: 0 0 25px rgba(255,0,0,0.5), 0 0 25px rgba(0,255,255,0.5);
+}
+
+/* === FORMULARIO VHS ESTILIZADO === */
+.input-vhs {
+  background: rgba(0,0,0,0.75);
+  border: 1px solid rgba(255,0,0,0.5);
+  padding: 1rem;
+  color: #fff;
+  border-radius: 0.5rem;
+  outline: none;
+  transition: all 0.3s ease, transform 0.1s;
+  font-family: 'Share Tech Mono', monospace;
+  width: 100%;
+  font-size: 1rem;
+}
+.input-vhs:focus {
+  border-color: #00ffff;
+  box-shadow: 0 0 15px #00ffff, 0 0 25px #ff0044;
+  transform: scale(1.02);
+}
+
+#reservaForm {
+  display: grid;
+  gap: 1rem;
+  background: rgba(0,0,0,0.65);
+  padding: 2rem;
+  border-radius: 1rem;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,0,0,0.4);
+  box-shadow: 0 0 25px rgba(255,0,0,0.3), 0 0 25px rgba(0,255,255,0.2);
+}
+
+#reservaForm button {
+  background: linear-gradient(90deg, #ff0044, #00ffff);
+  padding: 1rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border-radius: 0.7rem;
+  transition: all 0.3s ease, transform 0.1s;
+}
+#reservaForm button:hover {
+  box-shadow: 0 0 20px #ff0044, 0 0 20px #00ffff;
+  transform: scale(1.05) rotate(-1deg);
+}
+
+/* === FORMULARIO GLITCH === */
+.glitch {
+  animation: glitch-effect 0.4s linear;
+}
+@keyframes glitch-effect {
+  0% { transform: translate(0,0) skew(0deg); }
+  20% { transform: translate(-2px,2px) skew(-1deg); }
+  40% { transform: translate(2px,-2px) skew(1deg); }
+  60% { transform: translate(-2px,1px) skew(-0.5deg); }
+  80% { transform: translate(2px,-1px) skew(0.5deg); }
+  100% { transform: translate(0,0) skew(0deg); }
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  nav { flex-direction: column; gap: 0.5rem; }
+  section { padding: 3rem 1rem; }
+  .card, .flip-card { padding: 1rem; }
+  #reservaForm { gap: 0.8rem; padding: 1.5rem; }
+}
