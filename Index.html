@@ -100,9 +100,9 @@
     .subtitle { opacity: 0; font-size: 1.2rem; text-shadow: 0 0 5px #fff; }
 
     .final-text {
-      position: absolute; bottom: 50%; left: 50%; transform: translateX(-50%); font-size: 1.6rem;
-      opacity: 0; color: #fff; text-shadow: 0 0 10px #ff0000, 0 0 15px #00ffff;
-      letter-spacing: 1px; z-index: 99;
+      position: absolute; bottom: 50%; left: 50%; transform: translateX(-50%);
+      font-size: 1.6rem; opacity: 0; color: #fff;
+      text-shadow: 0 0 10px #ff0000, 0 0 15px #00ffff; letter-spacing: 1px; z-index: 99;
     }
 
     .bg-text { position: absolute; font-size: 3rem; bottom: 5%; left: 5%; opacity: 0.03; letter-spacing: 4px; z-index: 1; }
@@ -122,16 +122,20 @@
       <p id="subtitle" class="subtitle">Bienvenido al Black Comedor</p>
     </div>
 
-    <div id="finalText" class="final-text">Los mortales jamás salen...</div>
-    <div id="crtShutdown" class="crt-shutdown"></div>
+    <div id="finalText" class="final-text"></div>
   </div>
 
   <script>
-    // === Audio ===
-    const staticSound = new Howl({ src: ['https://cdn.pixabay.com/download/audio/2022/03/15/audio_58dc8b4f26.mp3?filename=tv-static-24962.mp3'], volume: 0.3, loop: true });
-    const glitchSound = new Howl({ src: ['https://cdn.pixabay.com/download/audio/2021/08/04/audio_5172e7e8a9.mp3?filename=glitch-96304.mp3'], volume: 0.5 });
-    const bass = new Howl({ src: ['https://cdn.pixabay.com/download/audio/2021/09/01/audio_ef8532a5f8.mp3?filename=horror-impact-91156.mp3'], volume: 0.6 });
-    const shutdownHum = new Howl({ src: ['https://cdn.pixabay.com/download/audio/2022/03/15/audio_8bbca55752.mp3?filename=power-down-24961.mp3'], volume: 0.5 });
+    // === Audio locales ===
+
+    const staticSound = new Howl({ src: ['./Assets/Audio/TvEstatica.mp3'], volume: 0.3, loop: true });
+    const glitchSound = new Howl({ src: ['./Assets/Audio/Glitch.mp3'], volume: 0.5 });
+    const bass = new Howl({ src: ['./Assets/Audio/Bass.mp3'], volume: 0.6 });
+    const shutdownHum = new Howl({ src: ['./Assets/Audio/ShutDown.mp3'], volume: 0.5 });
+    const susurros = new Howl({ src: ['./Assets/Audio/Susurros.mp3'], volume: 0.4 });
+    const tecleado = new Howl({ src: ['./Assets/Audio/Tecleado.mp3'], volume: 0.5 });
+
+
     staticSound.play();
 
     const frases = [
@@ -139,50 +143,61 @@
       "No abras la puerta trasera.", "El menú cambia cada noche...", "Escucha.", "Demasiado tarde..."
     ];
 
-    function textoCorrupto(txt) { return txt.split('').map(ch => Math.random()<0.15?"░▒▓█"[Math.floor(Math.random()*4)]:ch).join(''); }
-
-    function lanzarFrase(){
-      const el=document.createElement('div'); el.className='phrase';
-      el.textContent=textoCorrupto(frases[Math.floor(Math.random()*frases.length)]);
-      el.style.top=(Math.random()*80+10)+'%'; el.style.left=(Math.random()*80+5)+'%';
-      document.querySelector('.screen').appendChild(el);
-      gsap.to(el,{opacity:1,duration:0.2});
-      setTimeout(()=>gsap.to(el,{opacity:0,duration:0.5,onComplete:()=>el.remove()}),800);
-      if(Math.random()>0.6) glitchSound.play();
+    function textoCorrupto(txt) {
+      return txt.split('').map(ch => Math.random() < 0.15 ? "░▒▓█"[Math.floor(Math.random()*4)] : ch).join('');
     }
-    setInterval(lanzarFrase,300);
 
-    // Secuencia inicial
-    gsap.to("#mainText",{opacity:1,delay:2,duration:1});
-    gsap.to("#mainText",{opacity:0,delay:5,duration:1});
-    setTimeout(()=>{bass.play(); gsap.to("#logo",{opacity:1,scale:1.1,duration:1});},6000);
-    gsap.to("#subtitle",{opacity:1,delay:8,duration:1});
+    // === Frases aleatorias con susurros ===
+    function lanzarFrase() {
+      const el = document.createElement('div');
+      el.className = 'phrase';
+      el.textContent = textoCorrupto(frases[Math.floor(Math.random() * frases.length)]);
+      el.style.top = (Math.random() * 80 + 10) + '%';
+      el.style.left = (Math.random() * 80 + 5) + '%';
+      document.querySelector('.screen').appendChild(el);
 
-    // === Apagado total con typing glitch para frase final ===
-    setTimeout(()=>{
+      gsap.to(el, { opacity: 1, duration: 0.2 });
+      setTimeout(() => gsap.to(el, { opacity: 0, duration: 0.5, onComplete: () => el.remove() }), 800);
 
-      staticSound.fade(0.3,0,1.5);
+      if (Math.random() > 0.5) glitchSound.play();
+      susurros.play(); // Susurros siempre con frases aleatorias
+    }
+    setInterval(lanzarFrase, 300);
+
+    // === Secuencia inicial ===
+    gsap.to("#mainText", { opacity: 1, delay: 2, duration: 1 });
+    gsap.to("#mainText", { opacity: 0, delay: 5, duration: 1 });
+    setTimeout(() => {
+      bass.play();
+      gsap.to("#logo", { opacity: 1, scale: 1.1, duration: 1 });
+    }, 6000);
+    gsap.to("#subtitle", { opacity: 1, delay: 8, duration: 1 });
+
+    // === Apagado y frase final con tecleado ===
+    setTimeout(() => {
+      staticSound.fade(0.3, 0, 1.5);
       glitchSound.play();
 
-      // Oculta todo lo demás
-      gsap.to(".content",{opacity:0,duration:1});
-      gsap.to(".vhs-overlay",{opacity:0,duration:1});
-      gsap.to(".tracking-lines",{opacity:0,duration:1});
-      gsap.to(".bg-text",{opacity:0,duration:1});
+      gsap.to(".content", { opacity: 0, duration: 1 });
+      gsap.to(".vhs-overlay", { opacity: 0, duration: 1 });
+      gsap.to(".tracking-lines", { opacity: 0, duration: 1 });
+      gsap.to(".bg-text", { opacity: 0, duration: 1 });
 
-      // Efecto escritura letra por letra
       const finalEl = document.getElementById("finalText");
-      finalEl.textContent="";
-      finalEl.style.opacity=1;
+      finalEl.style.opacity = 1;
       const phrase = "Los mortales jamás salen...";
-      let i=0;
-      const typeInterval = setInterval(()=>{
-        finalEl.textContent+=phrase[i++];
-        glitchSound.play();
-        if(i>=phrase.length){ clearInterval(typeInterval); setTimeout(()=>{shutdownHum.play(); window.location.href="index.html";},1500); }
-      },150);
+      let i = 0;
 
-    },12000);
+      const typeInterval = setInterval(() => {
+        finalEl.textContent += phrase[i++];
+        tecleado.play(); // efecto máquina de escribir
+        glitchSound.play();
+        if (i >= phrase.length) {
+          clearInterval(typeInterval);
+          setTimeout(() => { shutdownHum.play(); window.location.href = "index.html"; }, 1500);
+        }
+      }, 150);
+    }, 12000);
   </script>
 </body>
 </html>
