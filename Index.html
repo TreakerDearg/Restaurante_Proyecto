@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Intro — Black Comedor</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: black;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Courier New', monospace;
+      color: #fff;
+      perspective: 800px;
+    }
+
+    .screen {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      transform: scale(1.05) rotateX(6deg);
+      box-shadow: 0 0 120px rgba(0,0,0,1) inset, 0 0 80px rgba(255,255,255,0.1);
+    }
+
+    .crt::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(255,255,255,0.05), rgba(0,0,0,0.9) 90%);
+      mix-blend-mode: overlay;
+      z-index: 5;
+    }
+
+    .crt::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(rgba(255,255,255,0.04) 0px, rgba(0,0,0,0.15) 2px);
+      animation: flicker 0.15s infinite;
+      z-index: 6;
+    }
+
+    @keyframes flicker {
+      0%,19%,21%,23%,25%,100% { opacity: 1; }
+      20%,22%,24% { opacity: 0.6; }
+    }
+
+    .noise {
+      position: absolute;
+      inset: 0;
+      background: url('https://media.giphy.com/media/oEI9uBYSzLpBK/giphy.gif') center/cover;
+      opacity: 0.15;
+      mix-blend-mode: lighten;
+      z-index: 2;
+    }
+
+    .vhs-overlay {
+      position: absolute;
+      top: 10px;
+      left: 15px;
+      font-size: 0.9rem;
+      color: #fff;
+      opacity: 0.8;
+      z-index: 10;
+      text-shadow: 0 0 5px #ff0000, 0 0 8px #00ffff;
+    }
+
+    .rec-dot {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      background: red;
+      border-radius: 50%;
+      margin-right: 6px;
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink { 0%,50% { opacity: 1; } 51%,100% { opacity: 0.1; } }
+
+    .content { position: relative; z-index: 9; text-align: center; }
+    .glitch { text-transform: uppercase; letter-spacing: 2px; text-shadow: 2px 0 red, -2px 0 cyan; filter: blur(0.2px); opacity: 0; }
+    .phrase { position: absolute; font-size: 1rem; opacity: 0; color: rgba(255,255,255,0.8); text-shadow: 0 0 8px rgba(255,255,255,0.3); }
+    .tracking-lines { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 7; mix-blend-mode: screen; }
+    .tracking-lines span { display: block; width: 100%; height: 1px; background: rgba(255,255,255,0.06); animation: moveLine 0.6s infinite; }
+    @keyframes moveLine { from { transform: translateY(-100%); } to { transform: translateY(100%); } }
+
+    .logo { opacity: 0; width: 200px; margin: 1rem auto; filter: brightness(1.3); }
+    .subtitle { opacity: 0; font-size: 1.2rem; text-shadow: 0 0 5px #fff; }
+
+    .final-text {
+      position: absolute; bottom: 50%; left: 50%; transform: translateX(-50%); font-size: 1.6rem;
+      opacity: 0; color: #fff; text-shadow: 0 0 10px #ff0000, 0 0 15px #00ffff;
+      letter-spacing: 1px; z-index: 99;
+    }
+
+    .bg-text { position: absolute; font-size: 3rem; bottom: 5%; left: 5%; opacity: 0.03; letter-spacing: 4px; z-index: 1; }
+  </style>
+</head>
+
+<body>
+  <div class="screen crt">
+    <div class="noise"></div>
+    <div class="vhs-overlay"><span class="rec-dot"></span> REC <br> TAPE A | 00:00:00</div>
+    <div class="bg-text">BLACK COMEDOR // TAPE 01</div>
+    <div class="tracking-lines"><span></span><span></span><span></span></div>
+
+    <div class="content">
+      <h1 id="mainText" class="glitch text-3xl">Bienvenidos, almas en pena...</h1>
+      <img id="logo" src="./assets/logo.png" alt="Logo" class="logo" />
+      <p id="subtitle" class="subtitle">Bienvenido al Black Comedor</p>
+    </div>
+
+    <div id="finalText" class="final-text">Los mortales jamás salen...</div>
+    <div id="crtShutdown" class="crt-shutdown"></div>
+  </div>
+
+  <script>
+    // === Audio ===
+    const staticSound = new Howl({ src: ['https://cdn.pixabay.com/download/audio/2022/03/15/audio_58dc8b4f26.mp3?filename=tv-static-24962.mp3'], volume: 0.3, loop: true });
+    const glitchSound = new Howl({ src: ['https://cdn.pixabay.com/download/audio/2021/08/04/audio_5172e7e8a9.mp3?filename=glitch-96304.mp3'], volume: 0.5 });
+    const bass = new Howl({ src: ['https://cdn.pixabay.com/download/audio/2021/09/01/audio_ef8532a5f8.mp3?filename=horror-impact-91156.mp3'], volume: 0.6 });
+    const shutdownHum = new Howl({ src: ['https://cdn.pixabay.com/download/audio/2022/03/15/audio_8bbca55752.mp3?filename=power-down-24961.mp3'], volume: 0.5 });
+    staticSound.play();
+
+    const frases = [
+      "Grabando... ¿o mirando?", "El chef no olvida.", "La cinta respira...",
+      "No abras la puerta trasera.", "El menú cambia cada noche...", "Escucha.", "Demasiado tarde..."
+    ];
+
+    function textoCorrupto(txt) { return txt.split('').map(ch => Math.random()<0.15?"░▒▓█"[Math.floor(Math.random()*4)]:ch).join(''); }
+
+    function lanzarFrase(){
+      const el=document.createElement('div'); el.className='phrase';
+      el.textContent=textoCorrupto(frases[Math.floor(Math.random()*frases.length)]);
+      el.style.top=(Math.random()*80+10)+'%'; el.style.left=(Math.random()*80+5)+'%';
+      document.querySelector('.screen').appendChild(el);
+      gsap.to(el,{opacity:1,duration:0.2});
+      setTimeout(()=>gsap.to(el,{opacity:0,duration:0.5,onComplete:()=>el.remove()}),800);
+      if(Math.random()>0.6) glitchSound.play();
+    }
+    setInterval(lanzarFrase,300);
+
+    // Secuencia inicial
+    gsap.to("#mainText",{opacity:1,delay:2,duration:1});
+    gsap.to("#mainText",{opacity:0,delay:5,duration:1});
+    setTimeout(()=>{bass.play(); gsap.to("#logo",{opacity:1,scale:1.1,duration:1});},6000);
+    gsap.to("#subtitle",{opacity:1,delay:8,duration:1});
+
+    // === Apagado total con typing glitch para frase final ===
+    setTimeout(()=>{
+
+      staticSound.fade(0.3,0,1.5);
+      glitchSound.play();
+
+      // Oculta todo lo demás
+      gsap.to(".content",{opacity:0,duration:1});
+      gsap.to(".vhs-overlay",{opacity:0,duration:1});
+      gsap.to(".tracking-lines",{opacity:0,duration:1});
+      gsap.to(".bg-text",{opacity:0,duration:1});
+
+      // Efecto escritura letra por letra
+      const finalEl = document.getElementById("finalText");
+      finalEl.textContent="";
+      finalEl.style.opacity=1;
+      const phrase = "Los mortales jamás salen...";
+      let i=0;
+      const typeInterval = setInterval(()=>{
+        finalEl.textContent+=phrase[i++];
+        glitchSound.play();
+        if(i>=phrase.length){ clearInterval(typeInterval); setTimeout(()=>{shutdownHum.play(); window.location.href="index.html";},1500); }
+      },150);
+
+    },12000);
+  </script>
+</body>
+</html>
