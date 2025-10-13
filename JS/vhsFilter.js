@@ -1,36 +1,52 @@
-// vhsFilter.js
-document.addEventListener("DOMContentLoaded", () => {
-  const overlay = document.querySelector(".overlay-vhs");
-  const glitchScreen = document.querySelector(".glitch-screen");
+// Efecto de ondas en pantalla (scanlines)
+function initVHSOverlay() {
+  const overlay = document.createElement('div');
+  overlay.className = 'vhs-wave-overlay fixed inset-0 pointer-events-none z-50';
+  document.body.appendChild(overlay);
+}
 
-  function generateNoise() {
-    const canvas = document.createElement("canvas");
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    const ctx = canvas.getContext("2d");
-    const imageData = ctx.createImageData(canvas.width, canvas.height);
+document.addEventListener('DOMContentLoaded', initVHSOverlay);
 
-    for (let i = 0; i < imageData.data.length; i += 4) {
-      const v = Math.random() * 255;
-      imageData.data[i] = v;
-      imageData.data[i + 1] = v;
-      imageData.data[i + 2] = v;
-      imageData.data[i + 3] = 20; // alpha leve
-    }
-    ctx.putImageData(imageData, 0, 0);
-    overlay.style.backgroundImage = `url(${canvas.toDataURL()})`;
-  }
+// Efecto hover con sombras y brillo VHS
+const menuItems = document.querySelectorAll('.menu-item, .flip-card');
 
-  function glitchEffect() {
-    glitchScreen.style.opacity = Math.random() > 0.8 ? Math.random() * 0.3 : 0;
-  }
-
-  function loop() {
-    generateNoise();
-    glitchEffect();
-    requestAnimationFrame(loop);
-  }
-
-  window.addEventListener("resize", generateNoise);
-  loop();
+menuItems.forEach(item => {
+  item.addEventListener('mouseenter', () => {
+    item.classList.add('shadow-[0_0_25px_rgba(255,0,0,0.7)]');
+  });
+  item.addEventListener('mouseleave', () => {
+    item.classList.remove('shadow-[0_0_25px_rgba(255,0,0,0.7)]');
+  });
 });
+
+const formContainer = document.getElementById('formContainer');
+
+const formHTML = `
+<form class="space-y-4 text-gray-300">
+  <div>
+    <label>Nombre</label>
+    <input type="text" name="nombre" class="w-full p-2 rounded bg-black border border-red-700" required>
+  </div>
+  <div>
+    <label>Email</label>
+    <input type="email" name="email" class="w-full p-2 rounded bg-black border border-red-700" required>
+  </div>
+  <div>
+    <label>Asistirás al ritual?</label>
+    <select name="asistencia" class="w-full p-2 rounded bg-black border border-red-700" required>
+      <option value="">Selecciona...</option>
+      <option value="si">Sí</option>
+      <option value="no">No</option>
+    </select>
+  </div>
+  <button type="submit" class="vhs-btn w-full">Enviar Convocatoria</button>
+</form>
+`;
+
+formContainer.innerHTML = formHTML;
+
+formContainer.querySelector('form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  alert('Convocatoria enviada. Pronto recibirás la invitación al ritual.');
+});
+

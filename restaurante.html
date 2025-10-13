@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="Assets/IconoBc.png" type="image/png">
   <title>Black Comedor — El Ritual del Hambre</title>
 
   <!-- Tipografías -->
@@ -36,9 +37,6 @@
   <button id="sound-toggle" class="fixed top-6 right-6 z-50 bg-black bg-opacity-70 text-red-500 p-3 rounded-full shadow-lg hover:scale-110 transition-transform">
     <ion-icon name="volume-high-outline"></ion-icon>
   </button>
-
-  <!-- 🔦 LINTERNA -->
-  <div id="light-mask"></div>
 
   <!-- 📼 VHS Overlay -->
   <div class="overlay-vhs"></div>
@@ -248,16 +246,88 @@
       </div>
     </section>
 
+        <!-- GALERÍA -->
+    <section id="galeria" class="py-24 px-6 bg-black bg-opacity-90 border-t border-red-900">
+      <h2 class="text-5xl text-center mb-12 chromatic">Galería del Culto</h2>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-7xl mx-auto">
+        <img src="./assets/interior1.jpg" class="rounded-lg shadow-lg hover:scale-105 transition-transform" alt="Interior Black Comedor">
+        <img src="./assets/interior2.jpg" class="rounded-lg shadow-lg hover:scale-105 transition-transform" alt="Mesa Ritual">
+        <img src="./assets/detalle3.jpg" class="rounded-lg shadow-lg hover:scale-105 transition-transform" alt="Detalles Lovecraftianos">
+        <img src="./assets/detalle4.jpg" class="rounded-lg shadow-lg hover:scale-105 transition-transform" alt="Vajilla Oculta">
+      </div>
+      <p class="text-center text-gray-400 mt-6 italic">"Al mirar demasiado, las sombras comienzan a devolverte la mirada."</p>
+    </section>
+
+    <!-- EQUIPO -->
+    <section id="equipo" class="py-24 px-6 max-w-7xl mx-auto">
+      <h2 class="text-5xl text-center mb-12 chromatic">El Círculo del Chef</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
+        <div class="p-6 bg-black border border-red-800 rounded-lg shadow-inner shadow-red-900 hover:scale-105 transition-transform">
+          <img src="./assets/chef_occulto.jpg" alt="Chef Maestro" class="w-40 h-40 object-cover mx-auto rounded-full mb-4 border-2 border-red-700">
+          <h3 class="text-2xl font-bold chromatic mb-2">El Maestro del Hambre</h3>
+          <p class="text-gray-400">Guía el banquete con precisión ritual. Nadie conoce su verdadero nombre.</p>
+        </div>
+        <div class="p-6 bg-black border border-purple-800 rounded-lg shadow-inner shadow-purple-900 hover:scale-105 transition-transform">
+          <img src="./assets/bartender.jpg" alt="Sumo Bartender" class="w-40 h-40 object-cover mx-auto rounded-full mb-4 border-2 border-purple-700">
+          <h3 class="text-2xl font-bold chromatic mb-2">El Sumo Bartender</h3>
+          <p class="text-gray-400">Domina el equilibrio entre veneno y deleite. Sus cócteles alteran la realidad.</p>
+        </div>
+        <div class="p-6 bg-black border border-green-800 rounded-lg shadow-inner shadow-green-900 hover:scale-105 transition-transform">
+          <img src="./assets/sacerdotisa.jpg" alt="Sacerdotisa del Sabor" class="w-40 h-40 object-cover mx-auto rounded-full mb-4 border-2 border-green-700">
+          <h3 class="text-2xl font-bold chromatic mb-2">La Sacerdotisa del Sabor</h3>
+          <p class="text-gray-400">Interpreta cada aroma como un presagio. Prepara los postres del olvido.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- UBICACIÓN -->
+    <section id="ubicacion" class="py-24 px-6 bg-black bg-opacity-90 border-t border-red-900">
+      <h2 class="text-5xl text-center mb-12 chromatic">Ubicación del Comedor</h2>
+<div class="text-center space-y-2 text-gray-200">
+  <p class="flex items-center justify-center gap-2">
+    <ion-icon name="location-outline" class="text-red-500 text-xl"></ion-icon>
+    Calle Sin Nombre 13, Distrito Oscuro, Ciudad Abismo.
+  </p>
+  <p class="flex items-center justify-center gap-2">
+    <ion-icon name="time-outline" class="text-red-500 text-xl"></ion-icon>
+    Horarios: Jueves a Domingo — 20:00 a 03:00
+  </p>
+  <p class="flex items-center justify-center gap-2">
+    <ion-icon name="call-outline" class="text-red-500 text-xl"></ion-icon>
+    Contacto: <span class="text-red-500 font-semibold">+54 11 6666-1313</span>
+  </p>
+</div>
+
+          <iframe class="w-full h-80 grayscale contrast-125"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3282.863!2d-58.38!3d-34.60!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzTCsDM2JzAwLjAiUyA1OMKwMjMnMDAuMCJX!5e0!3m2!1ses-419!2sar!4v0000000000"
+            allowfullscreen loading="lazy"></iframe>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <!-- ⚰️ FOOTER -->
-  <footer class="py-8 bg-black bg-opacity-95 text-center text-gray-400 border-t border-red-900 relative overflow-hidden">
+  <footer class="relative py-12 bg-black bg-opacity-95 text-center border-t border-red-900 overflow-hidden">
     <div class="absolute inset-0 pointer-events-none">
-      <img src="./assets/vhs_lines.png" alt="Scanlines" class="w-full h-full object-cover opacity-20">
+      <img src="./assets/vhs_lines.png" alt="Scanlines" class="w-full h-full object-cover opacity-25">
     </div>
-    <p class="chromatic z-10 relative">&copy; 2025 Black Comedor | “El hambre también recuerda.”</p>
-    <p class="text-red-500 text-sm z-10 relative mt-2">⟪ VHS & ABYSS ⟫</p>
+    <div class="relative z-10 flex flex-col items-center space-y-3">
+      <div class="flex items-center space-x-3 text-sm text-gray-400 font-mono">
+        <span class="text-red-600 font-bold">● REC</span>
+        <span>00:13:37</span>
+        <span>|</span>
+        <span>SP</span>
+        <span>|</span>
+        <span>VHS MODE</span>
+      </div>
+      <p class="chromatic text-lg">&copy; 2025 Black Comedor — “El hambre también recuerda.”</p>
+      <p class="text-red-500 text-sm">⟪ VHS & ABYSS ⟫</p>
+    </div>
+    <div class="absolute bottom-2 right-4 text-gray-600 text-xs opacity-60 font-mono">[ SIGNAL STABLE ]</div>
   </footer>
 
 </body>
+<script src="JS/animacion.js" defer></script>
+<script src="JS/Formulario.js" defer></script>
 </html>

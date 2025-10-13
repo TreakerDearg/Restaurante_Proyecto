@@ -1,11 +1,14 @@
+// ===============================
+// formulario.js — Envío a Google Sheets + UX optimizado
+// ===============================
 document.addEventListener("DOMContentLoaded", () => {
   const formContainer = document.getElementById("formContainer");
 
-  // Crear formulario
+  // Crear formulario base
   const form = document.createElement("form");
-  form.classList.add("space-y-6", "w-full", "distorted"); // "distorted" para glitch
+  form.classList.add("space-y-6", "w-full", "distorted");
 
-  // Configuración de campos
+  // Campos del formulario
   const fields = [
     { label: "Nombre completo", name: "nombre", type: "text", placeholder: "Juan Pérez", required: true },
     { label: "Correo electrónico", name: "email", type: "email", placeholder: "correo@ejemplo.com", required: true },
@@ -15,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
     { label: "Comentarios adicionales", name: "comentarios", type: "textarea", placeholder: "Observaciones...", required: false }
   ];
 
-  // Crear campos dinámicamente
+  // Render dinámico de campos
   fields.forEach(f => {
     const wrapper = document.createElement("div");
     wrapper.classList.add("flex", "flex-col");
@@ -50,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
     form.appendChild(wrapper);
   });
 
-  // Botón de envío con efecto VHS
+  // Botón de envío
   const submitBtn = document.createElement("button");
   submitBtn.type = "submit";
   submitBtn.textContent = "Enviar Reserva";
@@ -61,40 +64,64 @@ document.addEventListener("DOMContentLoaded", () => {
   );
   form.appendChild(submitBtn);
 
-  // Feedback
+  // Feedback visual
   const feedback = document.createElement("p");
-  feedback.classList.add("mt-2", "text-center", "text-green-400", "font-mono");
+  feedback.classList.add("mt-2", "text-center", "font-mono", "text-sm");
   form.appendChild(feedback);
 
   formContainer.appendChild(form);
 
-  // URL de tu Web App Google Apps Script
+  // === URL de Apps Script (ajustá tu endpoint)
   const scriptURL = "https://script.google.com/macros/s/AKfycbyYl6RmpHJ5IH3C5dXSZKM9oRLGIkWOAkxNZXShSPp23KmMiDD3vrXzdETbmkND7B/exec";
 
-  // Envío del formulario
-  form.addEventListener("submit", e => {
+  // === Envío del formulario
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
+
+    // Validación básica
+    if (!form.checkValidity()) {
+      feedback.textContent = "Por favor, completá todos los campos obligatorios.";
+      feedback.classList.add("text-red-500");
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Enviando...";
+    feedback.textContent = "";
+
     const formData = new FormData(form);
 
-    fetch(scriptURL, { method: "POST", body: formData })
-      .then(response => {
-        if (response.ok) {
-          feedback.textContent = "¡Reserva enviada correctamente! Gracias.";
-          feedback.classList.add("animate-pulse"); // pequeño parpadeo VHS
-          setTimeout(() => feedback.classList.remove("animate-pulse"), 800);
-          form.reset();
-
-          // Efecto glitch rápido en botón
-          const originalBg = submitBtn.style.background;
-          submitBtn.style.background = "#ff0044";
-          setTimeout(() => submitBtn.style.background = originalBg, 400);
-        } else {
-          feedback.textContent = "Error al enviar la reserva. Intenta nuevamente.";
-        }
-      })
-      .catch(err => {
-        feedback.textContent = "Error de conexión. Intenta más tarde.";
-        console.error(err);
+    try {
+      const response = await fetch(scriptURL, {
+        method: "POST",
+        body: formData
       });
+
+      if (response.ok) {
+        const result = await response.text();
+        console.log("Respuesta Google:", result);
+
+        feedback.textContent = "✅ Reserva enviada correctamente. ¡Gracias!";
+        feedback.classList.remove("text-red-500");
+        feedback.classList.add("text-green-400", "animate-pulse");
+
+        // Reset y animación de éxito
+        form.reset();
+        setTimeout(() => {
+          feedback.classList.remove("animate-pulse");
+          feedback.textContent = "";
+        }, 3000);
+      } else {
+        throw new Error("Error al enviar los datos al servidor.");
+      }
+    } catch (error) {
+      console.error("Error en el envío:", error);
+      feedback.textContent = "❌ Error de conexión o servidor. Intenta nuevamente.";
+      feedback.classList.remove("text-green-400");
+      feedback.classList.add("text-red-500");
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Enviar Reserva";
+    }
   });
 });

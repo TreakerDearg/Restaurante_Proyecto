@@ -1,4 +1,6 @@
-/* === RESET / BASE === */
+/* =======================
+   RESET / BASE
+======================= */
 * {
   margin: 0;
   padding: 0;
@@ -11,14 +13,23 @@ html, body {
   color: #e6e6e6;
   overflow-x: hidden;
   position: relative;
+  min-height: 100%;
 }
 
-/* === SCANLINES / CRT OVERLAY === */
+/* =======================
+   OVERLAYS / CRT / SCANLINES
+======================= */
+.scanlines,
+#light-mask,
+.overlay-vhs,
+.transition-glitch {
+  pointer-events: none;
+  z-index: 50;
+}
+
 .scanlines {
   position: fixed;
   inset: 0;
-  pointer-events: none;
-  z-index: 90;
   background: repeating-linear-gradient(
     0deg,
     rgba(255,255,255,0.02) 0px,
@@ -27,12 +38,12 @@ html, body {
   animation: flicker 0.12s infinite;
   mix-blend-mode: overlay;
 }
+
 @keyframes flicker {
-  0%, 19%, 21%, 23%, 25%, 100% { opacity: 1; }
-  20%, 22%, 24% { opacity: 0.8; }
+  0%,19%,21%,23%,25%,100% { opacity: 1; }
+  20%,22%,24% { opacity: 0.8; }
 }
 
-/* === CRT BORDER / GLOW === */
 body::before {
   content: "";
   position: fixed;
@@ -47,43 +58,44 @@ body::before {
   animation: pulse-border 4s infinite ease-in-out;
 }
 @keyframes pulse-border {
-  0%, 100% { opacity: 0.8; }
+  0%,100% { opacity: 0.8; }
   50% { opacity: 1; }
 }
 
-/* === CRT DISTORSIÓN / JITTER === */
-.crt-distortion {
-  animation: crt-wave 4s infinite linear, screen-jitter 0.15s infinite;
-  filter: contrast(1.2) brightness(0.95);
-}
-@keyframes crt-wave {
-  0%, 100% { transform: translateY(0) skewX(0deg); }
-  25% { transform: translateY(-1px) skewX(0.3deg); }
-  50% { transform: translateY(1px) skewX(-0.3deg); }
-  75% { transform: translateY(-0.5px) skewX(0.2deg); }
-}
-@keyframes screen-jitter {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(1px); }
-  50% { transform: translateX(-1px); }
-  75% { transform: translateX(0.5px); }
-}
-
-/* === CHROMATIC TEXT / GHOSTING === */
+/* =======================
+   CHROMATIC / GLITCH TEXT
+======================= */
 .chromatic {
   position: relative;
   color: #fff;
-  text-shadow: 2px 0 red, -2px 0 cyan;
+  text-shadow: 1px 0 red, -1px 0 cyan;
   animation: chromatic-flicker 0.3s infinite;
 }
+
 @keyframes chromatic-flicker {
-  0%, 100% { text-shadow: 1px 0 red, -1px 0 cyan; }
+  0%,100% { text-shadow: 1px 0 red, -1px 0 cyan; }
   25% { text-shadow: 2px 0 red, -2px 0 cyan; }
   50% { text-shadow: 0.5px 0 red, -0.5px 0 cyan; }
   75% { text-shadow: 1.5px 0 red, -1.5px 0 cyan; }
 }
 
-/* === NAVBAR === */
+.distorted {
+  animation: glitch-effect 0.6s linear infinite;
+  opacity: 0.95;
+}
+
+@keyframes glitch-effect {
+  0% { transform: translate(0,0) skew(0deg); }
+  20% { transform: translate(-2px,2px) skew(-1deg); }
+  40% { transform: translate(2px,-2px) skew(1deg); }
+  60% { transform: translate(-2px,1px) skew(-0.5deg); }
+  80% { transform: translate(2px,-1px) skew(0.5deg); }
+  100% { transform: translate(0,0) skew(0deg); }
+}
+
+/* =======================
+   NAVBAR
+======================= */
 nav {
   display: flex;
   justify-content: space-between;
@@ -95,6 +107,7 @@ nav {
   z-index: 100;
   transition: all 0.3s ease;
 }
+
 nav a {
   color: #e6e6e6;
   margin: 0 0.75rem;
@@ -107,7 +120,9 @@ nav a:hover {
   transform: scale(1.05);
 }
 
-/* === HERO / BANNER === */
+/* =======================
+   HERO / BANNER
+======================= */
 header {
   height: 90vh;
   display: flex;
@@ -118,6 +133,17 @@ header {
   overflow: hidden;
   padding: 0 1rem;
 }
+header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  pointer-events: none;
+  transition: opacity 1s ease;
+}
+header.loaded::before {
+  opacity: 0;
+}
 header h1 {
   font-size: clamp(3rem, 6vw, 6rem);
   text-shadow:
@@ -127,12 +153,15 @@ header h1 {
     0 0 20px #00ffff;
 }
 
-/* === SECCIONES === */
+/* =======================
+   SECCIONES
+======================= */
 section {
   padding: 4rem 2rem;
   max-width: 1200px;
   margin: auto;
 }
+
 h2 {
   font-size: clamp(2rem, 4vw, 3rem);
   margin-bottom: 2rem;
@@ -141,22 +170,23 @@ h2 {
   text-shadow: 0 0 10px #ff0044, 0 0 15px #00ffff;
 }
 
-/* === CARD SYSTEM === */
+/* =======================
+   CARDS / FLIP CARDS
+======================= */
 .card {
   background: rgba(15,15,15,0.85);
   border: 1px solid rgba(255,0,0,0.05);
   border-radius: 0.7rem;
   padding: 1.5rem;
-  transition: transform 0.4s, box-shadow 0.4s;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
   backdrop-filter: blur(6px);
   filter: contrast(1.2);
 }
 .card:hover {
-  transform: translateY(-5px) scale(1.05);
-  box-shadow: 0 0 35px rgba(255,0,0,0.5), 0 0 45px rgba(0,255,255,0.35);
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 0 25px rgba(255,0,0,0.4), 0 0 25px rgba(0,255,255,0.3);
 }
 
-/* === FLIP CARDS === */
 .flip-card {
   perspective: 1200px;
 }
@@ -189,37 +219,36 @@ h2 {
   padding: 1.5rem;
 }
 
-/* === BUTTONS === */
-button, a.button {
+/* =======================
+   BUTTONS / VHS
+======================= */
+button, .vhs-btn {
   background: linear-gradient(90deg, #ff0044, #00ffff);
   color: #000;
-  padding: 0.9rem 1.8rem;
-  border: none;
   font-weight: bold;
   border-radius: 0.5rem;
-  cursor: pointer;
-  transition: all 0.3s ease, box-shadow 0.2s;
+  padding: 0.8rem 1.5rem;
+  transition: all 0.3s ease, transform 0.15s;
 }
-button:hover, a.button:hover {
-  filter: brightness(1.4);
+button:hover, .vhs-btn:hover {
   transform: scale(1.05) rotate(-1deg);
-  box-shadow: 0 0 25px rgba(255,0,0,0.5), 0 0 25px rgba(0,255,255,0.5);
+  filter: brightness(1.3);
+  box-shadow: 0 0 20px #ff0044, 0 0 20px #00ffff;
 }
 
-/* === FORMULARIO VHS ESTILIZADO === */
-.input-vhs {
-  background: rgba(0,0,0,0.75);
+/* =======================
+   FORMULARIO VHS
+======================= */
+form input, form textarea {
+  background: rgba(0,0,0,0.7);
   border: 1px solid rgba(255,0,0,0.5);
-  padding: 1rem;
   color: #fff;
   border-radius: 0.5rem;
+  padding: 0.8rem;
   outline: none;
-  transition: all 0.3s ease, transform 0.1s;
-  font-family: 'Share Tech Mono', monospace;
-  width: 100%;
-  font-size: 1rem;
+  transition: all 0.3s ease;
 }
-.input-vhs:focus {
+form input:focus, form textarea:focus {
   border-color: #00ffff;
   box-shadow: 0 0 15px #00ffff, 0 0 25px #ff0044;
   transform: scale(1.02);
@@ -236,36 +265,24 @@ button:hover, a.button:hover {
   box-shadow: 0 0 25px rgba(255,0,0,0.3), 0 0 25px rgba(0,255,255,0.2);
 }
 
-#reservaForm button {
-  background: linear-gradient(90deg, #ff0044, #00ffff);
-  padding: 1rem;
-  font-size: 1.1rem;
-  font-weight: bold;
-  border-radius: 0.7rem;
-  transition: all 0.3s ease, transform 0.1s;
-}
-#reservaForm button:hover {
-  box-shadow: 0 0 20px #ff0044, 0 0 20px #00ffff;
-  transform: scale(1.05) rotate(-1deg);
-}
-
-/* === FORMULARIO GLITCH === */
-.glitch {
-  animation: glitch-effect 0.4s linear;
-}
-@keyframes glitch-effect {
-  0% { transform: translate(0,0) skew(0deg); }
-  20% { transform: translate(-2px,2px) skew(-1deg); }
-  40% { transform: translate(2px,-2px) skew(1deg); }
-  60% { transform: translate(-2px,1px) skew(-0.5deg); }
-  80% { transform: translate(2px,-1px) skew(0.5deg); }
-  100% { transform: translate(0,0) skew(0deg); }
-}
-
-/* === RESPONSIVE === */
+/* =======================
+   RESPONSIVE
+======================= */
 @media (max-width: 768px) {
   nav { flex-direction: column; gap: 0.5rem; }
   section { padding: 3rem 1rem; }
   .card, .flip-card { padding: 1rem; }
   #reservaForm { gap: 0.8rem; padding: 1.5rem; }
+}
+
+/* =======================
+   SCROLLBAR
+======================= */
+::-webkit-scrollbar {
+  width: 10px;
+  background: #000;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #ff0000, #550000);
+  border-radius: 5px;
 }
