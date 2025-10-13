@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+  <link rel="icon" href="Assets/IconoBc.png" type="image/png">
+  <title>Formulario de Reserva — Black Comedor</title>
+
+  <!-- Tipografías -->
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Ionicons -->
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+  <!-- CSS VHS / Restaurante -->
+  <link rel="stylesheet" href="CSS/vhs-core.css">
+  <link rel="stylesheet" href="CSS/formulario.css">
+
+  <!-- SEO / Theme -->
+  <meta name="theme-color" content="#110000">
+  <meta name="description" content="Formulario de reserva para Black Comedor — ritual gastronómico VHS, Lovecraft, Silent Hill.">
+
+</head>
+<body class="bg-black text-gray-100 font-mono overflow-x-hidden relative crt-distortion">
+
+  <!-- NAVBAR -->
+  <nav class="fixed w-full z-50 bg-black bg-opacity-75 backdrop-blur-md border-b border-red-900 px-6 py-4 flex justify-between items-center">
+    <div class="vhs-title text-2xl">BLACK COMEDOR</div>
+    <ul class="flex space-x-6 text-lg">
+      <li><a href="index.html" class="chromatic hover:text-red-500 flex items-center"><ion-icon name="home-outline" class="mr-1"></ion-icon>Inicio</a></li>
+      <li><a href="#form" class="chromatic hover:text-red-500 flex items-center"><ion-icon name="calendar-outline" class="mr-1"></ion-icon>Reserva</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO / TÍTULO FORMULARIO -->
+  <header class="relative h-screen flex items-center justify-center text-center overflow-hidden">
+    <div class="absolute inset-0 bg-black bg-opacity-85"></div>
+    <div class="relative z-10 px-4 fade-glitch">
+      <h1 class="vhs-title mb-4 uppercase chromatic" data-text="Reserva Tu Lugar">Reserva Tu Lugar</h1>
+      <p class="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto">
+        Completa el formulario para participar del ritual gastronómico.<br>
+        <span class="text-red-500 italic">Tu lugar te espera en las sombras del Banquete.</span>
+      </p>
+      <p class="mt-6 text-gray-400">Todos los campos marcados con <span class="text-red-500">*</span> son obligatorios.</p>
+    </div>
+  </header>
+
+  <!-- FORMULARIO -->
+  <main id="form" class="py-24 px-6 max-w-4xl mx-auto">
+    <div id="formContainer" aria-live="polite">
+      <!-- Formulario dinámico se inyectará con JS -->
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="py-8 bg-black bg-opacity-95 text-center text-gray-400 border-t border-red-900 relative overflow-hidden">
+    <p class="chromatic z-10 relative">&copy; 2025 Black Comedor | “El hambre también recuerda.”</p>
+    <p class="text-red-500 text-sm z-10 relative mt-2">⟪ VHS & ABYSS ⟫</p>
+  </footer>
+
+  <!-- JS -->
+
+  <script src="JS/formulario.js"></script>
+
+</body>
+</html>

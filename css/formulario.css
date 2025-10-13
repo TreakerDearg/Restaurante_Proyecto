@@ -1,0 +1,121 @@
+/* =============================== */
+/* FORMULARIO.CSS — Estilo exclusivo */
+/* =============================== */
+
+/* === RESET / BASE === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html, body {
+  scroll-behavior: smooth;
+  font-family: 'Share Tech Mono', monospace;
+  background-color: #000;
+  color: #e6e6e6;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* === NAVBAR === */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: rgba(0,0,0,0.75);
+  border-bottom: 1px solid rgba(255,0,0,0.1);
+  backdrop-filter: blur(6px);
+  z-index: 100;
+  transition: all 0.3s ease;
+}
+nav a {
+  color: #e6e6e6;
+  margin: 0 0.75rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+nav a:hover {
+  color: #ff0044;
+  text-shadow: 0 0 15px #ff0044;
+  transform: scale(1.05);
+}
+
+/* === FORMULARIO VHS === */
+.input-vhs {
+  background: rgba(0,0,0,0.75);
+  border: 1px solid rgba(255,0,0,0.5);
+  padding: 1rem;
+  color: #fff;
+  border-radius: 0.5rem;
+  outline: none;
+  transition: all 0.3s ease, transform 0.1s;
+  font-family: 'Share Tech Mono', monospace;
+  width: 100%;
+  font-size: 1rem;
+}
+.input-vhs:focus {
+  border-color: #00ffff;
+  box-shadow: 0 0 15px #00ffff, 0 0 25px #ff0044;
+  transform: scale(1.02);
+}
+
+/* === FORM CONTAINER === */
+#reservaForm {
+  display: grid;
+  gap: 1rem;
+  background: rgba(0,0,0,0.65);
+  padding: 2rem;
+  border-radius: 1rem;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,0,0,0.4);
+  box-shadow: 0 0 25px rgba(255,0,0,0.3), 0 0 25px rgba(0,255,255,0.2);
+}
+
+/* === BOTÓN ENVIAR === */
+#reservaForm button {
+  background: linear-gradient(90deg, #ff0044, #00ffff);
+  padding: 1rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border-radius: 0.7rem;
+  transition: all 0.3s ease, transform 0.1s;
+}
+#reservaForm button:hover {
+  box-shadow: 0 0 20px #ff0044, 0 0 20px #00ffff;
+  transform: scale(1.05) rotate(-1deg);
+}
+
+/* === GLITCH / DISTORTED TEXT === */
+.distorted {
+  animation: glitch-effect 0.4s linear infinite;
+}
+@keyframes glitch-effect {
+  0% { transform: translate(0,0) skew(0deg); }
+  20% { transform: translate(-2px,2px) skew(-1deg); }
+  40% { transform: translate(2px,-2px) skew(1deg); }
+  60% { transform: translate(-2px,1px) skew(-0.5deg); }
+  80% { transform: translate(2px,-1px) skew(0.5deg); }
+  100% { transform: translate(0,0) skew(0deg); }
+}
+
+/* === TÍTULOS CHROMATIC === */
+.chromatic {
+  position: relative;
+  color: #fff;
+  text-shadow: 2px 0 red, -2px 0 cyan;
+}
+
+/* === FOOTER (opcional) === */
+footer {
+  padding: 2rem;
+  text-align: center;
+  color: #aaa;
+  border-top: 1px solid rgba(255,0,0,0.2);
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  nav { flex-direction: column; gap: 0.5rem; }
+  #reservaForm { gap: 0.8rem; padding: 1.5rem; }
+}
