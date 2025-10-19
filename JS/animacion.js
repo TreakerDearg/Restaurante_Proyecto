@@ -1,18 +1,22 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  // === Activar transición de carga ===
+  // =======================
+  // ACTIVAR TRANSICIÓN DE CARGA
+  // =======================
   setTimeout(() => {
     document.body.classList.add("loaded");
     const header = document.querySelector("header");
     if (header) header.classList.add("loaded");
-  }, 100); // espera 100ms para suavizar la aparición
+  }, 100);
 
-  // === Texto distorsionado aleatorio (solo después de load) ===
+  // =======================
+  // TEXTO DISTORSIONADO ALEATORIO
+  // =======================
   function distortText() {
     if (!document.body.classList.contains("loaded")) return;
     const elements = document.querySelectorAll(".distorted, .chromatic");
     elements.forEach(el => {
-      if (Math.random() < 0.25) {
+      if (Math.random() < 0.2) {
         const original = el.dataset.text || el.textContent;
         el.dataset.text = original;
         const chars = original.split("");
@@ -27,19 +31,23 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   setInterval(distortText, 200);
 
-  // === Jitter cromático ===
+  // =======================
+  // JITTER CROMÁTICO SUAVE
+  // =======================
   function jitterChromatic() {
     if (!document.body.classList.contains("loaded")) return;
-    const titles = document.querySelectorAll(".chromatic");
+    const titles = document.querySelectorAll(".chromatic span");
     titles.forEach(el => {
-      const x = (Math.random() - 0.5) * 2;
-      const y = (Math.random() - 0.5) * 2;
+      const x = (Math.random() - 0.5) * 1.5;
+      const y = (Math.random() - 0.5) * 1.5;
       el.style.transform = `translate(${x}px, ${y}px)`;
     });
   }
   setInterval(jitterChromatic, 150);
 
-  // === Scroll animation con GSAP ===
+  // =======================
+  // SCROLL ANIMATION (GSAP)
+  // =======================
   const observer = new IntersectionObserver(
     entries => {
       entries.forEach(entry => {
@@ -55,9 +63,11 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     { threshold: 0.2 }
   );
-  document.querySelectorAll("section, .card").forEach(el => observer.observe(el));
+  document.querySelectorAll("section, .card, .flip-card").forEach(el => observer.observe(el));
 
-  // === Flicker overlay sutil ===
+  // =======================
+  // OVERLAY VHS / FLICKER SUAVE
+  // =======================
   const flickerOverlay = document.createElement("div");
   flickerOverlay.classList.add("vhs-flicker");
   document.body.appendChild(flickerOverlay);
@@ -69,7 +79,9 @@ document.addEventListener("DOMContentLoaded", () => {
     ease: "sine.inOut"
   });
 
-  // === Ruido estático tipo TV (canvas) ===
+  // =======================
+  // NOISE ESTÁTICO (Canvas)
+  // =======================
   const noiseCanvas = document.createElement("canvas");
   noiseCanvas.classList.add("noise-layer");
   document.body.appendChild(noiseCanvas);
@@ -87,14 +99,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const imageData = ctx.createImageData(noiseCanvas.width, noiseCanvas.height);
     const buffer = new Uint32Array(imageData.data.buffer);
     for (let i = 0; i < buffer.length; i++) {
-      buffer[i] = Math.random() < 0.02 ? 0xffffffff : 0xff000000;
+      buffer[i] = Math.random() < 0.015 ? 0xffffffff : 0xff000000;
     }
     ctx.putImageData(imageData, 0, 0);
     requestAnimationFrame(drawNoise);
   }
   drawNoise();
 
-  // === Vibración de videos ===
+  // =======================
+  // VIBRACIÓN DE VIDEOS
+  // =======================
   function shakeVideos() {
     if (!document.body.classList.contains("loaded")) return;
     const videos = document.querySelectorAll("video");
@@ -106,13 +120,74 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   setInterval(shakeVideos, 90);
 
-  // === Ruido cromático sobre títulos ===
+  // =======================
+  // RGB CHROMATIC TEXT
+  // =======================
   const rgbTitles = document.querySelectorAll(".chromatic");
   rgbTitles.forEach(title => {
+    if (title.dataset.processed) return; // evita duplicar
     const text = title.textContent;
+    title.dataset.processed = true;
     title.innerHTML = `<span class="r">${text}</span>
                        <span class="g">${text}</span>
                        <span class="b">${text}</span>`;
   });
 
+  // =======================
+  // VHS GLITCH RANDOM
+  // =======================
+  function glitchEffect() {
+    if (!document.body.classList.contains("loaded")) return;
+    const cards = document.querySelectorAll(".card, .flip-card");
+    cards.forEach(card => {
+      if (Math.random() < 0.02) {
+        const x = (Math.random() - 0.5) * 8;
+        const y = (Math.random() - 0.5) * 8;
+        card.style.transform = `translate(${x}px, ${y}px) scale(1.02)`;
+        setTimeout(() => { card.style.transform = ""; }, 100);
+      }
+    });
+  }
+  setInterval(glitchEffect, 400);
+
+});
+
+// JS: Filtro de menú
+document.addEventListener('DOMContentLoaded', () => {
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  const menuCards = document.querySelectorAll('.menu-card');
+
+  filterButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filter = btn.getAttribute('data-filter');
+
+      // Botón activo visual
+      filterButtons.forEach(b => b.classList.remove('opacity-70'));
+      btn.classList.add('opacity-70');
+
+      menuCards.forEach(card => {
+        const category = card.getAttribute('data-category');
+
+        if(filter === 'todos' || category === filter) {
+          card.classList.remove('hidden');
+          card.classList.add('block');
+        } else {
+          card.classList.remove('block');
+          card.classList.add('hidden');
+        }
+      });
+    });
+  });
+});
+
+const menuToggle = document.getElementById("menu-toggle");
+const navLinks = document.getElementById("nav-links");
+
+menuToggle.addEventListener("click", () => {
+  navLinks.classList.toggle("show");
+
+  // Cambia icono
+  menuToggle.innerHTML = navLinks.classList.contains("show")
+    ? '<ion-icon name="close-outline" class="text-3xl"></ion-icon>'
+    : '<ion-icon name="menu-outline" class="text-3xl"></ion-icon>';
 });

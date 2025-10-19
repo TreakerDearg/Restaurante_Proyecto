@@ -1,12 +1,19 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="Assets/IconoBc.png" type="image/png">
   <title>Black Comedor — El Ritual del Hambre</title>
 
+  <!-- SEO Mejorado -->
+  <meta name="theme-color" content="#110000">
+  <meta name="description" content="Black Comedor — experiencia gastronómica ritual inspirada en VHS, Lovecraft, Silent Hill y Buckshot Roulette.">
+  <meta name="keywords" content="restaurante gótico, horror gastronómico, lovecraft, silent hill, coctelería oscura">
+  
   <!-- Tipografías -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=VT323&family=Orbitron:wght@700&display=swap" rel="stylesheet">
 
   <!-- Tailwind -->
@@ -16,96 +23,60 @@
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
-  <!-- SEO / Theme -->
-  <meta name="theme-color" content="#110000">
-  <meta name="description" content="Black Comedor — experiencia gastronómica ritual inspirada en VHS, Lovecraft, Silent Hill y Buckshot Roulette.">
-
   <!-- CSS VHS y Core -->
-  <link rel="stylesheet" href="CSS/vhs-core.css" />
-  <link rel="stylesheet" href="CSS/restaurante.css" />
+  <link rel="stylesheet" href="CSS/vhs-core.css">
+  <link rel="stylesheet" href="CSS/restaurante.css">
 
-  <!-- Preload Assets -->
-  <link rel="preload" as="video" href="./assets/vhs_intro.mp4">
-  <link rel="preload" as="image" href="./assets/textures/noise_overlay.png">
-  <link rel="preload" as="image" href="./assets/chef_occulto.jpg">
-  <link rel="preload" as="image" href="./assets/ritual_masks.jpg">
 </head>
 
 <body class="bg-black text-gray-100 font-mono overflow-x-hidden relative crt-distortion">
 
-  <!-- 🔦 Botón de sonido ambiente -->
-  <button id="sound-toggle" class="fixed top-6 right-6 z-50 bg-black bg-opacity-70 text-red-500 p-3 rounded-full shadow-lg hover:scale-110 transition-transform">
-    <ion-icon name="volume-high-outline"></ion-icon>
-  </button>
+  <!-- NAVBAR -->
+  <nav class="bg-black bg-opacity-90 fixed w-full z-50 shadow-lg border-b border-red-900">
+    <div class="max-w-7xl mx-auto flex items-center justify-between p-4 relative">
+      <a href="#" class="vhs-title text-2xl chromatic font-bold">BLACK COMEDOR</a>
+      <button id="menu-toggle" class="md:hidden text-red-500 z-50">
+        <ion-icon name="menu-outline" class="text-3xl"></ion-icon>
+      </button>
+      <ul id="nav-links" class="hidden md:flex gap-8 items-center text-gray-100 uppercase font-mono">
+        <li><a href="#ritual" class="hover:text-red-500 flex items-center gap-1"><ion-icon name="flame-outline"></ion-icon> Ritual</a></li>
+        <li><a href="#menu" class="hover:text-red-500 flex items-center gap-1"><ion-icon name="restaurant-outline"></ion-icon> Carta</a></li>
+        <li><a href="#cocteles" class="hover:text-red-500 flex items-center gap-1"><ion-icon name="wine-outline"></ion-icon> Coctelería</a></li>
+        <li><a href="#reserva" class="hover:text-red-500 flex items-center gap-1"><ion-icon name="calendar-outline"></ion-icon> Convocatoria</a></li>
+      </ul>
+    </div>
+  </nav>
 
-  <!-- 📼 VHS Overlay -->
-  <div class="overlay-vhs"></div>
-
-  <!-- ⚡ Glitch Transitions -->
-  <div class="transition-glitch" id="transition-glitch"></div>
-
-<!-- 🧭 NAVBAR -->
-<nav class="navbar">
-  <div class="navbar-container">
-    <!-- LOGO / TÍTULO -->
-    <div class="vhs-title text-2xl chromatic">BLACK COMEDOR</div>
-
-    <!-- BOTÓN HAMBURGUESA (solo móvil) -->
-    <button id="menu-toggle" class="menu-toggle" aria-label="Abrir menú">
-      <ion-icon name="menu-outline" class="text-3xl"></ion-icon>
-    </button>
-
-    <!-- LINKS DE NAVEGACIÓN -->
-    <ul id="nav-links" class="nav-links">
-      <li><a href="#ritual"><ion-icon name="flame-outline"></ion-icon> Ritual</a></li>
-      <li><a href="#menu"><ion-icon name="restaurant-outline"></ion-icon> Carta</a></li>
-      <li><a href="#cocteles"><ion-icon name="wine-outline"></ion-icon> Coctelería</a></li>
-      <li><a href="#horror"><ion-icon name="skull-outline"></ion-icon> Horror Pop</a></li>
-      <li><a href="#clips"><ion-icon name="videocam-outline"></ion-icon> Archivos VHS</a></li>
-      <li><a href="#reserva"><ion-icon name="calendar-outline"></ion-icon> Convocatoria</a></li>
-    </ul>
-  </div>
-</nav>
-
-
-  <!-- 🕯️ HERO -->
+  <!-- HERO -->
   <header class="relative h-screen flex items-center justify-center text-center overflow-hidden">
-    <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover opacity-50" aria-hidden="true">
-      <source src="./assets/vhs_intro.mp4" type="video/mp4">
-      <img src="./assets/textures/noise_overlay.png" alt="Fondo VHS" />
-    </video>
-    <div class="absolute inset-0 bg-black bg-opacity-80"></div>
-    <div class="relative z-10 px-4 fade-glitch">
+    <div class="relative z-10 px-4">
       <h1 class="vhs-title mb-4 uppercase" data-glitch="El Ritual del Hambre">El Ritual del Hambre</h1>
-      <p class="vhs-subtext text-xl md:text-2xl max-w-3xl mx-auto">
+      <p class="vhs-subtext text-xl md:text-2xl max-w-3xl mx-auto text-gray-300">
         Donde cada plato invoca un recuerdo prohibido.<br>
         <span class="text-red-500 italic">El hambre no es física, es ancestral.</span>
       </p>
-      <a href="#menu" class="mt-10 inline-block vhs-btn hover:scale-105 transition-transform" role="button">Iniciar el Banquete</a>
     </div>
-    <img src="./assets/vhs_frame.png" alt="Marco VHS" class="absolute inset-0 w-full h-full pointer-events-none">
   </header>
 
-  <main class="space-y-48 relative z-10 fade-glitch" id="maincontent">
+  <main class="space-y-48 relative z-10 fade-glitch">
 
-    <!-- RITUAL -->
-    <section id="ritual" class="py-24 px-6 max-w-7xl mx-auto vhs-section">
-      <h2 class="text-5xl text-center mb-12 chromatic">Origen del Comedor</h2>
-      <div class="grid md:grid-cols-2 gap-12 items-center relative">
-        <div class="space-y-6 text-lg text-gray-300 leading-relaxed">
-          <p>Fundado sobre los cimientos de un templo olvidado, Black Comedor fusiona alta cocina con rituales de evocación. Cada plato es una ofrenda; cada sabor, un sacrificio.</p>
-          <p>El chef oculta símbolos en cada preparación, y las paredes respiran junto a cada bocado, acompañadas por susurros de cintas antiguas.</p>
-          <p class="italic text-red-400">“No vengas con hambre. Ven con devoción.”</p>
-          <p class="italic text-purple-400">“En su morada del abismo, lo innombrable espera a quienes miran demasiado profundo.”</p>
-          <div class="flex space-x-4 mt-4">
-            <img src="./assets/ritual_masks.jpg" alt="Máscaras del Culto" class="w-24 rounded-lg shadow-lg">
-            <img src="./assets/chef_occulto.jpg" alt="Chef del Culto" class="w-24 rounded-lg shadow-lg">
-          </div>
-        </div>
+        <!-- HORROR POP -->
+    <section id="horror" class="py-24 px-6 max-w-7xl mx-auto">
+      <h2 class="text-5xl text-center mb-12 chromatic">Horror Pop y Referencias</h2>
+      <div class="grid md:grid-cols-2 gap-12 items-center">
         <div class="relative">
-          <img src="./assets/ritual_scene.jpg" alt="Ritual del Banquete" class="rounded-lg shadow-2xl hover:scale-105 transition-transform">
-          <div class="absolute bottom-4 right-4 bg-red-900 bg-opacity-60 px-3 py-1 rounded text-sm text-gray-100 shadow-lg">Ceremonia Nocturna</div>
-          <img src="./assets/runas_overlay.png" alt="Runas del Abismo" class="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none">
+          <img src="./assets/ritual_masks.jpg" alt="Máscaras inspiradas en Silent Hill y Lovecraft" class="rounded-lg shadow-2xl hover:scale-105 transition-transform animate-vhs-flicker">
+          <div class="absolute bottom-4 left-4 bg-red-900 bg-opacity-70 px-3 py-1 rounded text-sm text-gray-100 shadow-lg">Silent Hill / Lovecraft</div>
+        </div>
+        <div class="space-y-4 text-lg text-gray-300 leading-relaxed">
+          <p>Explora referencias de Silent Hill, Buckshot Roulette y el legado de Lovecraft plasmadas en cada rincón del comedor.</p>
+          <ul class="list-disc list-inside text-gray-400 space-y-2">
+            <li>Decoración inspirada en pesadillas urbanas y mitologías ocultas.</li>
+            <li>Sonidos ambientales que evocan la sensación de VHS y rituales prohibidos.</li>
+            <li>Menús y cocteles con nombres oscuros y temáticos.</li>
+            <li>Easter eggs en cada card que revelan secretos ocultos.</li>
+            <li>Fragmentos de lenguas arcanas inscritas en las paredes (Azathoth, Nyarlathotep).</li>
+          </ul>
         </div>
       </div>
     </section>
@@ -117,257 +88,135 @@
         Cada plato es un susurro de los antiguos. Atrévete a explorar sabores que perturban la memoria.
       </p>
 
-      <div class="flex justify-center mb-12">
-        <a href="./assets/carta_completa.pdf" target="_blank" class="vhs-btn hover:scale-110 animate-pulse transition-transform flex items-center space-x-2">
-          <ion-icon name="document-text-outline"></ion-icon>
-          <span>Ver carta en PDF</span>
-        </a>
+      <div class="flex flex-wrap justify-center mb-12 gap-4">
+        <button class="filter-btn px-4 py-2 bg-red-700 text-black rounded-lg" data-filter="todos">Todos</button>
+        <button class="filter-btn px-4 py-2 bg-purple-700 text-black rounded-lg" data-filter="entradas">Entradas</button>
+        <button class="filter-btn px-4 py-2 bg-green-700 text-black rounded-lg" data-filter="principales">Principales</button>
+        <button class="filter-btn px-4 py-2 bg-blue-700 text-black rounded-lg" data-filter="postres">Postres</button>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-7xl mx-auto">
-        <!-- Ejemplo Plato -->
-        <div class="menu-card group relative p-6 text-center rounded-lg bg-black border-2 border-red-700 shadow-inner shadow-red-900 hover:scale-105 transition-transform hover:shadow-[0_0_30px_rgba(255,0,0,0.8)]">
-          <span class="absolute top-2 right-2 text-red-500 text-sm font-mono">⟪VHS⟫</span>
-          <img src="./assets/pizza_void.jpg" class="rounded mb-3 w-full h-56 object-cover" alt="Pizza del Vacío">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+        <article class="menu-card p-6 text-center rounded-lg bg-black border-2 border-red-700 shadow-inner shadow-red-900" data-category="principales">
+          <img src="./assets/pizza_void.jpg" alt="Pizza del Vacío" class="rounded-lg mb-4 w-full h-56 object-cover">
           <h3 class="text-2xl font-bold mb-2 chromatic">Pizza del Vacío</h3>
-          <p class="text-gray-400 group-hover:text-red-500 transition-colors">Fermentada bajo luna nueva, su masa palpita levemente antes de servirse.</p>
-        </div>
-
-        <div class="menu-card group relative p-6 text-center rounded-lg bg-black border-2 border-purple-700 shadow-inner shadow-purple-900 hover:scale-105 transition-transform hover:shadow-[0_0_30px_rgba(128,0,128,0.8)]">
-          <span class="absolute top-2 right-2 text-purple-400 text-sm font-mono">⟪VHS⟫</span>
-          <img src="./assets/sopa_eco.jpg" class="rounded mb-3 w-full h-56 object-cover" alt="Sopa de Ecos">
+          <p class="text-gray-400 text-sm sm:text-base leading-relaxed">Fermentada bajo luna nueva, su masa palpita levemente antes de servirse.</p>
+        </article>
+        <article class="menu-card p-6 text-center rounded-lg bg-black border-2 border-purple-700 shadow-inner shadow-purple-900" data-category="entradas">
+          <img src="./assets/sopa_eco.jpg" alt="Sopa de Ecos" class="rounded-lg mb-4 w-full h-56 object-cover">
           <h3 class="text-2xl font-bold mb-2 chromatic">Sopa de Ecos</h3>
-          <p class="text-gray-400 group-hover:text-purple-500 transition-colors">El caldo murmura nombres olvidados. Algunos aseguran escuchar el suyo.</p>
-        </div>
-
-        <div class="menu-card group relative p-6 text-center rounded-lg bg-black border-2 border-green-700 shadow-inner shadow-green-900 hover:scale-105 transition-transform hover:shadow-[0_0_30px_rgba(0,255,0,0.8)]">
-          <span class="absolute top-2 right-2 text-green-400 text-sm font-mono">⟪VHS⟫</span>
-          <img src="./assets/carne_niebla.jpg" class="rounded mb-3 w-full h-56 object-cover" alt="Carne de la Niebla">
+          <p class="text-gray-400 text-sm sm:text-base leading-relaxed">El caldo murmura nombres olvidados. Algunos aseguran escuchar el suyo.</p>
+        </article>
+        <article class="menu-card p-6 text-center rounded-lg bg-black border-2 border-green-700 shadow-inner shadow-green-900" data-category="principales">
+          <img src="./assets/carne_niebla.jpg" alt="Carne de la Niebla" class="rounded-lg mb-4 w-full h-56 object-cover">
           <h3 class="text-2xl font-bold mb-2 chromatic">Carne de la Niebla</h3>
-          <p class="text-gray-400 group-hover:text-green-500 transition-colors">Servida envuelta en humo real. Inspirada en los mitos de Silent Hill.</p>
-        </div>
-
-        <div class="menu-card group relative p-6 text-center rounded-lg bg-black border-2 border-blue-700 shadow-inner shadow-blue-900 hover:scale-105 transition-transform hover:shadow-[0_0_30px_rgba(0,0,255,0.8)]">
-          <span class="absolute top-2 right-2 text-blue-400 text-sm font-mono">⟪VHS⟫</span>
-          <img src="./assets/dessert_forgotten.jpg" class="rounded mb-3 w-full h-56 object-cover" alt="Postre de los Olvidados">
+          <p class="text-gray-400 text-sm sm:text-base leading-relaxed">Servida envuelta en humo real. Inspirada en los mitos de Silent Hill.</p>
+        </article>
+        <article class="menu-card p-6 text-center rounded-lg bg-black border-2 border-blue-700 shadow-inner shadow-blue-900" data-category="postres">
+          <img src="./assets/dessert_forgotten.jpg" alt="Postre de los Olvidados" class="rounded-lg mb-4 w-full h-56 object-cover">
           <h3 class="text-2xl font-bold mb-2 chromatic">Postre de los Olvidados</h3>
-          <p class="text-gray-400 group-hover:text-blue-500 transition-colors">Un postre que evoca recuerdos perdidos y secretos olvidados por la memoria.</p>
-        </div>
+          <p class="text-gray-400 text-sm sm:text-base leading-relaxed">Un postre que evoca recuerdos perdidos y secretos olvidados por la memoria.</p>
+        </article>
       </div>
     </section>
 
     <!-- COCTELERÍA -->
     <section id="cocteles" class="py-24 px-6 bg-black bg-opacity-90">
       <h2 class="text-5xl text-center mb-12 chromatic">Coctelería del Culto</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-7xl mx-auto">
-        <div class="flip-card card group relative cursor-pointer">
-          <div class="flip-card-inner transition-transform duration-500 transform-gpu group-hover:rotate-y-180">
-            <div class="flip-card-front p-6 text-center rounded-lg bg-black border-2 border-red-700 shadow-inner shadow-red-900">
-              <img src="./assets/azathoth_eye.jpg" alt="Ojo de Azathoth" class="rounded mb-4">
-              <h3 class="text-2xl font-bold chromatic">Ojo de Azathoth</h3>
-            </div>
-            <div class="flip-card-back p-6 flex flex-col justify-center bg-black border-2 border-red-700 rounded-lg shadow-inner shadow-red-900 relative">
-              <div class="absolute inset-0 bg-white opacity-5 pointer-events-none animate-vhs-scanline"></div>
-              <p class="text-gray-300 text-lg leading-relaxed">Vodka, jugo de granada y un toque de “mirada”. Nunca parpadea.</p>
-            </div>
-          </div>
-        </div>
 
-        <div class="flip-card card group relative cursor-pointer">
-          <div class="flip-card-inner transition-transform duration-500 transform-gpu group-hover:rotate-y-180">
-            <div class="flip-card-front p-6 text-center rounded-lg bg-black border-2 border-blue-700 shadow-inner shadow-blue-900">
-              <img src="./assets/deep_tear.jpg" alt="Lágrimas del Mar Profundo" class="rounded mb-4">
-              <h3 class="text-2xl font-bold chromatic">Lágrimas del Mar Profundo</h3>
-            </div>
-            <div class="flip-card-back p-6 flex flex-col justify-center bg-black border-2 border-blue-700 rounded-lg shadow-inner shadow-blue-900 relative">
-              <div class="absolute inset-0 bg-white opacity-5 pointer-events-none animate-vhs-scanline"></div>
-              <p class="text-gray-300 text-lg leading-relaxed">Gin azul, agua tónica y sal marina ancestral. Brilla bajo luz UV.</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto">
+        <article class="relative group cursor-pointer">
+          <div class="relative overflow-hidden rounded-lg border-2 border-red-700 shadow-inner shadow-red-900">
+            <img src="./assets/azathoth_eye.jpg" alt="Ojo de Azathoth" class="w-full h-56 object-cover group-hover:scale-110 transition-transform">
+            <div class="absolute inset-0 bg-black bg-opacity-70 opacity-0 group-hover:opacity-100 transition-opacity p-6 flex flex-col justify-center text-center">
+              <h3 class="text-2xl font-bold text-red-500 mb-2">Ojo de Azathoth</h3>
+              <p class="text-gray-300">Vodka, jugo de granada y un toque de "mirada". Nunca parpadea.</p>
             </div>
           </div>
-        </div>
-
-        <div class="flip-card card group relative cursor-pointer">
-          <div class="flip-card-inner transition-transform duration-500 transform-gpu group-hover:rotate-y-180">
-            <div class="flip-card-front p-6 text-center rounded-lg bg-black border-2 border-green-700 shadow-inner shadow-green-900">
-              <img src="./assets/necronomix.jpg" alt="Necronomix" class="rounded mb-4">
-              <h3 class="text-2xl font-bold chromatic">Necronomix</h3>
-            </div>
-            <div class="flip-card-back p-6 flex flex-col justify-center bg-black border-2 border-green-700 rounded-lg shadow-inner shadow-green-900 relative">
-              <div class="absolute inset-0 bg-white opacity-5 pointer-events-none animate-vhs-scanline"></div>
-              <p class="text-gray-300 text-lg leading-relaxed">Ron oscuro, café y polvo de “página arrancada”. Peligroso si se agita.</p>
+        </article>
+        <article class="relative group cursor-pointer">
+          <div class="relative overflow-hidden rounded-lg border-2 border-blue-700 shadow-inner shadow-blue-900">
+            <img src="./assets/deep_tear.jpg" alt="Lágrimas del Mar Profundo" class="w-full h-56 object-cover group-hover:scale-110 transition-transform">
+            <div class="absolute inset-0 bg-black bg-opacity-70 opacity-0 group-hover:opacity-100 transition-opacity p-6 flex flex-col justify-center text-center">
+              <h3 class="text-2xl font-bold text-blue-500 mb-2">Lágrimas del Mar Profundo</h3>
+              <p class="text-gray-300">Gin azul, agua tónica y sal marina ancestral. Brilla bajo luz UV.</p>
             </div>
           </div>
-        </div>
+        </article>
+        <article class="relative group cursor-pointer">
+          <div class="relative overflow-hidden rounded-lg border-2 border-green-700 shadow-inner shadow-green-900">
+            <img src="./assets/necronomix.jpg" alt="Necronomix" class="w-full h-56 object-cover group-hover:scale-110 transition-transform">
+            <div class="absolute inset-0 bg-black bg-opacity-70 opacity-0 group-hover:opacity-100 transition-opacity p-6 flex flex-col justify-center text-center">
+              <h3 class="text-2xl font-bold text-green-500 mb-2">Necronomix</h3>
+              <p class="text-gray-300">Ron oscuro, café y polvo de "página arrancada". Peligroso si se agita.</p>
+            </div>
+          </div>
+        </article>
       </div>
     </section>
 
-    <!-- HORROR POP -->
-    <section id="horror" class="py-24 px-6 max-w-7xl mx-auto">
-      <h2 class="text-5xl text-center mb-12 chromatic">Horror Pop y Referencias</h2>
-      <div class="grid md:grid-cols-2 gap-12 items-center">
-        <div class="relative">
-          <img src="./assets/ritual_masks.jpg" alt="Máscaras del Culto" class="rounded-lg shadow-2xl hover:scale-105 transition-transform animate-vhs-flicker">
-          <div class="absolute bottom-4 left-4 bg-red-900 bg-opacity-70 px-3 py-1 rounded text-sm text-gray-100 shadow-lg">Silent Hill / Lovecraft</div>
-        </div>
-        <div class="space-y-4 text-lg text-gray-300 leading-relaxed">
-          <p>Explora referencias de Silent Hill, Buckshot Roulette y el legado de Lovecraft plasmadas en cada rincón del comedor.</p>
-          <ul class="list-disc list-inside text-gray-400">
-            <li>Decoración inspirada en pesadillas urbanas y mitologías ocultas.</li>
-            <li>Sonidos ambientales que evocan la sensación de VHS y rituales prohibidos.</li>
-            <li>Menús y cocteles con nombres oscuros y temáticos.</li>
-            <li>Easter eggs en cada card que revelan secretos ocultos.</li>
-            <li>Fragmentos de lenguas arcanas inscritas en las paredes (Azathoth, Nyarlathotep).</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- ARCHIVOS VHS -->
-    <section id="clips" class="py-24 px-6">
-      <h2 class="text-5xl text-center mb-12 chromatic">Archivos Perdidos</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
-        <div class="clip-card relative group hover:shadow-[0_0_20px_rgba(255,0,0,0.6)] transition-transform hover:scale-105">
-          <video src="./assets/ritual1.mp4" controls class="rounded shadow-lg w-full h-60 object-cover"></video>
-          <span class="absolute bottom-2 left-2 text-red-500 text-sm font-mono">[ABYSSAL_TAPE_001]</span>
-        </div>
-        <div class="clip-card relative group hover:shadow-[0_0_20px_rgba(128,0,128,0.6)] transition-transform hover:scale-105">
-          <video src="./assets/ritual2.mp4" controls class="rounded shadow-lg w-full h-60 object-cover"></video>
-          <span class="absolute bottom-2 left-2 text-purple-500 text-sm font-mono">[ABYSSAL_TAPE_002]</span>
-        </div>
-        <div class="clip-card relative group hover:shadow-[0_0_20px_rgba(0,255,0,0.6)] transition-transform hover:scale-105">
-          <video src="./assets/ritual3.mp4" controls class="rounded shadow-lg w-full h-60 object-cover"></video>
-          <span class="absolute bottom-2 left-2 text-green-500 text-sm font-mono">[ABYSSAL_TAPE_003]</span>
-        </div>
-        <div class="clip-card relative group hover:shadow-[0_0_20px_rgba(255,0,0,0.6)] transition-transform hover:scale-105">
-          <video src="./assets/prohibido.mp4" controls class="rounded shadow-lg w-full h-60 object-cover"></video>
-          <span class="absolute bottom-2 left-2 text-red-500 text-sm font-mono">[PROHIBIDO]</span>
-        </div>
-      </div>
-    </section>
-
-<!-- RESERVAS -->
-<section id="reserva" class="py-24 px-6 vhs-section">
-  <h2 class="text-5xl text-center mb-12 chromatic">Convocatoria de Comensales</h2>
-  
-  <div id="formContainer" class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8" aria-live="polite">
-    
-    <!-- Tarjeta informativa -->
-    <div class="reservation-card p-6 rounded-lg border-2 border-red-700 shadow-inner shadow-red-900 hover:scale-105 transition-transform">
-      <h3 class="text-2xl font-bold mb-4 chromatic">Reserva Tu Lugar</h3>
-      <p class="text-gray-300">Envía tu solicitud y recibe instrucciones para el ritual de bienvenida.</p>
+    <!-- RESERVAS -->
+    <section id="reserva" class="py-24 px-6 vhs-section">
+      <h2 class="text-5xl text-center mb-12 chromatic">Convocatoria de Comensales</h2>
       
-      <!-- Botón para ir a formulario -->
-      <a href="formulario.html" class="mt-6 inline-block w-full text-center py-3 px-6 bg-gradient-to-r from-red-700 to-purple-700 text-black font-bold rounded-lg hover:scale-105 transition-transform distorted">
-        Entrar al Banquete
-      </a>
-    </div>
-
-  </div>
-</section>
-
-
-        <!-- GALERÍA -->
-    <section id="galeria" class="py-24 px-6 bg-black bg-opacity-90 border-t border-red-900">
-      <h2 class="text-5xl text-center mb-12 chromatic">Galería del Culto</h2>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-7xl mx-auto">
-        <img src="./assets/interior1.jpg" class="rounded-lg shadow-lg hover:scale-105 transition-transform" alt="Interior Black Comedor">
-        <img src="./assets/interior2.jpg" class="rounded-lg shadow-lg hover:scale-105 transition-transform" alt="Mesa Ritual">
-        <img src="./assets/detalle3.jpg" class="rounded-lg shadow-lg hover:scale-105 transition-transform" alt="Detalles Lovecraftianos">
-        <img src="./assets/detalle4.jpg" class="rounded-lg shadow-lg hover:scale-105 transition-transform" alt="Vajilla Oculta">
-      </div>
-      <p class="text-center text-gray-400 mt-6 italic">"Al mirar demasiado, las sombras comienzan a devolverte la mirada."</p>
-    </section>
-
-    <!-- EQUIPO -->
-    <section id="equipo" class="py-24 px-6 max-w-7xl mx-auto">
-      <h2 class="text-5xl text-center mb-12 chromatic">El Círculo del Chef</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
-        <div class="p-6 bg-black border border-red-800 rounded-lg shadow-inner shadow-red-900 hover:scale-105 transition-transform">
-          <img src="./assets/chef_occulto.jpg" alt="Chef Maestro" class="w-40 h-40 object-cover mx-auto rounded-full mb-4 border-2 border-red-700">
-          <h3 class="text-2xl font-bold chromatic mb-2">El Maestro del Hambre</h3>
-          <p class="text-gray-400">Guía el banquete con precisión ritual. Nadie conoce su verdadero nombre.</p>
-        </div>
-        <div class="p-6 bg-black border border-purple-800 rounded-lg shadow-inner shadow-purple-900 hover:scale-105 transition-transform">
-          <img src="./assets/bartender.jpg" alt="Sumo Bartender" class="w-40 h-40 object-cover mx-auto rounded-full mb-4 border-2 border-purple-700">
-          <h3 class="text-2xl font-bold chromatic mb-2">El Sumo Bartender</h3>
-          <p class="text-gray-400">Domina el equilibrio entre veneno y deleite. Sus cócteles alteran la realidad.</p>
-        </div>
-        <div class="p-6 bg-black border border-green-800 rounded-lg shadow-inner shadow-green-900 hover:scale-105 transition-transform">
-          <img src="./assets/sacerdotisa.jpg" alt="Sacerdotisa del Sabor" class="w-40 h-40 object-cover mx-auto rounded-full mb-4 border-2 border-green-700">
-          <h3 class="text-2xl font-bold chromatic mb-2">La Sacerdotisa del Sabor</h3>
-          <p class="text-gray-400">Interpreta cada aroma como un presagio. Prepara los postres del olvido.</p>
-        </div>
+      <div id="formContainer" class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+        <article class="reservation-card p-6 rounded-lg border-2 border-red-700 shadow-inner shadow-red-900 hover:scale-105 transition-transform">
+          <h3 class="text-2xl font-bold mb-4 chromatic">Reserva Tu Lugar</h3>
+          <p class="text-gray-300 mb-6">Envía tu solicitud y recibe instrucciones para el ritual de bienvenida.</p>
+          <a href="formulario.html" class="inline-block w-full text-center py-3 px-6 bg-gradient-to-r from-red-700 to-purple-700 text-black font-bold rounded-lg hover:scale-105 transition-transform distorted">
+            Entrar al Banquete
+          </a>
+        </article>
       </div>
     </section>
 
-    <!-- UBICACIÓN -->
+       <!-- UBICACIÓN -->
     <section id="ubicacion" class="py-24 px-6 bg-black bg-opacity-90 border-t border-red-900">
       <h2 class="text-5xl text-center mb-12 chromatic">Ubicación del Comedor</h2>
-<div class="text-center space-y-2 text-gray-200">
-  <p class="flex items-center justify-center gap-2">
-    <ion-icon name="location-outline" class="text-red-500 text-xl"></ion-icon>
-    Calle Sin Nombre 13, Distrito Oscuro, Ciudad Abismo.
-  </p>
-  <p class="flex items-center justify-center gap-2">
-    <ion-icon name="time-outline" class="text-red-500 text-xl"></ion-icon>
-    Horarios: Jueves a Domingo — 20:00 a 03:00
-  </p>
-  <p class="flex items-center justify-center gap-2">
-    <ion-icon name="call-outline" class="text-red-500 text-xl"></ion-icon>
-    Contacto: <span class="text-red-500 font-semibold">+54 11 6666-1313</span>
-  </p>
-</div>
 
+      <div class="max-w-5xl mx-auto">
+        <!-- Información -->
+        <div class="text-center space-y-4 text-gray-200 mb-8">
+          <p class="flex items-center justify-center gap-2 text-lg">
+            <ion-icon name="location-outline" class="text-red-500 text-2xl" aria-hidden="true"></ion-icon>
+            <span>Calle Sin Nombre 13, Distrito Oscuro, Ciudad Abismo.</span>
+          </p>
+          <p class="flex items-center justify-center gap-2 text-lg">
+            <ion-icon name="time-outline" class="text-red-500 text-2xl" aria-hidden="true"></ion-icon>
+            <span>Horarios: Jueves a Domingo — 20:00 a 03:00</span>
+          </p>
+          <p class="flex items-center justify-center gap-2 text-lg">
+            <ion-icon name="call-outline" class="text-red-500 text-2xl" aria-hidden="true"></ion-icon>
+            <span>Contacto: <a href="tel:+5411666613" class="text-red-500 font-semibold hover:text-red-400 transition-colors">+54 11 6666-1313</a></span>
+          </p>
+        </div>
+
+        <!-- Mapa -->
+        <div class="rounded-lg overflow-hidden shadow-2xl border-2 border-red-900">
           <iframe class="w-full h-80 grayscale contrast-125"
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3282.863!2d-58.38!3d-34.60!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzTCsDM2JzAwLjAiUyA1OMKwMjMnMDAuMCJX!5e0!3m2!1ses-419!2sar!4v0000000000"
-            allowfullscreen loading="lazy"></iframe>
+            allowfullscreen
+            loading="lazy"
+            title="Ubicación de Black Comedor en mapa">
+          </iframe>
         </div>
       </div>
     </section>
 
-  </main>
-
-  <!-- ⚰️ FOOTER -->
+  <!-- FOOTER -->
   <footer class="relative py-12 bg-black bg-opacity-95 text-center border-t border-red-900 overflow-hidden">
-    <div class="absolute inset-0 pointer-events-none">
-      <img src="./assets/vhs_lines.png" alt="Scanlines" class="w-full h-full object-cover opacity-25">
-    </div>
     <div class="relative z-10 flex flex-col items-center space-y-3">
-      <div class="flex items-center space-x-3 text-sm text-gray-400 font-mono">
-        <span class="text-red-600 font-bold">● REC</span>
-        <span>00:13:37</span>
-        <span>|</span>
-        <span>SP</span>
-        <span>|</span>
-        <span>VHS MODE</span>
-      </div>
-      <p class="chromatic text-lg">&copy; 2025 Black Comedor — “El hambre también recuerda.”</p>
+      <p class="chromatic text-lg">&copy; 2025 Black Comedor — "El hambre también recuerda."</p>
       <p class="text-red-500 text-sm">⟪ VHS & ABYSS ⟫</p>
+      <div class="flex space-x-6 mt-4">
+        <a href="#" class="text-gray-400 hover:text-red-500"><ion-icon name="logo-instagram"></ion-icon></a>
+        <a href="#" class="text-gray-400 hover:text-red-500"><ion-icon name="logo-facebook"></ion-icon></a>
+        <a href="#" class="text-gray-400 hover:text-red-500"><ion-icon name="logo-twitter"></ion-icon></a>
+      </div>
+      <p class="text-gray-400 mt-3">Horarios: Jueves a Domingo — 20:00 a 03:00</p>
+      <p class="text-gray-400">Contacto: <a href="tel:+5411666613" class="text-red-500 font-semibold">+54 11 6666-1313</a></p>
     </div>
-    <div class="absolute bottom-2 right-4 text-gray-600 text-xs opacity-60 font-mono">[ SIGNAL STABLE ]</div>
   </footer>
 
+  <script src="JS/animacion.js"></script>
 </body>
-<script src="JS/animacion.js" defer></script>
-<script>
-  const toggle = document.getElementById("menu-toggle");
-  const navLinks = document.getElementById("nav-links");
-
-  toggle.addEventListener("click", () => {
-    navLinks.classList.toggle("open");
-    // Animación del ícono
-    toggle.innerHTML = navLinks.classList.contains("open")
-      ? '<ion-icon name="close-outline" class="text-3xl"></ion-icon>'
-      : '<ion-icon name="menu-outline" class="text-3xl"></ion-icon>';
-  });
-
-  // Cerrar menú al hacer clic en un link
-  document.querySelectorAll(".nav-links a").forEach(link => {
-    link.addEventListener("click", () => {
-      navLinks.classList.remove("open");
-      toggle.innerHTML = '<ion-icon name="menu-outline" class="text-3xl"></ion-icon>';
-    });
-  });
-</script>
-
 </html>
