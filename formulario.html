@@ -6,7 +6,7 @@
   <link rel="icon" href="Assets/IconoBc.png" type="image/png">
   <title>Formulario de Reserva — Black Comedor</title>
 
-  <!-- Tipografías -->
+  <!-- Tipografía -->
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
 
   <!-- Tailwind -->
@@ -23,18 +23,51 @@
   <!-- SEO / Theme -->
   <meta name="theme-color" content="#110000">
   <meta name="description" content="Formulario de reserva para Black Comedor — ritual gastronómico VHS, Lovecraft, Silent Hill.">
-
 </head>
+
 <body class="bg-black text-gray-100 font-mono overflow-x-hidden relative crt-distortion">
 
-  <!-- NAVBAR -->
+  <!-- 🧭 NAVBAR -->
   <nav class="fixed w-full z-50 bg-black bg-opacity-75 backdrop-blur-md border-b border-red-900 px-6 py-4 flex justify-between items-center">
-    <div class="vhs-title text-2xl">BLACK COMEDOR</div>
-    <ul class="flex space-x-6 text-lg">
+    <div class="vhs-title text-2xl chromatic">BLACK COMEDOR</div>
+
+    <!-- Botón Hamburguesa (solo móvil) -->
+    <button id="menu-btn" class="text-red-500 text-3xl md:hidden focus:outline-none" aria-label="Abrir menú">
+      <ion-icon name="menu-outline"></ion-icon>
+    </button>
+
+    <!-- Enlaces del menú -->
+    <ul id="menu" class="hidden md:flex space-x-6 text-lg">
       <li><a href="index.html" class="chromatic hover:text-red-500 flex items-center"><ion-icon name="home-outline" class="mr-1"></ion-icon>Inicio</a></li>
       <li><a href="#form" class="chromatic hover:text-red-500 flex items-center"><ion-icon name="calendar-outline" class="mr-1"></ion-icon>Reserva</a></li>
     </ul>
   </nav>
+
+  <!-- SCRIPT: Toggle menú móvil -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const btn = document.getElementById("menu-btn");
+      const menu = document.getElementById("menu");
+
+      btn.addEventListener("click", () => {
+        menu.classList.toggle("hidden");
+        menu.classList.toggle("flex");
+        menu.classList.toggle("flex-col");
+        menu.classList.toggle("absolute");
+        menu.classList.toggle("top-16");
+        menu.classList.toggle("left-0");
+        menu.classList.toggle("w-full");
+        menu.classList.toggle("bg-black");
+        menu.classList.toggle("bg-opacity-90");
+        menu.classList.toggle("border-t");
+        menu.classList.toggle("border-red-900");
+
+        // Cambiar icono menú ↔ cerrar
+        const icon = btn.querySelector("ion-icon");
+        icon.setAttribute("name", icon.getAttribute("name") === "menu-outline" ? "close-outline" : "menu-outline");
+      });
+    });
+  </script>
 
   <!-- HERO / TÍTULO FORMULARIO -->
   <header class="relative h-screen flex items-center justify-center text-center overflow-hidden">
@@ -52,7 +85,7 @@
   <!-- FORMULARIO -->
   <main id="form" class="py-24 px-6 max-w-4xl mx-auto">
     <div id="formContainer" aria-live="polite">
-      <!-- Formulario dinámico se inyectará con JS -->
+      <!-- Formulario se inyecta dinámicamente con JS -->
     </div>
   </main>
 
@@ -63,8 +96,6 @@
   </footer>
 
   <!-- JS -->
-
   <script src="JS/formulario.js"></script>
-
 </body>
 </html>

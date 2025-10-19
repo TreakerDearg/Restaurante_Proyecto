@@ -44,18 +44,29 @@
   <!-- ⚡ Glitch Transitions -->
   <div class="transition-glitch" id="transition-glitch"></div>
 
-  <!-- 🧭 NAVBAR -->
-  <nav class="fixed w-full z-50 bg-black bg-opacity-75 backdrop-blur-md border-b border-red-900 px-6 py-4 flex justify-between items-center">
-    <div class="vhs-title text-2xl">BLACK COMEDOR</div>
-    <ul class="flex space-x-6 text-lg">
-      <li><a href="#ritual" class="chromatic hover:text-red-500 flex items-center"><ion-icon name="flame-outline" class="mr-1"></ion-icon>Ritual</a></li>
-      <li><a href="#menu" class="chromatic hover:text-red-500 flex items-center"><ion-icon name="restaurant-outline" class="mr-1"></ion-icon>Carta</a></li>
-      <li><a href="#cocteles" class="chromatic hover:text-red-500 flex items-center"><ion-icon name="wine-outline" class="mr-1"></ion-icon>Coctelería</a></li>
-      <li><a href="#horror" class="chromatic hover:text-red-500 flex items-center"><ion-icon name="skull-outline" class="mr-1"></ion-icon>Horror Pop</a></li>
-      <li><a href="#clips" class="chromatic hover:text-red-500 flex items-center"><ion-icon name="videocam-outline" class="mr-1"></ion-icon>Archivos VHS</a></li>
-      <li><a href="#reserva" class="chromatic hover:text-red-500 flex items-center"><ion-icon name="calendar-outline" class="mr-1"></ion-icon>Convocatoria</a></li>
+<!-- 🧭 NAVBAR -->
+<nav class="navbar">
+  <div class="navbar-container">
+    <!-- LOGO / TÍTULO -->
+    <div class="vhs-title text-2xl chromatic">BLACK COMEDOR</div>
+
+    <!-- BOTÓN HAMBURGUESA (solo móvil) -->
+    <button id="menu-toggle" class="menu-toggle" aria-label="Abrir menú">
+      <ion-icon name="menu-outline" class="text-3xl"></ion-icon>
+    </button>
+
+    <!-- LINKS DE NAVEGACIÓN -->
+    <ul id="nav-links" class="nav-links">
+      <li><a href="#ritual"><ion-icon name="flame-outline"></ion-icon> Ritual</a></li>
+      <li><a href="#menu"><ion-icon name="restaurant-outline"></ion-icon> Carta</a></li>
+      <li><a href="#cocteles"><ion-icon name="wine-outline"></ion-icon> Coctelería</a></li>
+      <li><a href="#horror"><ion-icon name="skull-outline"></ion-icon> Horror Pop</a></li>
+      <li><a href="#clips"><ion-icon name="videocam-outline"></ion-icon> Archivos VHS</a></li>
+      <li><a href="#reserva"><ion-icon name="calendar-outline"></ion-icon> Convocatoria</a></li>
     </ul>
-  </nav>
+  </div>
+</nav>
+
 
   <!-- 🕯️ HERO -->
   <header class="relative h-screen flex items-center justify-center text-center overflow-hidden">
@@ -338,5 +349,25 @@
 
 </body>
 <script src="JS/animacion.js" defer></script>
-<script src="JS/Formulario.js" defer></script>
+<script>
+  const toggle = document.getElementById("menu-toggle");
+  const navLinks = document.getElementById("nav-links");
+
+  toggle.addEventListener("click", () => {
+    navLinks.classList.toggle("open");
+    // Animación del ícono
+    toggle.innerHTML = navLinks.classList.contains("open")
+      ? '<ion-icon name="close-outline" class="text-3xl"></ion-icon>'
+      : '<ion-icon name="menu-outline" class="text-3xl"></ion-icon>';
+  });
+
+  // Cerrar menú al hacer clic en un link
+  document.querySelectorAll(".nav-links a").forEach(link => {
+    link.addEventListener("click", () => {
+      navLinks.classList.remove("open");
+      toggle.innerHTML = '<ion-icon name="menu-outline" class="text-3xl"></ion-icon>';
+    });
+  });
+</script>
+
 </html>
