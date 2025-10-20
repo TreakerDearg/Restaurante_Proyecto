@@ -233,7 +233,7 @@ body::before {
 }
 
 /* =======================
-   NAVBAR
+   NAVBAR BASE
 ======================= */
 nav {
   position: fixed;
@@ -249,11 +249,6 @@ nav {
   backdrop-filter: blur(10px);
   z-index: var(--z-nav);
   transition: var(--transition-base);
-}
-
-nav.scrolled {
-  padding: 0.8rem 2rem;
-  box-shadow: 0 4px 20px rgba(255, 0, 0, 0.2);
 }
 
 nav a {
@@ -282,9 +277,7 @@ nav a::after {
 
 nav a:hover {
   color: var(--color-primary-red);
-  text-shadow: 
-    0 0 15px var(--color-primary-red), 
-    0 0 10px var(--color-primary-cyan);
+  text-shadow: 0 0 15px var(--color-primary-red), 0 0 10px var(--color-primary-cyan);
   transform: translateY(-2px);
 }
 
@@ -292,14 +285,17 @@ nav a:hover::after {
   width: 100%;
 }
 
-/* Mobile Menu Toggle */
+/* =======================
+   BOTÓN MÓVIL
+======================= */
 #menu-toggle {
   background: transparent;
   padding: 0.5rem;
-  display: flex;
+  display: none; /* ✅ Oculto por defecto en desktop */
   align-items: center;
   justify-content: center;
   transition: var(--transition-base);
+  cursor: pointer;
 }
 
 #menu-toggle:hover {
@@ -307,12 +303,24 @@ nav a:hover::after {
   color: var(--color-primary-red);
 }
 
-/* Mobile Nav Links */
+/* =======================
+   MENÚ LINKS
+======================= */
 #nav-links {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
   list-style: none;
 }
 
+/* =======================
+   MEDIA QUERIES MÓVIL
+======================= */
 @media (max-width: 768px) {
+  #menu-toggle {
+    display: flex; /* ✅ Solo visible en móvil */
+  }
+
   #nav-links {
     position: fixed;
     top: 70px;
@@ -326,16 +334,51 @@ nav a:hover::after {
     transform: translateY(-100%);
     transition: transform 0.4s ease;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+    z-index: 40;
   }
-  
+
   #nav-links.active {
     transform: translateY(0);
   }
-  
+
   #nav-links li {
     text-align: center;
   }
 }
+
+@media (max-width: 768px) {
+  #nav-links {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 0; /* inicial oculto */
+    overflow: hidden;
+    background: var(--color-bg-dark);
+    flex-direction: column;
+    padding: 0;
+    gap: 1.5rem;
+    border-bottom: none;
+    transform: none;
+    transition: height 0.4s ease, padding 0.4s ease;
+    z-index: 40;
+  }
+
+  #nav-links.active {
+    height: 100vh; /* ocupa toda la pantalla */
+    padding: 5rem 2rem 2rem 2rem; /* deja espacio para contenido y logo */
+  }
+
+  #nav-links li {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  #menu-toggle {
+    display: flex; /* solo en móvil */
+  }
+}
+
 
 /* =======================
    HERO / BANNER

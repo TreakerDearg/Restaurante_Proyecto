@@ -29,22 +29,28 @@
 </head>
 
 <body class="bg-black text-gray-100 font-mono overflow-x-hidden relative crt-distortion">
+<!-- NAVBAR -->
+<nav class="bg-black bg-opacity-90 fixed w-full z-50 shadow-lg border-b border-red-900">
+  <div class="max-w-7xl mx-auto flex items-center justify-between p-4 relative">
+    
+    <!-- Logo -->
+    <a href="#" class="vhs-title text-2xl chromatic font-bold">BLACK COMEDOR</a>
+    
+    <!-- Botón menú móvil -->
+    <button id="menu-toggle" class="md:hidden text-red-500 z-50 focus:outline-none">
+      <ion-icon name="menu-outline" class="text-3xl"></ion-icon>
+    </button>
 
-  <!-- NAVBAR -->
-  <nav class="bg-black bg-opacity-90 fixed w-full z-50 shadow-lg border-b border-red-900">
-    <div class="max-w-7xl mx-auto flex items-center justify-between p-4 relative">
-      <a href="#" class="vhs-title text-2xl chromatic font-bold">BLACK COMEDOR</a>
-      <button id="menu-toggle" class="md:hidden text-red-500 z-50">
-        <ion-icon name="menu-outline" class="text-3xl"></ion-icon>
-      </button>
-      <ul id="nav-links" class="hidden md:flex gap-8 items-center text-gray-100 uppercase font-mono">
-        <li><a href="#ritual" class="hover:text-red-500 flex items-center gap-1"><ion-icon name="flame-outline"></ion-icon> Ritual</a></li>
-        <li><a href="#menu" class="hover:text-red-500 flex items-center gap-1"><ion-icon name="restaurant-outline"></ion-icon> Carta</a></li>
-        <li><a href="#cocteles" class="hover:text-red-500 flex items-center gap-1"><ion-icon name="wine-outline"></ion-icon> Coctelería</a></li>
-        <li><a href="#reserva" class="hover:text-red-500 flex items-center gap-1"><ion-icon name="calendar-outline"></ion-icon> Convocatoria</a></li>
-      </ul>
-    </div>
-  </nav>
+    <!-- Links del menú -->
+    <ul id="nav-links" class="hidden md:flex gap-8 items-center text-gray-100 uppercase font-mono flex-col md:flex-row absolute md:static top-full left-0 w-full md:w-auto bg-black md:bg-transparent p-4 md:p-0">
+      <li><a href="#ritual" class="hover:text-red-500 flex items-center gap-1"><ion-icon name="flame-outline"></ion-icon> Ritual</a></li>
+      <li><a href="#menu" class="hover:text-red-500 flex items-center gap-1"><ion-icon name="restaurant-outline"></ion-icon> Carta</a></li>
+      <li><a href="#cocteles" class="hover:text-red-500 flex items-center gap-1"><ion-icon name="wine-outline"></ion-icon> Coctelería</a></li>
+      <li><a href="#reserva" class="hover:text-red-500 flex items-center gap-1"><ion-icon name="calendar-outline"></ion-icon> Convocatoria</a></li>
+    </ul>
+
+  </div>
+</nav>
 
   <!-- HERO -->
   <header class="relative h-screen flex items-center justify-center text-center overflow-hidden">
