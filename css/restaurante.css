@@ -608,12 +608,13 @@ p {
 }
 
 /* =======================
-   COCTELERÍA - Hover Cards
+   COCTELERÍA - Hover / Tap Cards
 ======================= */
 #cocteles {
   background: radial-gradient(circle at center, #000 60%, #0a0a0a);
   position: relative;
   overflow: hidden;
+  padding-bottom: 6rem;
 }
 
 #cocteles h2 {
@@ -629,25 +630,26 @@ p {
   overflow: hidden;
   border: 2px solid rgba(255, 255, 255, 0.1);
   transition: transform 0.4s ease, box-shadow 0.4s ease;
-  background: rgba(10, 10, 10, 0.8);
+  background: rgba(10, 10, 10, 0.85);
+  cursor: pointer;
 }
 
 .coctel-card:hover {
-  transform: scale(1.05);
+  transform: scale(1.03);
   box-shadow: 0 0 25px rgba(255, 0, 0, 0.3);
 }
 
 /* --- Imagen --- */
 .coctel-card img {
   width: 100%;
-  height: 320px; /* más alta */
+  height: 340px;
   object-fit: cover;
-  transition: transform 0.5s ease;
-  filter: brightness(0.9) contrast(1.1);
+  transition: transform 0.6s ease, filter 0.3s ease;
+  filter: brightness(0.9) contrast(1.05);
 }
 
 .coctel-card:hover img {
-  transform: scale(1.15);
+  transform: scale(1.12);
   filter: brightness(1.1);
 }
 
@@ -655,7 +657,7 @@ p {
 .coctel-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 20%, rgba(0, 0, 0, 0.6) 80%);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 25%, rgba(0, 0, 0, 0.6) 80%);
   opacity: 0;
   display: flex;
   flex-direction: column;
@@ -675,28 +677,59 @@ p {
   font-weight: 700;
   text-transform: uppercase;
   margin-bottom: 1rem;
+  text-shadow: 0 0 10px rgba(255,255,255,0.3);
 }
 
 .coctel-overlay p {
   color: #ccc;
   font-size: 1rem;
   max-width: 90%;
-  line-height: 1.4;
+  line-height: 1.5;
 }
 
 .coctel-overlay.red h3 { color: #ef4444; }
 .coctel-overlay.blue h3 { color: #3b82f6; }
 .coctel-overlay.green h3 { color: #22c55e; }
 
-/* --- Responsivo --- */
+/* =======================
+   MOBILE OPTIMIZATION
+======================= */
 @media (max-width: 768px) {
-  .coctel-card img {
-    height: 260px;
+  .coctel-card {
+    transform: none !important;
   }
+
+  .coctel-card img {
+    height: 280px;
+  }
+
+  /* Simular hover en móviles: overlay siempre visible */
+  .coctel-overlay {
+    opacity: 1;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 40%, rgba(0, 0, 0, 0.7) 90%);
+    padding: 1.5rem;
+  }
+
   .coctel-overlay h3 {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .coctel-overlay p {
+    font-size: 0.95rem;
+    color: #ddd;
+  }
+
+  .coctel-card:hover img {
+    transform: none;
+  }
+
+  .coctel-card:hover {
+    transform: none;
+    box-shadow: none;
   }
 }
+
 
 /* =======================
    BUTTONS / VHS
