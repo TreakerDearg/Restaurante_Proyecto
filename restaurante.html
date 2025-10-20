@@ -24,7 +24,6 @@
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
   <!-- CSS VHS y Core -->
-  <link rel="stylesheet" href="CSS/vhs-core.css">
   <link rel="stylesheet" href="CSS/restaurante.css">
 
 </head>
@@ -154,6 +153,35 @@
       </div>
     </section>
 
+ <!-- ARCHIVOS VHS -->
+    <section id="clips" class="py-24 px-6">
+      <h2 class="text-5xl text-center mb-12 chromatic">Archivos Perdidos</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        
+        <article class="clip-card relative group hover:shadow-[0_0_20px_rgba(255,0,0,0.6)] transition-transform hover:scale-105">
+          <video src="./assets/ritual1.mp4" controls class="rounded shadow-lg w-full h-60 object-cover" aria-label="Archivo VHS ritual 001"></video>
+          <span class="absolute bottom-2 left-2 text-red-500 text-sm font-mono">[ABYSSAL_TAPE_001]</span>
+        </article>
+        
+        <article class="clip-card relative group hover:shadow-[0_0_20px_rgba(128,0,128,0.6)] transition-transform hover:scale-105">
+          <video src="./assets/ritual2.mp4" controls class="rounded shadow-lg w-full h-60 object-cover" aria-label="Archivo VHS ritual 002"></video>
+          <span class="absolute bottom-2 left-2 text-purple-500 text-sm font-mono">[ABYSSAL_TAPE_002]</span>
+        </article>
+        
+        <article class="clip-card relative group hover:shadow-[0_0_20px_rgba(0,255,0,0.6)] transition-transform hover:scale-105">
+          <video src="./assets/ritual3.mp4" controls class="rounded shadow-lg w-full h-60 object-cover" aria-label="Archivo VHS ritual 003"></video>
+          <span class="absolute bottom-2 left-2 text-green-500 text-sm font-mono">[ABYSSAL_TAPE_003]</span>
+        </article>
+        
+        <article class="clip-card relative group hover:shadow-[0_0_20px_rgba(255,0,0,0.6)] transition-transform hover:scale-105">
+          <video src="./assets/prohibido.mp4" controls class="rounded shadow-lg w-full h-60 object-cover" aria-label="Archivo VHS prohibido"></video>
+          <span class="absolute bottom-2 left-2 text-red-500 text-sm font-mono">[PROHIBIDO]</span>
+        </article>
+        
+      </div>
+    </section>
+
+
     <!-- RESERVAS -->
     <section id="reserva" class="py-24 px-6 vhs-section">
       <h2 class="text-5xl text-center mb-12 chromatic">Convocatoria de Comensales</h2>
@@ -166,6 +194,33 @@
             Entrar al Banquete
           </a>
         </article>
+      </div>
+    </section>
+
+
+       <!-- EQUIPO -->
+    <section id="equipo" class="py-24 px-6 max-w-7xl mx-auto">
+      <h2 class="text-5xl text-center mb-12 chromatic">El Círculo del Chef</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
+        
+        <article class="p-6 bg-black border border-red-800 rounded-lg shadow-inner shadow-red-900 hover:scale-105 transition-transform">
+          <img src="./assets/chef_occulto.jpg" alt="Chef Maestro del Hambre" class="w-40 h-40 object-cover mx-auto rounded-full mb-4 border-2 border-red-700">
+          <h3 class="text-2xl font-bold chromatic mb-2">El Maestro del Hambre</h3>
+          <p class="text-gray-400">Guía el banquete con precisión ritual. Nadie conoce su verdadero nombre.</p>
+        </article>
+        
+        <article class="p-6 bg-black border border-purple-800 rounded-lg shadow-inner shadow-purple-900 hover:scale-105 transition-transform">
+          <img src="./assets/bartender.jpg" alt="Sumo Bartender del Culto" class="w-40 h-40 object-cover mx-auto rounded-full mb-4 border-2 border-purple-700">
+          <h3 class="text-2xl font-bold chromatic mb-2">El Sumo Bartender</h3>
+          <p class="text-gray-400">Domina el equilibrio entre veneno y deleite. Sus cócteles alteran la realidad.</p>
+        </article>
+        
+        <article class="p-6 bg-black border border-green-800 rounded-lg shadow-inner shadow-green-900 hover:scale-105 transition-transform">
+          <img src="./assets/sacerdotisa.jpg" alt="Sacerdotisa del Sabor" class="w-40 h-40 object-cover mx-auto rounded-full mb-4 border-2 border-green-700">
+          <h3 class="text-2xl font-bold chromatic mb-2">La Sacerdotisa del Sabor</h3>
+          <p class="text-gray-400">Interpreta cada aroma como un presagio. Prepara los postres del olvido.</p>
+        </article>
+        
       </div>
     </section>
 

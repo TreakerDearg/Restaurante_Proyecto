@@ -111,7 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       if (response.ok || response.type === "opaque") {
-        feedback.textContent = "✅ Reserva enviada correctamente.";
+        feedback.textContent = " Reserva enviada correctamente.";
         feedback.className = "mt-4 text-center text-green-400 font-mono opacity-100 transition-all duration-700";
         form.reset();
       } else {
@@ -120,7 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     } catch (error) {
       console.error("Error:", error);
-      feedback.textContent = "🚫 Error al conectar con el servidor.";
+      feedback.textContent = " Error al conectar con el servidor.";
       feedback.className = "mt-4 text-center text-red-400 font-mono opacity-100";
     } finally {
       submitBtn.disabled = false;
