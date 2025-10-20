@@ -52,16 +52,50 @@
   </div>
 </nav>
 
-  <!-- HERO -->
-  <header class="relative h-screen flex items-center justify-center text-center overflow-hidden">
-    <div class="relative z-10 px-4">
-      <h1 class="vhs-title mb-4 uppercase" data-glitch="El Ritual del Hambre">El Ritual del Hambre</h1>
-      <p class="vhs-subtext text-xl md:text-2xl max-w-3xl mx-auto text-gray-300">
-        Donde cada plato invoca un recuerdo prohibido.<br>
-        <span class="text-red-500 italic">El hambre no es física, es ancestral.</span>
-      </p>
-    </div>
-  </header>
+<header class="relative h-screen flex items-center justify-center text-center overflow-hidden hero">
+  <!-- Overlay oscuro + gradiente -->
+  <div class="absolute inset-0 bg-black/80 bg-gradient-to-b from-black/70 via-black/50 to-black/80 z-0"></div>
+
+  <!-- Contenido principal -->
+  <div class="relative z-10 px-4">
+    <h1 class="vhs-title mb-6 uppercase glitch-text text-4xl md:text-6xl lg:text-7xl font-bold" data-glitch="El Ritual del Hambre">
+      El Ritual del Hambre
+    </h1>
+
+    <p class="vhs-subtext text-lg md:text-2xl max-w-3xl mx-auto text-gray-300 leading-relaxed mb-8">
+      Donde cada plato invoca un recuerdo prohibido.<br>
+      <span class="text-red-500 italic">El hambre no es física, es ancestral.</span>
+    </p>
+
+    <a href="#menu" class="cta-btn inline-block px-6 py-3 bg-gradient-to-r from-red-700 to-purple-700 text-black font-bold rounded-lg hover:scale-105 transition-transform">
+      Explorar la Carta
+    </a>
+  </div>
+
+  <!-- 🎥 Fondo animado con fallback -->
+  <div class="absolute inset-0 z-[-1] hero-bg">
+    <video 
+      class="w-full h-full object-cover opacity-70 hidden sm:block"
+      autoplay 
+      muted 
+      loop 
+      playsinline
+      poster="Assets/Bosque.jpg"  <!-- Fallback visible mientras carga -->
+    >
+      <source src="Assets/TerrorLoop.mp4" type="video/mp4" />
+      <!-- Fallback en caso de que el video no cargue -->
+      <img src="Assets/Bosque.jpg" alt="Hero background" class="w-full h-full object-cover opacity-70" />
+    </video>
+
+    <!-- Imagen fallback para dispositivos móviles -->
+    <img 
+      src="Assets/Bosque.jpg" 
+      alt="Hero background" 
+      class="w-full h-full object-cover opacity-70 sm:hidden"
+    />
+  </div>
+</header>
+
 
   <main class="space-y-48 relative z-10 fade-glitch">
 
@@ -70,7 +104,7 @@
       <h2 class="text-5xl text-center mb-12 chromatic">Horror Pop y Referencias</h2>
       <div class="grid md:grid-cols-2 gap-12 items-center">
         <div class="relative">
-          <img src="./assets/ritual_masks.jpg" alt="Máscaras inspiradas en Silent Hill y Lovecraft" class="rounded-lg shadow-2xl hover:scale-105 transition-transform animate-vhs-flicker">
+          <img src="Assets/Mozo.jpg" alt="Máscaras inspiradas en Silent Hill y Lovecraft" class="rounded-lg shadow-2xl hover:scale-105 transition-transform animate-vhs-flicker">
           <div class="absolute bottom-4 left-4 bg-red-900 bg-opacity-70 px-3 py-1 rounded text-sm text-gray-100 shadow-lg">Silent Hill / Lovecraft</div>
         </div>
         <div class="space-y-4 text-lg text-gray-300 leading-relaxed">
@@ -102,62 +136,64 @@
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
         <article class="menu-card p-6 text-center rounded-lg bg-black border-2 border-red-700 shadow-inner shadow-red-900" data-category="principales">
-          <img src="./assets/pizza_void.jpg" alt="Pizza del Vacío" class="rounded-lg mb-4 w-full h-56 object-cover">
+          <img src="Assets/Comida5.jpg" alt="Pizza del Vacío" class="rounded-lg mb-4 w-full h-56 object-cover">
           <h3 class="text-2xl font-bold mb-2 chromatic">Pizza del Vacío</h3>
           <p class="text-gray-400 text-sm sm:text-base leading-relaxed">Fermentada bajo luna nueva, su masa palpita levemente antes de servirse.</p>
         </article>
         <article class="menu-card p-6 text-center rounded-lg bg-black border-2 border-purple-700 shadow-inner shadow-purple-900" data-category="entradas">
-          <img src="./assets/sopa_eco.jpg" alt="Sopa de Ecos" class="rounded-lg mb-4 w-full h-56 object-cover">
+          <img src="Assets/Comida4.jpg" alt="Sopa de Ecos" class="rounded-lg mb-4 w-full h-56 object-cover">
           <h3 class="text-2xl font-bold mb-2 chromatic">Sopa de Ecos</h3>
           <p class="text-gray-400 text-sm sm:text-base leading-relaxed">El caldo murmura nombres olvidados. Algunos aseguran escuchar el suyo.</p>
         </article>
         <article class="menu-card p-6 text-center rounded-lg bg-black border-2 border-green-700 shadow-inner shadow-green-900" data-category="principales">
-          <img src="./assets/carne_niebla.jpg" alt="Carne de la Niebla" class="rounded-lg mb-4 w-full h-56 object-cover">
+          <img src="Assets/Comida1.jpg" alt="Carne de la Niebla" class="rounded-lg mb-4 w-full h-56 object-cover">
           <h3 class="text-2xl font-bold mb-2 chromatic">Carne de la Niebla</h3>
           <p class="text-gray-400 text-sm sm:text-base leading-relaxed">Servida envuelta en humo real. Inspirada en los mitos de Silent Hill.</p>
         </article>
         <article class="menu-card p-6 text-center rounded-lg bg-black border-2 border-blue-700 shadow-inner shadow-blue-900" data-category="postres">
-          <img src="./assets/dessert_forgotten.jpg" alt="Postre de los Olvidados" class="rounded-lg mb-4 w-full h-56 object-cover">
+          <img src="Assets/Comida3.jpg" alt="Postre de los Olvidados" class="rounded-lg mb-4 w-full h-56 object-cover">
           <h3 class="text-2xl font-bold mb-2 chromatic">Postre de los Olvidados</h3>
           <p class="text-gray-400 text-sm sm:text-base leading-relaxed">Un postre que evoca recuerdos perdidos y secretos olvidados por la memoria.</p>
+        </article>
+        <article class="menu-card p-6 text-center rounded-lg bg-black border-2 border-green-700 shadow-inner shadow-green-900" data-category="principales">
+          <img src="Assets/Comida2.jpg" alt="Carne de la Niebla" class="rounded-lg mb-4 w-full h-56 object-cover">
+          <h3 class="text-2xl font-bold mb-2 chromatic">Ojos del vacio</h3>
+          <p class="text-gray-400 text-sm sm:text-base leading-relaxed">Aquellos que miran por mucho tiempo al vacio, se pierden en su sabor. Inspirado en Don't look outside.</p>
         </article>
       </div>
     </section>
 
     <!-- COCTELERÍA -->
-    <section id="cocteles" class="py-24 px-6 bg-black bg-opacity-90">
-      <h2 class="text-5xl text-center mb-12 chromatic">Coctelería del Culto</h2>
+<section id="cocteles" class="py-24 px-6">
+  <h2 class="text-5xl text-center mb-12 chromatic">Coctelería del Culto</h2>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto">
-        <article class="relative group cursor-pointer">
-          <div class="relative overflow-hidden rounded-lg border-2 border-red-700 shadow-inner shadow-red-900">
-            <img src="./assets/azathoth_eye.jpg" alt="Ojo de Azathoth" class="w-full h-56 object-cover group-hover:scale-110 transition-transform">
-            <div class="absolute inset-0 bg-black bg-opacity-70 opacity-0 group-hover:opacity-100 transition-opacity p-6 flex flex-col justify-center text-center">
-              <h3 class="text-2xl font-bold text-red-500 mb-2">Ojo de Azathoth</h3>
-              <p class="text-gray-300">Vodka, jugo de granada y un toque de "mirada". Nunca parpadea.</p>
-            </div>
-          </div>
-        </article>
-        <article class="relative group cursor-pointer">
-          <div class="relative overflow-hidden rounded-lg border-2 border-blue-700 shadow-inner shadow-blue-900">
-            <img src="./assets/deep_tear.jpg" alt="Lágrimas del Mar Profundo" class="w-full h-56 object-cover group-hover:scale-110 transition-transform">
-            <div class="absolute inset-0 bg-black bg-opacity-70 opacity-0 group-hover:opacity-100 transition-opacity p-6 flex flex-col justify-center text-center">
-              <h3 class="text-2xl font-bold text-blue-500 mb-2">Lágrimas del Mar Profundo</h3>
-              <p class="text-gray-300">Gin azul, agua tónica y sal marina ancestral. Brilla bajo luz UV.</p>
-            </div>
-          </div>
-        </article>
-        <article class="relative group cursor-pointer">
-          <div class="relative overflow-hidden rounded-lg border-2 border-green-700 shadow-inner shadow-green-900">
-            <img src="./assets/necronomix.jpg" alt="Necronomix" class="w-full h-56 object-cover group-hover:scale-110 transition-transform">
-            <div class="absolute inset-0 bg-black bg-opacity-70 opacity-0 group-hover:opacity-100 transition-opacity p-6 flex flex-col justify-center text-center">
-              <h3 class="text-2xl font-bold text-green-500 mb-2">Necronomix</h3>
-              <p class="text-gray-300">Ron oscuro, café y polvo de "página arrancada". Peligroso si se agita.</p>
-            </div>
-          </div>
-        </article>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto">
+    <article class="coctel-card">
+      <img src="Assets/Trago3.jpg" alt="Ojo de Azathoth">
+      <div class="coctel-overlay red">
+        <h3>Ojo de Azathoth</h3>
+        <p>Vodka, jugo de granada y un toque de "mirada". Nunca parpadea.</p>
       </div>
-    </section>
+    </article>
+
+    <article class="coctel-card">
+      <img src="Assets/Trago2.jpg" alt="Lágrimas del Mar Profundo">
+      <div class="coctel-overlay blue">
+        <h3>Lágrimas del Mar Profundo</h3>
+        <p>Gin azul, agua tónica y sal marina ancestral. Brilla bajo luz UV.</p>
+      </div>
+    </article>
+
+    <article class="coctel-card">
+      <img src="Assets/Trago1.jpg" alt="Necronomix">
+      <div class="coctel-overlay green">
+        <h3>Necronomix</h3>
+        <p>Ron oscuro, café y polvo de "página arrancada". Peligroso si se agita.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
 
  <!-- ARCHIVOS VHS -->
     <section id="clips" class="py-24 px-6">
@@ -210,19 +246,19 @@
       <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
         
         <article class="p-6 bg-black border border-red-800 rounded-lg shadow-inner shadow-red-900 hover:scale-105 transition-transform">
-          <img src="./assets/chef_occulto.jpg" alt="Chef Maestro del Hambre" class="w-40 h-40 object-cover mx-auto rounded-full mb-4 border-2 border-red-700">
+          <img src="Assets/Chef.jpg" alt="Chef Maestro del Hambre" class="w-40 h-40 object-cover mx-auto rounded-full mb-4 border-2 border-red-700">
           <h3 class="text-2xl font-bold chromatic mb-2">El Maestro del Hambre</h3>
           <p class="text-gray-400">Guía el banquete con precisión ritual. Nadie conoce su verdadero nombre.</p>
         </article>
         
         <article class="p-6 bg-black border border-purple-800 rounded-lg shadow-inner shadow-purple-900 hover:scale-105 transition-transform">
-          <img src="./assets/bartender.jpg" alt="Sumo Bartender del Culto" class="w-40 h-40 object-cover mx-auto rounded-full mb-4 border-2 border-purple-700">
+          <img src="Assets/Barman.jpg" alt="Sumo Bartender del Culto" class="w-40 h-40 object-cover mx-auto rounded-full mb-4 border-2 border-purple-700">
           <h3 class="text-2xl font-bold chromatic mb-2">El Sumo Bartender</h3>
           <p class="text-gray-400">Domina el equilibrio entre veneno y deleite. Sus cócteles alteran la realidad.</p>
         </article>
         
         <article class="p-6 bg-black border border-green-800 rounded-lg shadow-inner shadow-green-900 hover:scale-105 transition-transform">
-          <img src="./assets/sacerdotisa.jpg" alt="Sacerdotisa del Sabor" class="w-40 h-40 object-cover mx-auto rounded-full mb-4 border-2 border-green-700">
+          <img src="Assets/Sacerdote.jpg" alt="Sacerdotisa del Sabor" class="w-40 h-40 object-cover mx-auto rounded-full mb-4 border-2 border-green-700">
           <h3 class="text-2xl font-bold chromatic mb-2">La Sacerdotisa del Sabor</h3>
           <p class="text-gray-400">Interpreta cada aroma como un presagio. Prepara los postres del olvido.</p>
         </article>

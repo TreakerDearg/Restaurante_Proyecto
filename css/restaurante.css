@@ -1,9 +1,4 @@
 /* =======================
-   VHS-CORE.CSS - BLACK COMEDOR
-   Optimizado y mejorado 2025
-======================= */
-
-/* =======================
    RESET / BASE
 ======================= */
 *,
@@ -286,16 +281,16 @@ nav a:hover::after {
 }
 
 /* =======================
-   BOTÓN MÓVIL
+   BOTÓN HAMBURGUESA
 ======================= */
 #menu-toggle {
+  display: none; /* oculto por defecto en desktop */
   background: transparent;
   padding: 0.5rem;
-  display: none; /* ✅ Oculto por defecto en desktop */
   align-items: center;
   justify-content: center;
-  transition: var(--transition-base);
   cursor: pointer;
+  transition: var(--transition-base);
 }
 
 #menu-toggle:hover {
@@ -304,7 +299,7 @@ nav a:hover::after {
 }
 
 /* =======================
-   MENÚ LINKS
+   MENU LINKS
 ======================= */
 #nav-links {
   display: flex;
@@ -317,69 +312,53 @@ nav a:hover::after {
    MEDIA QUERIES MÓVIL
 ======================= */
 @media (max-width: 768px) {
+  /* Mostrar botón hamburguesa */
   #menu-toggle {
-    display: flex; /* ✅ Solo visible en móvil */
+    display: flex;
   }
 
-  #nav-links {
-    position: fixed;
-    top: 70px;
-    left: 0;
-    right: 0;
-    background: var(--color-bg-dark);
-    flex-direction: column;
-    padding: 2rem;
-    gap: 1.5rem;
-    border-bottom: 2px solid var(--color-border-red);
-    transform: translateY(-100%);
-    transition: transform 0.4s ease;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
-    z-index: 40;
-  }
-
-  #nav-links.active {
-    transform: translateY(0);
-  }
-
-  #nav-links li {
-    text-align: center;
-  }
-}
-
-@media (max-width: 768px) {
+  /* Menú móvil oculto inicialmente */
   #nav-links {
     position: fixed;
     top: 0;
     left: 0;
-    right: 0;
-    height: 0; /* inicial oculto */
+    width: 100%;
+    height: 0;
     overflow: hidden;
-    background: var(--color-bg-dark);
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    background-color: rgba(13, 13, 13, 0.98);
     padding: 0;
-    gap: 1.5rem;
-    border-bottom: none;
-    transform: none;
     transition: height 0.4s ease, padding 0.4s ease;
     z-index: 40;
   }
 
+  /* Menú activo desplegado */
   #nav-links.active {
-    height: 100vh; /* ocupa toda la pantalla */
-    padding: 5rem 2rem 2rem 2rem; /* deja espacio para contenido y logo */
+    height: 100vh;
+    padding-top: 5rem; /* espacio para logo y botón */
   }
 
+  /* Links centrados */
   #nav-links li {
+    width: 100%;
     text-align: center;
-    margin-bottom: 1.5rem;
   }
 
-  #menu-toggle {
-    display: flex; /* solo en móvil */
+  #nav-links li a {
+    font-size: 1.5rem;
+    color: var(--color-text-gray);
+    display: block;
+    width: 100%;
+  }
+
+  #nav-links li a:hover {
+    color: var(--color-primary-red);
+    text-shadow: 0 0 10px var(--color-primary-red);
   }
 }
-
-
 /* =======================
    HERO / BANNER
 ======================= */
@@ -393,9 +372,12 @@ header {
   position: relative;
   overflow: hidden;
   padding: 0 1rem;
+  background: radial-gradient(circle at center, #000 0%, #111 100%);
 }
 
-header video {
+/* Fondo video o imagen */
+header video,
+header img {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -403,34 +385,47 @@ header video {
   object-fit: cover;
   opacity: 0.6;
   filter: grayscale(0.3) contrast(1.2);
+  z-index: 0;
 }
 
+/* Overlay radial + ruido sutil */
 header::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.8) 100%);
+  background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.85) 100%);
   pointer-events: none;
   z-index: 1;
 }
 
+/* Contenedor del contenido */
 header > div {
   position: relative;
   z-index: 2;
+  max-width: 1200px;
 }
 
+/* TITULO principal */
 header h1 {
   font-size: clamp(2.5rem, 8vw, 7rem);
   font-weight: 700;
   margin-bottom: 1.5rem;
+  line-height: 1.1;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+
+  /* efecto VHS / glitch */
   text-shadow:
     2px 0 var(--color-primary-red),
     -2px 0 var(--color-primary-cyan),
     0 0 20px var(--color-primary-red),
     0 0 30px var(--color-primary-cyan);
   animation: pulse-title 3s infinite ease-in-out;
+  position: relative;
 }
 
+/* Animación pulsante glitch */
 @keyframes pulse-title {
   0%, 100% { 
     text-shadow:
@@ -448,14 +443,36 @@ header h1 {
   }
 }
 
+/* PARÁGRAFO secundario */
 header p {
   font-size: clamp(1rem, 2.5vw, 1.5rem);
   margin-bottom: 2rem;
   line-height: 1.8;
+  color: rgba(255,255,255,0.9);
   opacity: 0.95;
 }
 
-/* Fade in animation */
+/* CTA Button */
+header .cta-btn {
+  display: inline-block;
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #000;
+  background: linear-gradient(90deg, #ff0000, #ff00ff);
+  border-radius: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-decoration: none;
+}
+
+header .cta-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #ff0000, 0 0 15px #ff00ff;
+}
+
+/* Fade-in glitch para texto y CTA */
 .fade-glitch {
   animation: fade-in 1.5s ease-out;
 }
@@ -470,6 +487,33 @@ header p {
     transform: translateY(0);
   }
 }
+
+/* RESPONSIVE MOBILE */
+@media (max-width: 768px) {
+  header h1 {
+    font-size: clamp(2rem, 10vw, 5rem);
+  }
+
+  header p {
+    font-size: clamp(0.9rem, 4vw, 1.2rem);
+  }
+
+  header .cta-btn {
+    padding: 0.6rem 1.5rem;
+    font-size: 0.9rem;
+  }
+}
+
+.hero-bg video,
+.hero-bg img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.6;
+}
+
 
 /* =======================
    SECTIONS
@@ -564,81 +608,94 @@ p {
 }
 
 /* =======================
-   FLIP CARDS (Cocteles)
+   COCTELERÍA - Hover Cards
 ======================= */
-.flip-card {
-  perspective: 1500px;
+#cocteles {
+  background: radial-gradient(circle at center, #000 60%, #0a0a0a);
   position: relative;
-  min-height: 400px;
+  overflow: hidden;
 }
 
-.flip-card-inner {
+#cocteles h2 {
+  font-family: 'Cinzel', serif;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
+}
+
+/* --- Card Base --- */
+.coctel-card {
   position: relative;
+  border-radius: 1rem;
+  overflow: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  background: rgba(10, 10, 10, 0.8);
+}
+
+.coctel-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(255, 0, 0, 0.3);
+}
+
+/* --- Imagen --- */
+.coctel-card img {
   width: 100%;
-  height: 100%;
-  min-height: 400px;
-  transition: transform 0.8s cubic-bezier(0.4, 0.2, 0.2, 1);
-  transform-style: preserve-3d;
+  height: 320px; /* más alta */
+  object-fit: cover;
+  transition: transform 0.5s ease;
+  filter: brightness(0.9) contrast(1.1);
 }
 
-.flip-card:hover .flip-card-inner {
-  transform: rotateY(180deg);
+.coctel-card:hover img {
+  transform: scale(1.15);
+  filter: brightness(1.1);
 }
 
-.flip-card-front,
-.flip-card-back {
+/* --- Overlay --- */
+.coctel-overlay {
   position: absolute;
-  width: 100%;
-  height: 100%;
-  min-height: 400px;
-  backface-visibility: hidden;
-  border-radius: var(--border-radius-md);
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 20%, rgba(0, 0, 0, 0.6) 80%);
+  opacity: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
-}
-
-.flip-card-front {
-  background: var(--color-bg-card);
-  border: 2px solid var(--color-border-red);
-}
-
-.flip-card-back {
-  transform: rotateY(180deg);
-  background: rgba(10, 10, 10, 0.95);
-  border: 2px solid var(--color-primary-cyan);
   padding: 2rem;
-  text-align: center;
+  transition: opacity 0.4s ease;
 }
 
-/* VHS Scanline animation for back of card */
-@keyframes vhs-scanline {
-  0% { transform: translateY(-100%); }
-  100% { transform: translateY(100%); }
+.coctel-card:hover .coctel-overlay {
+  opacity: 1;
 }
 
-.animate-vhs-scanline {
-  animation: vhs-scanline 3s linear infinite;
+/* --- Texto --- */
+.coctel-overlay h3 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
 }
 
-/* VHS Flicker animation */
-.animate-vhs-flicker {
-  animation: vhs-flicker 4s infinite;
+.coctel-overlay p {
+  color: #ccc;
+  font-size: 1rem;
+  max-width: 90%;
+  line-height: 1.4;
 }
 
-@keyframes vhs-flicker {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.95; }
-  51% { opacity: 1; }
-  52% { opacity: 0.95; }
-  53% { opacity: 1; }
-}
+.coctel-overlay.red h3 { color: #ef4444; }
+.coctel-overlay.blue h3 { color: #3b82f6; }
+.coctel-overlay.green h3 { color: #22c55e; }
 
-/* Perspective utility */
-.perspective-1000 {
-  perspective: 1000px;
+/* --- Responsivo --- */
+@media (max-width: 768px) {
+  .coctel-card img {
+    height: 260px;
+  }
+  .coctel-overlay h3 {
+    font-size: 1.4rem;
+  }
 }
 
 /* =======================
