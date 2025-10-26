@@ -38,7 +38,7 @@
 
     <!-- Enlaces del menú -->
     <ul id="menu" class="hidden md:flex space-x-6 text-lg">
-      <li><a href="index.html" class="chromatic hover:text-red-500 flex items-center"><ion-icon name="home-outline" class="mr-1"></ion-icon>Inicio</a></li>
+      <li><a href="restaurante.html" class="chromatic hover:text-red-500 flex items-center"><ion-icon name="home-outline" class="mr-1"></ion-icon>Inicio</a></li>
       <li><a href="#form" class="chromatic hover:text-red-500 flex items-center"><ion-icon name="calendar-outline" class="mr-1"></ion-icon>Reserva</a></li>
     </ul>
   </nav>
@@ -82,12 +82,77 @@
     </div>
   </header>
 
-  <!-- FORMULARIO -->
-  <main id="form" class="py-24 px-6 max-w-4xl mx-auto">
-    <div id="formContainer" aria-live="polite">
-      <!-- Formulario se inyecta dinámicamente con JS -->
+<!-- FORMULARIO DE RESERVAS -->
+<section id="form" class="py-24 px-6 max-w-4xl mx-auto">
+  <form id="reservaForm" class="space-y-6 w-full p-6 rounded-xl backdrop-blur-md bg-black bg-opacity-60 border border-red-700 shadow-lg shadow-red-900">
+
+    <!-- Nombre completo -->
+    <div class="flex flex-col">
+      <label for="nombre" class="mb-2 text-gray-300 font-semibold">Nombre completo *</label>
+      <input type="text" id="nombre" name="nombre" placeholder="Juan Pérez" required
+        class="p-3 rounded-lg bg-black bg-opacity-70 border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-red-500 transition duration-300">
     </div>
-  </main>
+
+    <!-- Correo electrónico -->
+    <div class="flex flex-col">
+      <label for="email" class="mb-2 text-gray-300 font-semibold">Correo electrónico *</label>
+      <input type="email" id="email" name="email" placeholder="correo@ejemplo.com" required
+        class="p-3 rounded-lg bg-black bg-opacity-70 border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-red-500 transition duration-300">
+    </div>
+
+    <!-- Teléfono -->
+    <div class="flex flex-col">
+      <label for="telefono" class="mb-2 text-gray-300 font-semibold">Teléfono *</label>
+      <input type="tel" id="telefono" name="telefono" placeholder="+54 9 11 1234-5678" required
+        class="p-3 rounded-lg bg-black bg-opacity-70 border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-red-500 transition duration-300">
+    </div>
+
+    <!-- Número de comensales -->
+    <div class="flex flex-col">
+      <label for="comensales" class="mb-2 text-gray-300 font-semibold">Número de comensales *</label>
+      <input type="number" id="comensales" name="comensales" placeholder="2" required
+        class="p-3 rounded-lg bg-black bg-opacity-70 border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-red-500 transition duration-300">
+    </div>
+
+    <!-- Fecha de reserva -->
+    <div class="flex flex-col">
+      <label for="fecha" class="mb-2 text-gray-300 font-semibold">Fecha de reserva *</label>
+      <input type="date" id="fecha" name="fecha" required
+        class="p-3 rounded-lg bg-black bg-opacity-70 border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-red-500 transition duration-300">
+    </div>
+
+    <!-- Seña opcional -->
+    <div class="flex flex-col">
+      <label for="sena" class="mb-2 text-gray-300 font-semibold">Seña (opcional)</label>
+      <input type="number" id="sena" name="sena" placeholder="Ej: 5000"
+        class="p-3 rounded-lg bg-black bg-opacity-70 border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-red-500 transition duration-300">
+    </div>
+
+    <!-- Comentarios -->
+    <div class="flex flex-col">
+      <label for="comentarios" class="mb-2 text-gray-300 font-semibold">Comentarios adicionales</label>
+      <textarea id="comentarios" name="comentarios" rows="4" placeholder="Observaciones o alergias..."
+        class="p-3 rounded-lg bg-black bg-opacity-70 border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-red-500 transition duration-300"></textarea>
+    </div>
+
+    <!-- Cliente VIP -->
+    <div class="flex items-center space-x-3">
+      <input type="checkbox" id="vip" name="vip" value="Sí"
+        class="h-5 w-5 text-red-600 focus:ring-red-500">
+      <label for="vip" class="text-gray-300 font-semibold">Cliente VIP</label>
+    </div>
+
+    <!-- Botón de envío -->
+    <button type="submit"
+      class="w-full py-3 bg-gradient-to-r from-red-700 to-purple-700 text-white font-bold rounded-lg hover:scale-105 transition-transform hover:brightness-125 tracking-wide uppercase">
+      Enviar Reserva
+    </button>
+
+    <!-- Feedback visual -->
+    <div id="feedback" class="mt-4 text-center font-mono opacity-0 transition duration-500"></div>
+  </form>
+</section>
+
 
   <!-- FOOTER -->
   <footer class="py-8 bg-black bg-opacity-95 text-center text-gray-400 border-t border-red-900 relative overflow-hidden">
