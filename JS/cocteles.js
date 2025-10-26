@@ -1,56 +1,64 @@
-document.querySelectorAll(".coctel-card").forEach(card => {
-  let timeout;
+/* ===============================
+   LOGICA DESKTOP – COCTEL CARDS
+=============================== */
+function initDesktopCards() {
+  // Seleccionamos solo las cards de desktop
+  const desktopCards = document.querySelectorAll("#cocteles-desktop .coctel-card");
 
-  // Hover (desktop)
-  card.addEventListener("mouseenter", () => {
-    timeout = setTimeout(() => card.classList.add("show-info"), 3000);
+  desktopCards.forEach(card => {
+    let hoverTimeout;
+
+    // Mostrar info después de 3 segundos de hover
+    card.addEventListener("mouseenter", () => {
+      hoverTimeout = setTimeout(() => card.classList.add("show-info"), 3000);
+    });
+
+    // Ocultar info al salir del hover
+    card.addEventListener("mouseleave", () => {
+      clearTimeout(hoverTimeout);
+      card.classList.remove("show-info");
+    });
   });
+}
 
-  card.addEventListener("mouseleave", () => {
-    clearTimeout(timeout);
-    card.classList.remove("show-info");
+/* ===============================
+   LOGICA MOVIL – CARTRIDGES
+=============================== */
+function initMobileCartridges() {
+  const cartridges = document.querySelectorAll("#cocteles-mobile .cartridge");
+
+  cartridges.forEach(cart => {
+    cart.addEventListener("click", () => {
+      cart.classList.toggle("active");
+    });
   });
+}
 
-  // Tap (móvil)
-  card.addEventListener("click", () => {
-    if (window.innerWidth < 768) {
-      card.classList.toggle("active");
-    }
-  });
-});
-
-
-document.addEventListener("DOMContentLoaded", () => {
-  const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-
-  const desktopSection = document.getElementById("cocteles-desktop");
-  const mobileSection = document.getElementById("cocteles-mobile");
-
-  if (isMobile) {
-    desktopSection.style.display = "none";
-    mobileSection.style.display = "block";
+/* ===============================
+   DETECCION DE DISPOSITIVO
+=============================== */
+function initCocktails() {
+  if (window.innerWidth >= 768) {
+    // Desktop
+    initDesktopCards();
   } else {
-    desktopSection.style.display = "block";
-    mobileSection.style.display = "none";
+    // Móvil
+    initMobileCartridges();
   }
+}
+
+/* ===============================
+   REINICIAR LOGICA AL REDIMENSIONAR
+=============================== */
+window.addEventListener("resize", () => {
+  // Limpiar antes de reiniciar para evitar duplicados
+  document.querySelectorAll(".coctel-card").forEach(card => card.classList.remove("show-info"));
+  document.querySelectorAll(".cartridge").forEach(cart => cart.classList.remove("active"));
+
+  initCocktails();
 });
 
-
-const cartridges = document.querySelectorAll('.cartridge');
-const popup = document.getElementById('ingredientes-popup');
-const popupText = popup.querySelector('p');
-
-cartridges.forEach(cart => {
-  cart.addEventListener('click', () => {
-    const ingredientes = cart.getAttribute('data-ingredientes');
-    popupText.textContent = ingredientes;
-    popup.classList.remove('hidden');
-
-    // Efecto de “disparo” / vibración breve
-    cart.classList.add('shake');
-    setTimeout(() => cart.classList.remove('shake'), 400);
-
-    // Ocultar después de 3s
-    setTimeout(() => popup.classList.add('hidden'), 3000);
-  });
-});
+/* ===============================
+   INICIALIZACION
+=============================== */
+document.addEventListener("DOMContentLoaded", initCocktails);
