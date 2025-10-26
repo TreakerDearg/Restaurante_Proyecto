@@ -173,9 +173,9 @@
     </section>
 
 <!-- ================================
-     SECCIÓN: COCTELERÍA DEL CULTO
+     SECCIÓN: COCTELERÍA DEL CULTO (DESKTOP)
 ================================ -->
-<section id="cocteles" class="py-24 px-6 bg-black text-white relative overflow-hidden">
+<section id="cocteles-desktop" class="py-24 px-6 bg-black text-white relative overflow-hidden hidden-mobile">
   <!-- Fondo dinámico tipo estática -->
   <div class="absolute inset-0 pointer-events-none opacity-10 mix-blend-screen"
        style="background: url('Assets/static.gif') repeat;"></div>
@@ -195,22 +195,15 @@
     
     <!-- === CÓCTEL 1 === -->
     <article class="coctel-card group" data-coctel="Ojo de Azathoth">
-      <!-- Capa de ruido VHS -->
       <div class="vhs-overlay"></div>
-
-      <!-- Imagen principal -->
       <figure class="relative">
         <img src="Assets/Trago3.jpg" alt="Ojo de Azathoth" class="coctel-img">
         <figcaption class="sr-only">Vodka, granada y un toque de mirada</figcaption>
       </figure>
-
-      <!-- Overlay informativo -->
       <div class="coctel-info red">
         <div class="glitch-title" data-text="Ojo de Azathoth">Ojo de Azathoth</div>
         <p class="coctel-desc">Vodka, jugo de granada y un toque de “mirada”. Nunca parpadea.</p>
       </div>
-
-      <!-- Efecto encendido CRT -->
       <div class="crt-flash"></div>
     </article>
 
@@ -271,6 +264,67 @@
         
       </div>
     </section>
+
+
+    <!-- ================================
+     SECCIÓN: COCTELERÍA DEL CULTO (MÓVIL)
+================================ -->
+<section id="cocteles-mobile" class="py-16 px-4 bg-black text-white relative overflow-hidden hidden-desktop">
+  <!-- Fondo -->
+  <div class="absolute inset-0 bg-[url('Assets/static.gif')] opacity-10 mix-blend-screen pointer-events-none"></div>
+
+  <header class="relative text-center mb-10 z-10">
+    <h2 class="text-4xl font-bold uppercase tracking-widest chromatic">
+      Coctelería del Culto
+    </h2>
+    <p class="text-gray-500 text-xs mt-2 tracking-[0.3em] uppercase">
+      Buckshot Edition
+    </p>
+  </header>
+
+  <div class="relative flex flex-col items-center gap-8 max-w-md mx-auto z-10">
+    
+    <!-- CARTUCHO 1 -->
+    <article class="cartridge" data-flavor="Ojo de Azathoth">
+      <div class="shell-metal">
+        <div class="shell-cap red"></div>
+        <div class="shell-body">
+          <h3>Ojo de Azathoth</h3>
+        </div>
+      </div>
+      <div class="shell-info">
+        <p>Vodka, jugo de granada y un toque de “mirada”.</p>
+      </div>
+    </article>
+
+    <!-- CARTUCHO 2 -->
+    <article class="cartridge" data-flavor="Lágrimas del Mar Profundo">
+      <div class="shell-metal">
+        <div class="shell-cap blue"></div>
+        <div class="shell-body">
+          <h3>Lágrimas del Mar Profundo</h3>
+        </div>
+      </div>
+      <div class="shell-info">
+        <p>Gin azul, agua tónica y sal marina ancestral.</p>
+      </div>
+    </article>
+
+    <!-- CARTUCHO 3 -->
+    <article class="cartridge" data-flavor="Necronomix">
+      <div class="shell-metal">
+        <div class="shell-cap green"></div>
+        <div class="shell-body">
+          <h3>Necronomix</h3>
+        </div>
+      </div>
+      <div class="shell-info">
+        <p>Ron oscuro, café y polvo de “página arrancada”.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
 
 
     <!-- RESERVAS -->
