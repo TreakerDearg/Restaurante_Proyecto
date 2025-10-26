@@ -1,0 +1,220 @@
+/* ===============================
+   ESTILO GENERAL DE SECCIÓN
+=============================== */
+#cocteles {
+  position: relative;
+  overflow: hidden;
+  background-color: #000;
+  color: #fff;
+  font-family: 'Orbitron', 'Share Tech Mono', monospace;
+}
+
+/* Fondo de estática (solo en desktop) */
+@media (min-width: 1024px) {
+  #cocteles::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: url("Assets/static.gif") repeat;
+    opacity: 0.08;
+    mix-blend-mode: screen;
+    pointer-events: none;
+    z-index: 1;
+    animation: staticMove 2s infinite steps(8);
+  }
+}
+
+/* Movimiento leve de ruido */
+@keyframes staticMove {
+  0% { background-position: 0 0; }
+  100% { background-position: 100px 100px; }
+}
+
+/* ===============================
+   TARJETAS DE CÓCTELES
+=============================== */
+.coctel-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: #0a0a0a;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  cursor: pointer;
+}
+
+.coctel-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.15);
+}
+
+/* Imagen base */
+.coctel-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.75) contrast(1.2) saturate(1.1);
+  opacity: 0;
+  animation: revealImage 3s ease forwards;
+}
+
+/* Efecto de “revelado de cinta” */
+@keyframes revealImage {
+  0% {
+    filter: brightness(0) contrast(2);
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.3;
+    filter: brightness(0.2) contrast(1.5);
+  }
+  100% {
+    opacity: 1;
+    filter: brightness(1) contrast(1.1);
+  }
+}
+
+/* ===============================
+   EFECTO VHS OVERLAY
+=============================== */
+.vhs-overlay {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.03) 0px,
+    rgba(0, 0, 0, 0.03) 2px,
+    rgba(255, 255, 255, 0.03) 4px
+  );
+  opacity: 0.4;
+  mix-blend-mode: overlay;
+  animation: scanlines 1.2s infinite linear;
+  pointer-events: none;
+  z-index: 3;
+}
+
+@keyframes scanlines {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 8px; }
+}
+
+/* ===============================
+   OVERLAY DE INFORMACIÓN
+=============================== */
+.coctel-info {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  padding: 1.5rem;
+  opacity: 0;
+  background: rgba(0, 0, 0, 0.8);
+  transition: opacity 0.5s ease;
+  z-index: 5;
+}
+
+/* Colores temáticos por cóctel */
+.coctel-info.red { border-top: 3px solid #e11d48; }
+.coctel-info.blue { border-top: 3px solid #38bdf8; }
+.coctel-info.green { border-top: 3px solid #10b981; }
+
+/* Hover o auto-revelado */
+.coctel-card:hover .coctel-info {
+  opacity: 1;
+}
+
+/* ===============================
+   TÍTULO GLITCH RGB
+=============================== */
+.glitch-title {
+  position: relative;
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  animation: glitchAnim 2s infinite;
+}
+
+.glitch-title::before,
+.glitch-title::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0.8;
+  clip: rect(0, 900px, 0, 0);
+}
+
+.glitch-title::before {
+  left: 2px;
+  text-shadow: -2px 0 red;
+  animation: glitchClip 2.5s infinite linear alternate-reverse;
+}
+
+.glitch-title::after {
+  left: -2px;
+  text-shadow: 2px 0 cyan;
+  animation: glitchClip 2.5s infinite linear alternate;
+}
+
+@keyframes glitchClip {
+  0% { clip: rect(0, 900px, 0, 0); }
+  5% { clip: rect(10px, 9999px, 25px, 0); }
+  10% { clip: rect(80px, 9999px, 100px, 0); }
+  20% { clip: rect(30px, 9999px, 80px, 0); }
+  30% { clip: rect(0, 9999px, 50px, 0); }
+  100% { clip: rect(0, 9999px, 0, 0); }
+}
+
+@keyframes glitchAnim {
+  0% { transform: none; }
+  20% { transform: skew(2deg); }
+  40% { transform: skew(-2deg); }
+  60% { transform: none; }
+  100% { transform: none; }
+}
+
+/* ===============================
+   EFECTO CRT FLASH (encendido)
+=============================== */
+.crt-flash {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(255,255,255,0.6), transparent 70%);
+  opacity: 0;
+  animation: crtOn 4s ease-in-out;
+  pointer-events: none;
+  z-index: 4;
+}
+
+@keyframes crtOn {
+  0% { opacity: 1; transform: scale(1.2); }
+  30% { opacity: 0.8; }
+  60% { opacity: 0.3; }
+  100% { opacity: 0; transform: scale(1); }
+}
+
+/* ===============================
+   MOBILE OPTIMIZACIÓN
+=============================== */
+@media (max-width: 640px) {
+  .coctel-card {
+    transform: none !important;
+    border-radius: 0.5rem;
+  }
+
+  .coctel-info {
+    opacity: 1;
+    position: relative;
+    background: rgba(0, 0, 0, 0.9);
+    margin-top: -0.5rem;
+  }
+
+  .glitch-title {
+    font-size: 1.4rem;
+  }
+}

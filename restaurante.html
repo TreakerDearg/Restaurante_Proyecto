@@ -25,6 +25,8 @@
 
   <!-- CSS VHS y Core -->
   <link rel="stylesheet" href="CSS/restaurante.css">
+  <link rel="stylesheet" href="CSS/cocteles.css">
+
 
 </head>
 
@@ -170,37 +172,77 @@
       </div>
     </section>
 
-    <!-- COCTELERÍA -->
-<section id="cocteles" class="py-24 px-6">
-  <h2 class="text-5xl text-center mb-12 chromatic">Coctelería del Culto</h2>
+<!-- ================================
+     SECCIÓN: COCTELERÍA DEL CULTO
+================================ -->
+<section id="cocteles" class="py-24 px-6 bg-black text-white relative overflow-hidden">
+  <!-- Fondo dinámico tipo estática -->
+  <div class="absolute inset-0 pointer-events-none opacity-10 mix-blend-screen"
+       style="background: url('Assets/static.gif') repeat;"></div>
 
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto">
-    <article class="coctel-card">
-      <img src="Assets/Trago3.jpg" alt="Ojo de Azathoth">
-      <div class="coctel-overlay red">
-        <h3>Ojo de Azathoth</h3>
-        <p>Vodka, jugo de granada y un toque de "mirada". Nunca parpadea.</p>
+  <!-- Título principal -->
+  <header class="relative text-center mb-16 z-10">
+    <h2 class="text-5xl md:text-6xl font-bold chromatic tracking-widest uppercase">
+      Coctelería del Culto
+    </h2>
+    <p class="text-gray-400 text-sm mt-3 uppercase tracking-[0.3em]">
+      Ritual líquido — Preparaciones prohibidas
+    </p>
+  </header>
+
+  <!-- Grid de cócteles -->
+  <div class="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto z-10">
+    
+    <!-- === CÓCTEL 1 === -->
+    <article class="coctel-card group" data-coctel="Ojo de Azathoth">
+      <!-- Capa de ruido VHS -->
+      <div class="vhs-overlay"></div>
+
+      <!-- Imagen principal -->
+      <figure class="relative">
+        <img src="Assets/Trago3.jpg" alt="Ojo de Azathoth" class="coctel-img">
+        <figcaption class="sr-only">Vodka, granada y un toque de mirada</figcaption>
+      </figure>
+
+      <!-- Overlay informativo -->
+      <div class="coctel-info red">
+        <div class="glitch-title" data-text="Ojo de Azathoth">Ojo de Azathoth</div>
+        <p class="coctel-desc">Vodka, jugo de granada y un toque de “mirada”. Nunca parpadea.</p>
       </div>
+
+      <!-- Efecto encendido CRT -->
+      <div class="crt-flash"></div>
     </article>
 
-    <article class="coctel-card">
-      <img src="Assets/Trago2.jpg" alt="Lágrimas del Mar Profundo">
-      <div class="coctel-overlay blue">
-        <h3>Lágrimas del Mar Profundo</h3>
-        <p>Gin azul, agua tónica y sal marina ancestral. Brilla bajo luz UV.</p>
+    <!-- === CÓCTEL 2 === -->
+    <article class="coctel-card group" data-coctel="Lágrimas del Mar Profundo">
+      <div class="vhs-overlay"></div>
+      <figure class="relative">
+        <img src="Assets/Trago2.jpg" alt="Lágrimas del Mar Profundo" class="coctel-img">
+        <figcaption class="sr-only">Gin azul, tónica y sal marina ancestral</figcaption>
+      </figure>
+      <div class="coctel-info blue">
+        <div class="glitch-title" data-text="Lágrimas del Mar Profundo">Lágrimas del Mar Profundo</div>
+        <p class="coctel-desc">Gin azul, agua tónica y sal marina ancestral. Brilla bajo luz UV.</p>
       </div>
+      <div class="crt-flash"></div>
     </article>
 
-    <article class="coctel-card">
-      <img src="Assets/Trago1.jpg" alt="Necronomix">
-      <div class="coctel-overlay green">
-        <h3>Necronomix</h3>
-        <p>Ron oscuro, café y polvo de "página arrancada". Peligroso si se agita.</p>
+    <!-- === CÓCTEL 3 === -->
+    <article class="coctel-card group" data-coctel="Necronomix">
+      <div class="vhs-overlay"></div>
+      <figure class="relative">
+        <img src="Assets/Trago1.jpg" alt="Necronomix" class="coctel-img">
+        <figcaption class="sr-only">Ron oscuro, café y polvo de página arrancada</figcaption>
+      </figure>
+      <div class="coctel-info green">
+        <div class="glitch-title" data-text="Necronomix">Necronomix</div>
+        <p class="coctel-desc">Ron oscuro, café y polvo de “página arrancada”. Peligroso si se agita.</p>
       </div>
+      <div class="crt-flash"></div>
     </article>
   </div>
 </section>
-
 
  <!-- ARCHIVOS VHS -->
     <section id="clips" class="py-24 px-6">
@@ -208,22 +250,22 @@
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
         
         <article class="clip-card relative group hover:shadow-[0_0_20px_rgba(255,0,0,0.6)] transition-transform hover:scale-105">
-          <video src="./assets/ritual1.mp4" controls class="rounded shadow-lg w-full h-60 object-cover" aria-label="Archivo VHS ritual 001"></video>
+          <video src="Assets/Video1.mp4" controls class="rounded shadow-lg w-full h-60 object-cover" aria-label="Archivo VHS ritual 001"></video>
           <span class="absolute bottom-2 left-2 text-red-500 text-sm font-mono">[ABYSSAL_TAPE_001]</span>
         </article>
         
         <article class="clip-card relative group hover:shadow-[0_0_20px_rgba(128,0,128,0.6)] transition-transform hover:scale-105">
-          <video src="./assets/ritual2.mp4" controls class="rounded shadow-lg w-full h-60 object-cover" aria-label="Archivo VHS ritual 002"></video>
+          <video src="Assets/Video2.mp4" controls class="rounded shadow-lg w-full h-60 object-cover" aria-label="Archivo VHS ritual 002"></video>
           <span class="absolute bottom-2 left-2 text-purple-500 text-sm font-mono">[ABYSSAL_TAPE_002]</span>
         </article>
         
         <article class="clip-card relative group hover:shadow-[0_0_20px_rgba(0,255,0,0.6)] transition-transform hover:scale-105">
-          <video src="./assets/ritual3.mp4" controls class="rounded shadow-lg w-full h-60 object-cover" aria-label="Archivo VHS ritual 003"></video>
+          <video src="Assets/Video3.mp4" controls class="rounded shadow-lg w-full h-60 object-cover" aria-label="Archivo VHS ritual 003"></video>
           <span class="absolute bottom-2 left-2 text-green-500 text-sm font-mono">[ABYSSAL_TAPE_003]</span>
         </article>
         
         <article class="clip-card relative group hover:shadow-[0_0_20px_rgba(255,0,0,0.6)] transition-transform hover:scale-105">
-          <video src="./assets/prohibido.mp4" controls class="rounded shadow-lg w-full h-60 object-cover" aria-label="Archivo VHS prohibido"></video>
+          <video src="Assets/Video4.mp4" controls class="rounded shadow-lg w-full h-60 object-cover" aria-label="Archivo VHS prohibido"></video>
           <span class="absolute bottom-2 left-2 text-red-500 text-sm font-mono">[PROHIBIDO]</span>
         </article>
         
@@ -322,5 +364,7 @@
   </footer>
 
   <script src="JS/animacion.js"></script>
+  <script src="JS/cocteles.js"></script>
+
 </body>
 </html>
