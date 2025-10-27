@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // =======================
   const rgbTitles = document.querySelectorAll(".chromatic");
   rgbTitles.forEach(title => {
-    if (title.dataset.processed) return; // evita duplicar
+    if (title.dataset.processed) return;
     const text = title.textContent;
     title.dataset.processed = true;
     title.innerHTML = `<span class="r">${text}</span>
@@ -150,10 +150,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   setInterval(glitchEffect, 400);
 
-});
-
-// JS: Filtro de menú
-document.addEventListener('DOMContentLoaded', () => {
+  // =======================
+  // FILTRO DE MENÚ
+  // =======================
   const filterButtons = document.querySelectorAll('.filter-btn');
   const menuCards = document.querySelectorAll('.menu-card');
 
@@ -161,13 +160,11 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.addEventListener('click', () => {
       const filter = btn.getAttribute('data-filter');
 
-      // Botón activo visual
       filterButtons.forEach(b => b.classList.remove('opacity-70'));
       btn.classList.add('opacity-70');
 
       menuCards.forEach(card => {
         const category = card.getAttribute('data-category');
-
         if(filter === 'todos' || category === filter) {
           card.classList.remove('hidden');
           card.classList.add('block');
@@ -178,38 +175,5 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   });
-});
 
-document.addEventListener("DOMContentLoaded", () => {
-  const menuToggle = document.getElementById("menu-toggle");
-  const navLinks = document.getElementById("nav-links");
-  const body = document.body;
-
-  if (!menuToggle || !navLinks) return;
-
-  menuToggle.addEventListener("click", () => {
-    navLinks.classList.toggle("active");
-    const isActive = navLinks.classList.contains("active");
-
-    // Cambia icono
-    menuToggle.innerHTML = isActive
-      ? '<ion-icon name="close-outline" class="text-3xl"></ion-icon>'
-      : '<ion-icon name="menu-outline" class="text-3xl"></ion-icon>';
-
-    // Bloquea scroll del body cuando el menú está abierto
-    if (isActive) {
-      body.style.overflow = "hidden";
-    } else {
-      body.style.overflow = "";
-    }
-  });
-
-  // Cierra el menú si se redimensiona a desktop
-  window.addEventListener("resize", () => {
-    if (window.innerWidth > 768 && navLinks.classList.contains("active")) {
-      navLinks.classList.remove("active");
-      menuToggle.innerHTML = '<ion-icon name="menu-outline" class="text-3xl"></ion-icon>';
-      body.style.overflow = "";
-    }
-  });
 });
