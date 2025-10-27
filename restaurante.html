@@ -24,8 +24,9 @@
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
   <!-- CSS VHS y Core -->
-  <link rel="stylesheet" href="CSS/restaurante.css">
-  <link rel="stylesheet" href="CSS/cocteles.css">
+  <link rel="stylesheet" href="css/restaurante.css">
+  <link rel="stylesheet" href="css/cocteles-vhs.css" media="(max-width: 767px)" />
+  <link rel="stylesheet" href="css/cocteles-bioshock.css" media="(min-width: 768px)" />
 
 
 </head>
@@ -182,124 +183,125 @@
       </div>
     </section>
 
-<!-- ================================
-     SECCIÓN: COCTELERÍA DEL CULTO
-================================ -->
+<!-- ============================================================
+     🥃 SECCIÓN: COCTELERÍA DEL CULTO — BIOSHOCK MODE (DESKTOP)
+     ============================================================ -->
+<section id="cocteles-desktop" class="hidden md:block relative bg-black text-white py-24 overflow-hidden">
 
-<!-- ===== DESKTOP ===== -->
-<section id="cocteles-desktop" class="py-24 px-6 bg-black text-white relative overflow-hidden hidden-mobile">
-  <!-- Fondo dinámico tipo estática -->
-  <div class="absolute inset-0 pointer-events-none opacity-10 mix-blend-screen"
-       style="background: url('Assets/static.gif') repeat;"></div>
+  <!-- 🌊 Canvas de efectos líquidos -->
+  <canvas id="bioshockCanvas" class="absolute inset-0 w-full h-full z-0 pointer-events-none"></canvas>
 
-  <!-- Título principal -->
-  <header class="relative text-center mb-16 z-10">
-    <h2 class="text-5xl md:text-6xl font-bold chromatic tracking-widest uppercase">
+  <!-- 💡 Luces dinámicas de fondo -->
+  <div class="absolute inset-0 z-0 opacity-20 mix-blend-screen"
+       style="background: radial-gradient(circle at 20% 30%, rgba(255,215,0,0.08), transparent 70%), 
+              radial-gradient(circle at 80% 70%, rgba(0,255,255,0.06), transparent 70%);">
+  </div>
+
+  <!-- HEADER -->
+  <header class="relative text-center mb-20 z-10">
+    <h2 class="text-6xl font-extrabold glitch-title tracking-widest uppercase">
       Coctelería del Culto
     </h2>
-    <p class="text-gray-400 text-sm mt-3 uppercase tracking-[0.3em]">
-      Ritual líquido — Preparaciones prohibidas
+    <p class="text-gray-400 text-sm mt-4 uppercase tracking-[0.25em]">
+      — Rituales líquidos desde el fondo del abismo —
     </p>
   </header>
 
-  <!-- Grid de cócteles -->
-  <div class="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto z-10">
-    
-    <!-- === CÓCTEL 1 === -->
-    <article class="coctel-card group" data-coctel="Ojo de Azathoth">
-      <div class="vhs-overlay"></div>
-      <figure class="relative">
-        <img src="Assets/Trago3.jpg" alt="Ojo de Azathoth" class="coctel-img">
-        <figcaption class="sr-only">Vodka, granada y un toque de mirada</figcaption>
-      </figure>
-      <div class="coctel-info red">
-        <div class="glitch-title" data-text="Ojo de Azathoth">Ojo de Azathoth</div>
-        <p class="coctel-desc">Vodka, jugo de granada y un toque de “mirada”. Nunca parpadea.</p>
+  <!-- GRID DE CÓCTELES -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-14 max-w-7xl mx-auto px-10 relative z-10">
+
+    <!-- 🧿 Cóctel 1: Ojo de Azathoth -->
+    <article class="coctel-card bioshock-card" data-coctel="Ojo de Azathoth">
+      <div class="coctel-img-wrapper">
+        <img src="Assets/Trago3.jpg" alt="Ojo de Azathoth" class="coctel-img" loading="lazy" />
       </div>
-      <div class="crt-flash"></div>
+      <div class="coctel-overlay">
+        <h3 class="coctel-title">Ojo de Azathoth</h3>
+        <p class="coctel-desc">
+          Vodka puro, jugo de granada y un toque de mirada prohibida.  
+          No parpadees mientras lo tomas — podría devolverte la mirada.
+        </p>
+      </div>
     </article>
 
-    <!-- === CÓCTEL 2 === -->
-    <article class="coctel-card group" data-coctel="Lágrimas del Mar Profundo">
-      <div class="vhs-overlay"></div>
-      <figure class="relative">
-        <img src="Assets/Trago2.jpg" alt="Lágrimas del Mar Profundo" class="coctel-img">
-        <figcaption class="sr-only">Gin azul, tónica y sal marina ancestral</figcaption>
-      </figure>
-      <div class="coctel-info blue">
-        <div class="glitch-title" data-text="Lágrimas del Mar Profundo">Lágrimas del Mar Profundo</div>
-        <p class="coctel-desc">Gin azul, agua tónica y sal marina ancestral. Brilla bajo luz UV.</p>
+    <!-- 🌊 Cóctel 2: Lágrimas del Mar Profundo -->
+    <article class="coctel-card bioshock-card" data-coctel="Lágrimas del Mar Profundo">
+      <div class="coctel-img-wrapper">
+        <img src="Assets/Trago2.jpg" alt="Lágrimas del Mar Profundo" class="coctel-img" loading="lazy" />
       </div>
-      <div class="crt-flash"></div>
+      <div class="coctel-overlay">
+        <h3 class="coctel-title">Lágrimas del Mar Profundo</h3>
+        <p class="coctel-desc">
+          Gin azul, agua tónica y sal marina ancestral.  
+          Brilla bajo la luz ultravioleta, como una ofrenda al océano eterno.
+        </p>
+      </div>
     </article>
 
-    <!-- === CÓCTEL 3 === -->
-    <article class="coctel-card group" data-coctel="Necronomix">
-      <div class="vhs-overlay"></div>
-      <figure class="relative">
-        <img src="Assets/Trago1.jpg" alt="Necronomix" class="coctel-img">
-        <figcaption class="sr-only">Ron oscuro, café y polvo de página arrancada</figcaption>
-      </figure>
-      <div class="coctel-info green">
-        <div class="glitch-title" data-text="Necronomix">Necronomix</div>
-        <p class="coctel-desc">Ron oscuro, café y polvo de “página arrancada”. Peligroso si se agita.</p>
+    <!-- 📜 Cóctel 3: Necronomix -->
+    <article class="coctel-card bioshock-card" data-coctel="Necronomix">
+      <div class="coctel-img-wrapper">
+        <img src="Assets/Trago1.jpg" alt="Necronomix" class="coctel-img" loading="lazy" />
       </div>
-      <div class="crt-flash"></div>
+      <div class="coctel-overlay">
+        <h3 class="coctel-title">Necronomix</h3>
+        <p class="coctel-desc">
+          Ron oscuro, café negro y polvo de página arrancada del libro prohibido.  
+          Agítalo, y escucharás los susurros del conocimiento maldito.
+        </p>
+      </div>
     </article>
+
   </div>
 </section>
 
-<!-- ===== MOBILE ===== -->
-<section id="cocteles-mobile" class="py-12 px-4 bg-black text-white hidden-desktop">
-  <header class="text-center mb-12">
-    <h2 class="text-3xl font-bold chromatic tracking-widest uppercase">
-      Coctelería del Culto
-    </h2>
-    <p class="text-gray-400 text-sm mt-2 uppercase tracking-[0.2em]">
-      Ritual líquido — Preparaciones prohibidas
-    </p>
-  </header>
 
-  <div class="flex flex-col gap-6 items-center">
-    <!-- === CÓCTEL 1 MOBILE === -->
-    <div class="cartridge group" data-coctel="Ojo de Azathoth">
-      <div class="shell-metal">
-        <div class="shell-cap red"></div>
-        <div class="shell-body">
-          <h3>Ojo de Azathoth</h3>
-        </div>
-        <div class="shell-info">
-          Vodka, jugo de granada y un toque de “mirada”. Nunca parpadea.
-        </div>
+  <!-- ============================================================
+       📼 MOBILE MODE — RED VHS / TERMINAL ANCESTRAL
+       ============================================================ -->
+<div id="cocteles-mobile" class="block md:hidden px-6 pb-20">
+
+  <div class="terminal-wrapper">
+
+    <!-- Entrada 1 -->
+    <div class="terminal-entry hidden" data-img="Assets/Trago1.jpg">
+      <span class="terminal-line">&gt; init ritual --sequence=cocteles</span>
+      <span class="terminal-output">Cargando memoria gustativa...</span>
+      <div class="terminal-img-wrapper">
+        <img src="Assets/Trago1.jpg" alt="El Susurro del Abismo" class="terminal-img">
       </div>
     </div>
 
-    <!-- === CÓCTEL 2 MOBILE === -->
-    <div class="cartridge group" data-coctel="Lágrimas del Mar Profundo">
-      <div class="shell-metal">
-        <div class="shell-cap blue"></div>
-        <div class="shell-body">
-          <h3>Lágrimas del Mar Profundo</h3>
-        </div>
-        <div class="shell-info">
-          Gin azul, agua tónica y sal marina ancestral. Brilla bajo luz UV.
-        </div>
+    <!-- Entrada 2 -->
+    <div class="terminal-entry hidden" data-img="Assets/Trago2.jpg">
+      <span class="terminal-line">&gt; coctel.load("Lágrima de Penumbra")</span>
+      <span class="terminal-output">
+        [✓] Ginebra floral + loto negro — Efecto: <span class="terminal-key">TRANSCENDENTE</span>
+      </span>
+      <div class="terminal-img-wrapper">
+        <img src="Assets/Trago2.jpg" alt="Lágrima de Penumbra" class="terminal-img">
       </div>
     </div>
 
-    <!-- === CÓCTEL 3 MOBILE === -->
-    <div class="cartridge group" data-coctel="Necronomix">
-      <div class="shell-metal">
-        <div class="shell-cap green"></div>
-        <div class="shell-body">
-          <h3>Necronomix</h3>
-        </div>
-        <div class="shell-info">
-          Ron oscuro, café y polvo de “página arrancada”. Peligroso si se agita.
-        </div>
+    <!-- Entrada 3 -->
+    <div class="terminal-entry hidden" data-img="Assets/Trago3.jpg">
+      <span class="terminal-line">&gt; coctel.load("Ritual de Medianoche")</span>
+      <span class="terminal-output">
+        [✓] Mezcal + cacao + especias — Estado: <span class="terminal-key">DESPERTAR</span>
+      </span>
+      <div class="terminal-img-wrapper">
+        <img src="Assets/Trago3.jpg" alt="Ritual de Medianoche" class="terminal-img">
       </div>
     </div>
+
+    <!-- Entrada final -->
+    <div class="terminal-entry hidden">
+      <span class="terminal-line blink-slow">&gt; ritual.completed()</span>
+    </div>
+
   </div>
+</div>
+
 </section>
 
 
@@ -425,9 +427,11 @@
     </div>
   </footer>
 
-  <script src="JS/animacion.js"></script>
-  <script src="JS/cocteles.js"></script>
-  <script src="JS/navbar.js"></script>
+  <script src="js/animacion.js"></script>
+  <script src="js/cocteles.js"></script>
+  <script src="js/navbar.js"></script>
+  <script src="js/terminal.js"></script>
+  <script src="/js/bioshockCanvas.js"></script>
 
 </body>
 </html>

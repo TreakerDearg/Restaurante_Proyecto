@@ -1,84 +1,112 @@
-/* ===============================
-   UTILIDAD: DEBOUNCE PARA RESIZE
-=============================== */
-function debounce(func, wait = 200) {
-  let timeout;
-  return (...args) => {
-    clearTimeout(timeout);
-    timeout = setTimeout(() => func.apply(this, args), wait);
-  };
-}
+// ============================================================
+// COCTELERÍA DEL CULTO — SCRIPT PRINCIPAL
+// Autor: Treaker
+// ============================================================
 
-/* ===============================
-   LÓGICA DESKTOP – COCTEL CARDS
-=============================== */
-function initDesktopCards() {
-  const desktopCards = document.querySelectorAll("#cocteles-desktop .coctel-card");
+document.addEventListener("DOMContentLoaded", () => {
+  const isMobile = window.innerWidth < 768;
 
-  desktopCards.forEach(card => {
-    let hoverTimeout;
+  // =============================
+  // DESKTOP MODE — VHS BEHAVIOR
+  // =============================
+  if (!isMobile) {
+    const vhsCards = document.querySelectorAll(".vhs-tape");
 
-    const showInfo = () => card.classList.add("show-info");
-    const hideInfo = () => {
-      clearTimeout(hoverTimeout);
-      card.classList.remove("show-info");
-    };
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            entry.target.classList.remove("hidden");
 
-    card.addEventListener("mouseenter", () => {
-      hoverTimeout = setTimeout(showInfo, 3000); // esperar 3s antes de mostrar info
+            // Glitch delay effect
+            const title = entry.target.querySelector(".tape-title");
+            title.classList.add("glitch-slow");
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    vhsCards.forEach((card) => {
+      card.classList.add("hidden");
+      observer.observe(card);
     });
 
-    card.addEventListener("mouseleave", hideInfo);
-  });
-}
-
-/* ===============================
-   LÓGICA MÓVIL – CARTRIDGES
-=============================== */
-function initMobileCartridges() {
-  const cartridges = document.querySelectorAll("#cocteles-mobile .cartridge");
-
-  cartridges.forEach(cart => {
-    cart.addEventListener("click", () => cart.classList.toggle("active"));
-  });
-}
-
-/* ===============================
-   LIMPIAR EVENTOS
-=============================== */
-function clearDesktopCards() {
-  document.querySelectorAll("#cocteles-desktop .coctel-card").forEach(card => {
-    card.classList.remove("show-info");
-    card.replaceWith(card.cloneNode(true)); // eliminar eventos antiguos
-  });
-}
-
-function clearMobileCartridges() {
-  document.querySelectorAll("#cocteles-mobile .cartridge").forEach(cart => {
-    cart.classList.remove("active");
-    cart.replaceWith(cart.cloneNode(true)); // eliminar eventos antiguos
-  });
-}
-
-/* ===============================
-   DETECCIÓN DE DISPOSITIVO
-=============================== */
-function initCocktails() {
-  if (window.innerWidth >= 768) {
-    clearMobileCartridges();
-    initDesktopCards();
-  } else {
-    clearDesktopCards();
-    initMobileCartridges();
+    console.log("🎞️ VHS mode enabled: glitch + scroll reveal active");
   }
-}
 
-/* ===============================
-   REINICIAR LÓGICA AL REDIMENSIONAR
-=============================== */
-window.addEventListener("resize", debounce(initCocktails, 250));
+  // =============================
+  // MOBILE MODE — TERMINAL EFFECT
+  // =============================
+  else {
+    const terminalEntries = document.querySelectorAll(".terminal-entry");
 
-/* ===============================
-   INICIALIZACIÓN
-=============================== */
-document.addEventListener("DOMContentLoaded", initCocktails);
+    // Función para escribir texto tipo BIOSHOCK
+    const typeEffect = (element, text, speed = 25, callback) => {
+      element.textContent = "";
+      let i = 0;
+      const interval = setInterval(() => {
+        element.textContent += text.charAt(i);
+        i++;
+        if (i >= text.length) {
+          clearInterval(interval);
+          if (callback) callback();
+        }
+      }, speed);
+    };
+
+    // Secuencia de escritura automática con scroll reveal
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !entry.target.classList.contains("active")) {
+            entry.target.classList.add("visible", "active");
+
+            const lines = entry.target.querySelectorAll(".terminal-line, .terminal-output");
+            let delay = 0;
+
+            lines.forEach((line) => {
+              const text = line.dataset.text;
+              line.textContent = "";
+              setTimeout(() => {
+                line.classList.add("typing");
+                typeEffect(line, text, 30);
+              }, delay);
+              delay += text.length * 25 + 400;
+            });
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    terminalEntries.forEach((entry) => {
+      entry.classList.add("hidden");
+      observer.observe(entry);
+    });
+
+    console.log("🧬 Terminal mode enabled: BIOSHOCK typing active");
+  }
+
+  // =============================
+  // GLOBAL UTILITY — Smooth Reveal for Shared Elements
+  // =============================
+  const revealElements = document.querySelectorAll(".reveal-on-scroll");
+  const globalObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          entry.target.classList.remove("hidden");
+        }
+      });
+    },
+    { threshold: 0.2 }
+  );
+
+  revealElements.forEach((el) => {
+    el.classList.add("hidden");
+    globalObserver.observe(el);
+  });
+});

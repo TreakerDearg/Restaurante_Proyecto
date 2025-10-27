@@ -1,0 +1,128 @@
+/* ============================================================
+   🥃 COCTELERÍA DEL CULTO — BIOSHOCK MODE (Desktop)
+   ============================================================ */
+
+#cocteles-desktop {
+  background: radial-gradient(circle at 30% 20%, #0a0a0f 0%, #000 80%);
+  position: relative;
+  z-index: 2;
+}
+
+/* ---------- Tarjeta base ---------- */
+.bioshock-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.5rem;
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  background: linear-gradient(180deg, rgba(20,20,25,0.85) 0%, rgba(0,0,0,0.95) 100%);
+  box-shadow:
+    inset 0 0 20px rgba(255, 255, 255, 0.05),
+    0 0 40px rgba(255, 215, 0, 0.05);
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.5s ease, border 0.5s ease;
+}
+
+.bioshock-card:hover {
+  transform: translateY(-10px) scale(1.03);
+  border-color: rgba(255, 215, 0, 0.5);
+  box-shadow:
+    0 0 60px rgba(255, 215, 0, 0.2),
+    inset 0 0 30px rgba(255, 255, 255, 0.1);
+}
+
+/* ---------- Imagen ---------- */
+.coctel-img-wrapper {
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255, 215, 0, 0.15);
+}
+
+.coctel-img {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  transition: transform 2s ease, filter 1.5s ease;
+  filter: brightness(0.85) contrast(1.1);
+}
+
+.bioshock-card:hover .coctel-img {
+  transform: scale(1.08);
+  filter: brightness(1.1) contrast(1.3) saturate(1.2);
+}
+
+/* ---------- Overlay de descripción ---------- */
+.coctel-overlay {
+  padding: 2rem;
+  text-align: center;
+  color: #fefaf2;
+  position: relative;
+  z-index: 2;
+}
+
+.coctel-title {
+  font-family: "Cinzel Decorative", serif;
+  font-size: 1.75rem;
+  letter-spacing: 0.08em;
+  color: #ffd700;
+  text-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
+  margin-bottom: 0.5rem;
+  position: relative;
+}
+
+.coctel-desc {
+  font-family: "Cormorant Garamond", serif;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* ---------- Animación de “ondas bajo el agua” ---------- */
+.bioshock-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.04), transparent 70%);
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.bioshock-card:hover::before {
+  opacity: 0.6;
+  animation: waveMotion 6s ease-in-out infinite alternate;
+}
+
+@keyframes waveMotion {
+  0% { transform: translateY(0px) scale(1); opacity: 0.4; }
+  100% { transform: translateY(-10px) scale(1.05); opacity: 0.7; }
+}
+
+/* ---------- Header y título ---------- */
+.glitch-title {
+  position: relative;
+  color: #ffd700;
+  text-shadow: 1px 0 #ffecb3, -1px 0 #b38900;
+  animation: titlePulse 3s infinite ease-in-out;
+}
+
+@keyframes titlePulse {
+  0%, 100% { text-shadow: 0 0 8px rgba(255, 215, 0, 0.5); }
+  50% { text-shadow: 0 0 20px rgba(255, 215, 0, 0.9); }
+}
+
+/* ---------- Efecto “luz líquida” ---------- */
+.bioshock-card::after {
+  content: "";
+  position: absolute;
+  top: -100%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%);
+  transform: rotate(25deg);
+  animation: shimmer 8s linear infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translate(-30%, -30%) rotate(25deg); }
+  100% { transform: translate(30%, 30%) rotate(25deg); }
+} 

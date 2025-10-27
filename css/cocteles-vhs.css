@@ -1,0 +1,95 @@
+/* ============================================================
+   📼 MOBILE MODE — RED VHS / TERMINAL
+   ============================================================ */
+#cocteles-mobile {
+  background-color: #000;
+  color: #ff3b3b;
+  font-family: "Share Tech Mono", monospace;
+  overflow-x: hidden;
+  padding-bottom: 4rem;
+}
+
+/* Terminal container */
+.terminal-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Terminal entry */
+.terminal-entry {
+  background: rgba(255, 0, 0, 0.05);
+  border-left: 3px solid #ff0000;
+  padding: 1.5rem;
+  border-radius: 6px;
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 1s ease;
+}
+
+/* Tipeo */
+.terminal-line,
+.terminal-output {
+  white-space: nowrap;
+  overflow: hidden;
+  display: block;
+}
+
+.terminal-line.typing,
+.terminal-output.typing {
+  animation: typingEffect 2s steps(40) 1 forwards;
+  opacity: 1;
+}
+
+/* Blinking cursor */
+.blink-slow::after {
+  content: "_";
+  animation: blinkCursor 1s infinite;
+  color: #ff0000;
+}
+
+/* Terminal key */
+.terminal-key {
+  color: #ff4c4c;
+  font-weight: bold;
+}
+
+/* Imagen dentro de terminal */
+.terminal-img-wrapper {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.terminal-img {
+  max-width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+  opacity: 0.85;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.terminal-img:hover {
+  transform: scale(1.05);
+  opacity: 1;
+  box-shadow: 0 0 40px rgba(255, 0, 0, 0.5);
+}
+
+/* Reveal scroll / animation */
+.terminal-entry.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Animaciones */
+@keyframes typingEffect {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blinkCursor {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
