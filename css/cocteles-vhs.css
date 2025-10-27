@@ -27,48 +27,57 @@
   overflow: hidden;
   opacity: 0;
   transform: translateY(20px);
-  transition: all 1s ease;
+  transition: all 0.8s ease;
 }
 
-/* Tipeo */
+/* Reveal animation */
+.terminal-entry.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Lines of terminal */
 .terminal-line,
 .terminal-output {
   white-space: nowrap;
   overflow: hidden;
   display: block;
+  opacity: 0;
 }
 
+/* Tipeo animation */
 .terminal-line.typing,
 .terminal-output.typing {
-  animation: typingEffect 2s steps(40) 1 forwards;
+  animation: typingEffect 1.8s steps(40) 1 forwards;
   opacity: 1;
 }
 
-/* Blinking cursor */
+/* Cursor blinking */
 .blink-slow::after {
   content: "_";
   animation: blinkCursor 1s infinite;
-  color: #ff0000;
+  color: #ff3b3b;
 }
 
-/* Terminal key */
+/* Terminal key style */
 .terminal-key {
   color: #ff4c4c;
   font-weight: bold;
 }
 
-/* Imagen dentro de terminal */
+/* Imagen wrapper */
 .terminal-img-wrapper {
   margin-top: 1rem;
   text-align: center;
 }
 
+/* Images in terminal */
 .terminal-img {
   max-width: 100%;
   border-radius: 8px;
   box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
   opacity: 0.85;
-  transition: transform 0.5s ease, opacity 0.5s ease;
+  transition: transform 0.5s ease, opacity 0.5s ease, box-shadow 0.5s ease;
 }
 
 .terminal-img:hover {
@@ -77,13 +86,7 @@
   box-shadow: 0 0 40px rgba(255, 0, 0, 0.5);
 }
 
-/* Reveal scroll / animation */
-.terminal-entry.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Animaciones */
+/* Animations */
 @keyframes typingEffect {
   from { width: 0; }
   to { width: 100%; }
@@ -92,4 +95,9 @@
 @keyframes blinkCursor {
   0%, 50% { opacity: 1; }
   51%, 100% { opacity: 0; }
+}
+
+/* Optional: smoother delay between terminal entries */
+.terminal-entry:not(:last-child) {
+  margin-bottom: 1.5rem;
 }

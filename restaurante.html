@@ -255,55 +255,64 @@
   </div>
 </section>
 
-
-  <!-- ============================================================
-       📼 MOBILE MODE — RED VHS / TERMINAL ANCESTRAL
-       ============================================================ -->
-<div id="cocteles-mobile" class="block md:hidden px-6 pb-20">
+<!-- ============================================================
+     📼 MOBILE MODE — RED VHS / TERMINAL ANCESTRAL
+     ============================================================ -->
+<section id="cocteles-mobile" class="block md:hidden relative px-6 pb-20">
 
   <div class="terminal-wrapper">
 
     <!-- Entrada 1 -->
-    <div class="terminal-entry hidden" data-img="Assets/Trago1.jpg">
+    <div class="terminal-entry hidden" 
+         data-coctel="El Susurro del Abismo" 
+         data-composicion="Vodka negro + néctar de mora + humo líquido" 
+         data-efecto="ALTO" 
+         data-img="Assets/Trago1.jpg">
       <span class="terminal-line">&gt; init ritual --sequence=cocteles</span>
       <span class="terminal-output">Cargando memoria gustativa...</span>
       <div class="terminal-img-wrapper">
-        <img src="Assets/Trago1.jpg" alt="El Susurro del Abismo" class="terminal-img">
+        <img src="Assets/Trago1.jpg" alt="El Susurro del Abismo" class="terminal-img" loading="lazy">
       </div>
     </div>
 
     <!-- Entrada 2 -->
-    <div class="terminal-entry hidden" data-img="Assets/Trago2.jpg">
+    <div class="terminal-entry hidden" 
+         data-coctel="Lágrima de Penumbra" 
+         data-composicion="Ginebra floral + loto negro" 
+         data-efecto="TRANSCENDENTE" 
+         data-img="Assets/Trago2.jpg">
       <span class="terminal-line">&gt; coctel.load("Lágrima de Penumbra")</span>
       <span class="terminal-output">
-        [✓] Ginebra floral + loto negro — Efecto: <span class="terminal-key">TRANSCENDENTE</span>
+        [✓] <span class="terminal-key">Composición</span>: Ginebra floral + loto negro — Efecto: <span class="terminal-key">TRANSCENDENTE</span>
       </span>
       <div class="terminal-img-wrapper">
-        <img src="Assets/Trago2.jpg" alt="Lágrima de Penumbra" class="terminal-img">
+        <img src="Assets/Trago2.jpg" alt="Lágrima de Penumbra" class="terminal-img" loading="lazy">
       </div>
     </div>
 
     <!-- Entrada 3 -->
-    <div class="terminal-entry hidden" data-img="Assets/Trago3.jpg">
+    <div class="terminal-entry hidden" 
+         data-coctel="Ritual de Medianoche" 
+         data-composicion="Mezcal + cacao + especias" 
+         data-efecto="DESPERTAR" 
+         data-img="Assets/Trago3.jpg">
       <span class="terminal-line">&gt; coctel.load("Ritual de Medianoche")</span>
       <span class="terminal-output">
-        [✓] Mezcal + cacao + especias — Estado: <span class="terminal-key">DESPERTAR</span>
+        [✓] <span class="terminal-key">Composición</span>: Mezcal + cacao + especias — Estado: <span class="terminal-key">DESPERTAR</span>
       </span>
       <div class="terminal-img-wrapper">
-        <img src="Assets/Trago3.jpg" alt="Ritual de Medianoche" class="terminal-img">
+        <img src="Assets/Trago3.jpg" alt="Ritual de Medianoche" class="terminal-img" loading="lazy">
       </div>
     </div>
 
     <!-- Entrada final -->
     <div class="terminal-entry hidden">
       <span class="terminal-line blink-slow">&gt; ritual.completed()</span>
+      <span class="terminal-output">Secuencia finalizada. Memoria gustativa registrada.</span>
     </div>
 
   </div>
-</div>
-
 </section>
-
 
  <!-- ARCHIVOS VHS -->
     <section id="clips" class="py-24 px-6">
