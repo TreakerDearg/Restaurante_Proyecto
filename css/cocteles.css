@@ -1,15 +1,27 @@
-/* ===============================
-   ESTILO GENERAL DE SECCIÓN – DESKTOP
-=============================== */
-#cocteles-desktop {
-  position: relative;
-  overflow: hidden;
-  background-color: #000;
-  color: #fff;
+/* ================================
+   COCTELERÍA DEL CULTO - ESTILOS
+================================ */
+
+/* ----------------
+   General
+---------------- */
+#cocteles-desktop,
+#cocteles-mobile {
   font-family: 'Orbitron', 'Share Tech Mono', monospace;
+  color: #fff;
+  position: relative;
+  text-align: center;
 }
 
-/* Fondo de estática VHS */
+/* ----------------
+   Desktop
+---------------- */
+#cocteles-desktop {
+  background-color: #000;
+  padding: 6rem 1.5rem;
+  overflow: hidden;
+}
+
 #cocteles-desktop::before {
   content: "";
   position: absolute;
@@ -22,33 +34,49 @@
   animation: staticMove 2s infinite steps(8);
 }
 
-/* Movimiento leve de ruido */
 @keyframes staticMove {
   0% { background-position: 0 0; }
   100% { background-position: 100px 100px; }
 }
 
-/* ===============================
-   TARJETAS DE CÓCTELES
-=============================== */
+/* Grid */
+#cocteles-desktop .grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+@media (min-width: 640px) {
+  #cocteles-desktop .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1024px) {
+  #cocteles-desktop .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Tarjetas de cóctel */
 .coctel-card {
   position: relative;
   overflow: hidden;
   border-radius: 0.75rem;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255,255,255,0.05);
   background: #0a0a0a;
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  box-shadow: 0 0 20px rgba(255,255,255,0.05);
   cursor: pointer;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
   z-index: 2;
 }
-
 .coctel-card:hover {
   transform: scale(1.05);
-  box-shadow: 0 0 40px rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 40px rgba(255,255,255,0.2);
 }
 
-/* Imagen base con “revelado de cinta” */
+/* Imagen */
 .coctel-img {
   width: 100%;
   height: 100%;
@@ -57,16 +85,13 @@
   opacity: 0;
   animation: revealImage 2.5s ease forwards;
 }
-
 @keyframes revealImage {
   0% { filter: brightness(0) contrast(2); opacity: 0; }
   40% { filter: brightness(0.2) contrast(1.5); opacity: 0.3; }
   100% { filter: brightness(1) contrast(1.1); opacity: 1; }
 }
 
-/* ===============================
-   VHS OVERLAY (scanlines)
-=============================== */
+/* VHS Overlay */
 .vhs-overlay {
   position: absolute;
   inset: 0;
@@ -82,15 +107,12 @@
   z-index: 3;
   animation: scanlines 1.2s infinite linear;
 }
-
 @keyframes scanlines {
   0% { background-position: 0 0; }
   100% { background-position: 0 8px; }
 }
 
-/* ===============================
-   OVERLAY DE INFORMACIÓN
-=============================== */
+/* Info Overlay */
 .coctel-info {
   position: absolute;
   inset: 0;
@@ -104,7 +126,6 @@
   transition: opacity 0.4s ease;
   z-index: 5;
 }
-
 .coctel-card:hover .coctel-info {
   opacity: 1;
 }
@@ -114,9 +135,7 @@
 .coctel-info.blue { border-top: 3px solid #3b82f6; }
 .coctel-info.green { border-top: 3px solid #22c55e; }
 
-/* ===============================
-   GLITCH RGB
-=============================== */
+/* Glitch */
 .glitch-title {
   position: relative;
   font-size: 1.8rem;
@@ -126,7 +145,6 @@
   margin-bottom: 0.5rem;
   animation: glitchAnim 2s infinite;
 }
-
 .glitch-title::before,
 .glitch-title::after {
   content: attr(data-text);
@@ -136,19 +154,16 @@
   opacity: 0.8;
   clip: rect(0, 900px, 0, 0);
 }
-
 .glitch-title::before {
   left: 2px;
   text-shadow: -2px 0 #ff0048;
   animation: glitchClip 2.5s infinite linear alternate-reverse;
 }
-
 .glitch-title::after {
   left: -2px;
   text-shadow: 2px 0 #00ffff;
   animation: glitchClip 2.5s infinite linear alternate;
 }
-
 @keyframes glitchClip {
   0% { clip: rect(0, 900px, 0, 0); }
   5% { clip: rect(10px, 9999px, 25px, 0); }
@@ -157,16 +172,13 @@
   30% { clip: rect(0, 9999px, 50px, 0); }
   100% { clip: rect(0, 9999px, 0, 0); }
 }
-
 @keyframes glitchAnim {
   0%, 60%, 100% { transform: none; }
   20% { transform: skew(2deg); }
   40% { transform: skew(-2deg); }
 }
 
-/* ===============================
-   CRT FLASH (encendido)
-=============================== */
+/* CRT Flash */
 .crt-flash {
   position: absolute;
   inset: 0;
@@ -176,7 +188,6 @@
   pointer-events: none;
   z-index: 4;
 }
-
 @keyframes crtOn {
   0% { opacity: 1; transform: scale(1.2); }
   30% { opacity: 0.8; }
@@ -184,82 +195,42 @@
   100% { opacity: 0; transform: scale(1); }
 }
 
-/* ===============================
-   RESPONSIVE (desktop adaptativo)
-=============================== */
-@media (max-width: 1024px) {
-  #cocteles-desktop {
-    padding: 4rem 2rem;
-  }
-
-  .coctel-card {
-    border-radius: 0.5rem;
-  }
-
-  .coctel-info {
-    padding: 1.5rem;
-  }
-
-  .glitch-title {
-    font-size: 1.6rem;
-  }
-}
-
-
-/* =======================
-   MODO MÓVIL (BUCKSHOT)
-======================= */
-
-/* Por defecto, ocultar sección móvil (solo mostrar desktop) */
-#cocteles-mobile { display: none; }
-
-/* Mostrar móvil en pantallas ≤ 768px */
-@media (max-width: 768px) {
-  #cocteles-mobile { display: block; }
-  #cocteles-desktop { display: none; }
-}
-
-/* Estilo general */
+/* ----------------
+   Mobile
+---------------- */
 #cocteles-mobile {
-  font-family: 'Share Tech Mono', monospace;
-  background: radial-gradient(ellipse at center, #050505 0%, #000 80%);
+  padding: 3rem 1rem;
+  background: #000;
   text-align: center;
-  position: relative;
 }
-
-/* Fondo animado tipo VHS */
-#cocteles-mobile .absolute {
-  pointer-events: none;
-}
-
-/* === CARTUCHOS === */
 .cartridge {
   position: relative;
   width: 90%;
   max-width: 280px;
   perspective: 1000px;
+  margin-bottom: 1.5rem;
   cursor: pointer;
   transition: transform 0.3s ease;
 }
+.cartridge:active { transform: scale(0.97); }
 
-.cartridge:active {
-  transform: scale(0.97);
-}
-
-/* Cuerpo metálico del cartucho */
+/* Cuerpo metálico */
 .shell-metal {
   position: relative;
   height: 120px;
   background: linear-gradient(145deg, #202020, #090909);
   border-radius: 50px;
-  box-shadow: inset 0 0 10px #000, 0 0 15px rgba(255, 255, 255, 0.1);
   overflow: hidden;
   transform-style: preserve-3d;
   transition: transform 0.6s;
   animation: pulse 3s infinite ease-in-out;
 }
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 5px rgba(255,255,255,0.2); }
+  50% { box-shadow: 0 0 20px rgba(255,255,255,0.4); }
+}
 
-/* Parte superior del cartucho */
+/* Tapa de cartucho */
 .shell-cap {
   position: absolute;
   top: 0;
@@ -268,39 +239,26 @@
   width: 100%;
   border-top-left-radius: 50px;
   border-top-right-radius: 50px;
-  background: linear-gradient(to bottom, #ff0000, #330000);
-  box-shadow: inset 0 -2px 4px rgba(0, 0, 0, 0.8), 0 0 10px rgba(255, 0, 0, 0.5);
+  box-shadow: inset 0 -2px 4px rgba(0,0,0,0.8);
 }
+.shell-cap.red { background: linear-gradient(to bottom, #ff0000, #330000); }
+.shell-cap.blue { background: linear-gradient(to bottom, #00aaff, #001a33); }
+.shell-cap.green { background: linear-gradient(to bottom, #00ff88, #003322); }
 
-.shell-cap.blue {
-  background: linear-gradient(to bottom, #00aaff, #001a33);
-  box-shadow: 0 0 10px rgba(0, 170, 255, 0.5);
-}
-
-.shell-cap.green {
-  background: linear-gradient(to bottom, #00ff88, #003322);
-  box-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
-}
-
-/* Cuerpo con texto */
+/* Texto del cartucho */
 .shell-body {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100%;
   color: #ccc;
+  font-weight: bold;
   letter-spacing: 1px;
   text-transform: uppercase;
-  font-weight: bold;
-  transition: opacity 0.3s;
 }
+.shell-body h3 { font-size: 0.9rem; opacity: 0.8; }
 
-.shell-body h3 {
-  font-size: 0.9rem;
-  opacity: 0.8;
-}
-
-/* Información (parte trasera del cartucho) */
+/* Información trasera */
 .shell-info {
   position: absolute;
   inset: 0;
@@ -318,23 +276,12 @@
   transition: opacity 0.5s ease;
   text-align: center;
 }
+.cartridge.active .shell-metal { transform: rotateY(180deg); }
+.cartridge.active .shell-info { opacity: 1; }
 
-/* Efecto de giro al tocar */
-.cartridge.active .shell-metal {
-  transform: rotateY(180deg);
-}
-
-.cartridge.active .shell-info {
-  opacity: 1;
-}
-
-/* Pulsación del cartucho (brillo) */
-@keyframes pulse {
-  0%, 100% { box-shadow: 0 0 5px rgba(255,255,255,0.2); }
-  50% { box-shadow: 0 0 20px rgba(255,255,255,0.4); }
-}
-
-/* Estilo del título principal */
+/* ----------------
+   Títulos cromáticos
+---------------- */
 .chromatic {
   text-shadow:
     1px 0 #ff0048,
@@ -342,25 +289,20 @@
     0 1px #00ff99;
 }
 
+/* ----------------
+   Hidden classes
+---------------- */
+.hidden-mobile { display: block; }
+@media (max-width: 767px) { .hidden-mobile { display: none !important; } }
 
-/* Ocultar en móviles (<768px) */
-.hidden-mobile {
-  display: block; /* por defecto se muestra */
-}
+.hidden-desktop { display: block; }
+@media (min-width: 768px) { .hidden-desktop { display: none !important; } }
 
-@media (max-width: 767px) {
-  .hidden-mobile {
-    display: none !important;
-  }
-}
-
-/* Ocultar en desktop (>=768px) */
-.hidden-desktop {
-  display: block; /* por defecto se muestra */
-}
-
-@media (min-width: 768px) {
-  .hidden-desktop {
-    display: none !important;
-  }
+/* ----------------
+   Responsivo Desktop
+---------------- */
+@media (max-width: 1024px) {
+  #cocteles-desktop { padding: 4rem 1rem; }
+  .coctel-info { padding: 1.5rem; }
+  .glitch-title { font-size: 1.6rem; }
 }

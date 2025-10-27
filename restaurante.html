@@ -31,20 +31,21 @@
 </head>
 
 <body class="bg-black text-gray-100 font-mono overflow-x-hidden relative crt-distortion">
+
 <!-- NAVBAR -->
 <nav class="bg-black bg-opacity-90 fixed w-full z-50 shadow-lg border-b border-red-900">
   <div class="max-w-7xl mx-auto flex items-center justify-between p-4 relative">
-    
+
     <!-- Logo -->
     <a href="#" class="vhs-title text-2xl chromatic font-bold">BLACK COMEDOR</a>
-    
+
     <!-- Botón menú móvil -->
-    <button id="menu-toggle" class="md:hidden text-red-500 z-50 focus:outline-none">
+    <button id="menu-toggle" class="md:hidden text-red-500 focus:outline-none z-50">
       <ion-icon name="menu-outline" class="text-3xl"></ion-icon>
     </button>
 
-    <!-- Links del menú -->
-    <ul id="nav-links" class="hidden md:flex gap-8 items-center text-gray-100 uppercase font-mono flex-col md:flex-row absolute md:static top-full left-0 w-full md:w-auto bg-black md:bg-transparent p-4 md:p-0">
+    <!-- Links del menú (desktop) -->
+    <ul class="hidden md:flex gap-8 items-center text-gray-100 uppercase font-mono flex-row">
       <li><a href="#ritual" class="hover:text-red-500 flex items-center gap-1"><ion-icon name="flame-outline"></ion-icon> Ritual</a></li>
       <li><a href="#menu" class="hover:text-red-500 flex items-center gap-1"><ion-icon name="restaurant-outline"></ion-icon> Carta</a></li>
       <li><a href="#cocteles" class="hover:text-red-500 flex items-center gap-1"><ion-icon name="wine-outline"></ion-icon> Coctelería</a></li>
@@ -52,7 +53,16 @@
     </ul>
 
   </div>
+
+  <!-- Overlay menú móvil -->
+  <div id="mobile-menu" class="fixed inset-0 bg-black bg-opacity-95 flex flex-col items-center justify-center gap-10 text-white text-xl uppercase font-mono z-40 transform -translate-y-full transition-transform duration-500 ease-in-out">
+    <a href="#ritual" class="hover:text-red-500">Ritual</a>
+    <a href="#menu" class="hover:text-red-500">Carta</a>
+    <a href="#cocteles" class="hover:text-red-500">Coctelería</a>
+    <a href="#reserva" class="hover:text-red-500">Convocatoria</a>
+  </div>
 </nav>
+
 
 <header class="relative h-screen flex items-center justify-center text-center overflow-hidden hero">
   <!-- Overlay oscuro + gradiente -->
@@ -173,8 +183,10 @@
     </section>
 
 <!-- ================================
-     SECCIÓN: COCTELERÍA DEL CULTO (DESKTOP)
+     SECCIÓN: COCTELERÍA DEL CULTO
 ================================ -->
+
+<!-- ===== DESKTOP ===== -->
 <section id="cocteles-desktop" class="py-24 px-6 bg-black text-white relative overflow-hidden hidden-mobile">
   <!-- Fondo dinámico tipo estática -->
   <div class="absolute inset-0 pointer-events-none opacity-10 mix-blend-screen"
@@ -236,6 +248,60 @@
     </article>
   </div>
 </section>
+
+<!-- ===== MOBILE ===== -->
+<section id="cocteles-mobile" class="py-12 px-4 bg-black text-white hidden-desktop">
+  <header class="text-center mb-12">
+    <h2 class="text-3xl font-bold chromatic tracking-widest uppercase">
+      Coctelería del Culto
+    </h2>
+    <p class="text-gray-400 text-sm mt-2 uppercase tracking-[0.2em]">
+      Ritual líquido — Preparaciones prohibidas
+    </p>
+  </header>
+
+  <div class="flex flex-col gap-6 items-center">
+    <!-- === CÓCTEL 1 MOBILE === -->
+    <div class="cartridge group" data-coctel="Ojo de Azathoth">
+      <div class="shell-metal">
+        <div class="shell-cap red"></div>
+        <div class="shell-body">
+          <h3>Ojo de Azathoth</h3>
+        </div>
+        <div class="shell-info">
+          Vodka, jugo de granada y un toque de “mirada”. Nunca parpadea.
+        </div>
+      </div>
+    </div>
+
+    <!-- === CÓCTEL 2 MOBILE === -->
+    <div class="cartridge group" data-coctel="Lágrimas del Mar Profundo">
+      <div class="shell-metal">
+        <div class="shell-cap blue"></div>
+        <div class="shell-body">
+          <h3>Lágrimas del Mar Profundo</h3>
+        </div>
+        <div class="shell-info">
+          Gin azul, agua tónica y sal marina ancestral. Brilla bajo luz UV.
+        </div>
+      </div>
+    </div>
+
+    <!-- === CÓCTEL 3 MOBILE === -->
+    <div class="cartridge group" data-coctel="Necronomix">
+      <div class="shell-metal">
+        <div class="shell-cap green"></div>
+        <div class="shell-body">
+          <h3>Necronomix</h3>
+        </div>
+        <div class="shell-info">
+          Ron oscuro, café y polvo de “página arrancada”. Peligroso si se agita.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
  <!-- ARCHIVOS VHS -->
     <section id="clips" class="py-24 px-6">
