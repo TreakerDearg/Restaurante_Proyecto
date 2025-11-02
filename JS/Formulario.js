@@ -15,13 +15,16 @@ document.addEventListener("DOMContentLoaded", () => {
   reservasContainer.className = "mt-6 overflow-x-auto hidden";
   form.after(reservasContainer);
 
-  const API_URL = "http://localhost:4000/api/reservas"; // Cambiar en producción
+  // === URL del backend Render (ajustar según tu servicio) ===
+  const API_URL = "https://restaurante-proyecto.onrender.com/api/reservas";
 
-  // === Cargar reservas desde MongoDB ===
+  // === Función para cargar reservas desde MongoDB ===
   const cargarReservas = async () => {
     reservasContainer.innerHTML = `<p class="text-gray-400 text-center italic">Cargando reservas...</p>`;
     try {
       const res = await fetch(API_URL);
+      if (!res.ok) throw new Error("Error en la petición");
+
       const reservas = await res.json();
 
       if (!reservas || reservas.length === 0) {
@@ -32,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const table = document.createElement("table");
       table.className = "w-full border-collapse border border-red-700 text-white";
 
-      // Cabecera
+      // Cabecera de la tabla
       const thead = document.createElement("thead");
       thead.innerHTML = `
         <tr class="bg-black bg-opacity-70 border-b border-red-700">
@@ -49,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
       table.appendChild(thead);
 
-      // Cuerpo
+      // Cuerpo de la tabla
       const tbody = document.createElement("tbody");
       reservas.forEach((reserva, i) => {
         const tr = document.createElement("tr");
@@ -67,21 +70,20 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
         tbody.appendChild(tr);
       });
+
       table.appendChild(tbody);
       reservasContainer.innerHTML = "";
       reservasContainer.appendChild(table);
     } catch (err) {
-      reservasContainer.innerHTML = `<p class="text-red-500 text-center italic">Error al cargar las reservas.</p>`;
       console.error(err);
+      reservasContainer.innerHTML = `<p class="text-red-500 text-center italic">Error al cargar las reservas.</p>`;
     }
   };
 
   // === Mostrar/ocultar reservas ===
   showBtn.addEventListener("click", () => {
     reservasContainer.classList.toggle("hidden");
-    if (!reservasContainer.classList.contains("hidden")) {
-      cargarReservas();
-    }
+    if (!reservasContainer.classList.contains("hidden")) cargarReservas();
   });
 
   // === Envío del formulario al backend ===
@@ -89,13 +91,13 @@ document.addEventListener("DOMContentLoaded", () => {
     e.preventDefault();
 
     const datos = {
-      nombre: form.nombre.value,
-      email: form.email.value,
-      telefono: form.telefono.value,
+      nombre: form.nombre.value.trim(),
+      email: form.email.value.trim(),
+      telefono: form.telefono.value.trim(),
       comensales: Number(form.comensales.value),
       fecha: form.fecha.value,
       sena: Number(form.sena.value) || 0,
-      comentarios: form.comentarios.value,
+      comentarios: form.comentarios.value.trim(),
       vip: form.vip.checked
     };
 
@@ -112,17 +114,19 @@ document.addEventListener("DOMContentLoaded", () => {
       const result = await res.json();
 
       if (res.ok) {
-        feedback.textContent = "✅ Reserva guardada exitosamente.";
+        feedback.textContent = "Reserva guardada exitosamente.";
         feedback.className = "mt-4 text-center text-green-400 font-mono opacity-100";
         form.reset();
         setTimeout(() => feedback.classList.add("opacity-0"), 5000);
+
+        if (!reservasContainer.classList.contains("hidden")) cargarReservas();
       } else {
-        feedback.textContent = "❌ Error al guardar la reserva: " + (result.error || "Error desconocido.");
+        feedback.textContent = "Error al guardar la reserva: " + (result.error || "Error desconocido");
         feedback.className = "mt-4 text-center text-red-500 font-mono opacity-100";
       }
     } catch (err) {
       console.error(err);
-      feedback.textContent = "⚠️ No se pudo conectar con el servidor.";
+      feedback.textContent = "No se pudo conectar con el servidor.";
       feedback.className = "mt-4 text-center text-red-500 font-mono opacity-100";
     }
   });
