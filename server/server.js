@@ -10,26 +10,52 @@ import cors from "cors";
 dotenv.config();
 const app = express();
 
-// === Middlewares ===
-app.use(cors()); // Permite requests desde cualquier origen
+// ==============================
+// MIDDLEWARES
+// ==============================
+
+// CORS: permitir tu front (GitHub Pages + localhost)
+app.use(cors({
+  origin: [
+    "https://treakerdearg.github.io",
+    "http://localhost:5500"
+  ],
+  credentials: true
+}));
+
+// Parse JSON
 app.use(express.json());
 
-// === Conexión a MongoDB Atlas ===
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log("✅ Conectado a MongoDB Atlas"))
-  .catch(err => console.error("❌ Error de conexión:", err));
+// ==============================
+// CONEXIÓN A MONGODB ATLAS
+// ==============================
 
-// === Modelo ===
+const MONGO_URI = process.env.MONGO_URI || "mongodb+srv://leandronicolas201402_db_user:Delta12@restaurante.vaqq5sn.mongodb.net/Restaurante?retryWrites=true&w=majority";
+
+mongoose.connect(MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  serverSelectionTimeoutMS: 5000
+})
+.then(() => console.log("✅ Conectado a MongoDB Atlas"))
+.catch(err => console.error("❌ Error de conexión:", err.message));
+
+// ==============================
+// MODELO DE RESERVA
+// ==============================
+
 import Reserva from "./models/Reserva.js";
 
-// === Endpoints ===
+// ==============================
+// ENDPOINTS
+// ==============================
 
 // Guardar reserva
 app.post("/api/reservas", async (req, res) => {
   try {
     const data = {
       ...req.body,
-      fecha: new Date(req.body.fecha) // Convertimos la fecha a Date
+      fecha: new Date(req.body.fecha)
     };
 
     const nuevaReserva = new Reserva(data);
@@ -38,25 +64,27 @@ app.post("/api/reservas", async (req, res) => {
     console.log("✅ Reserva guardada:", nuevaReserva);
     res.status(201).json({ mensaje: "Reserva guardada exitosamente" });
   } catch (error) {
-    console.error("❌ Error al guardar la reserva:", error);
-    res.status(500).json({ error: "Error al guardar la reserva" });
+    console.error("❌ Error al guardar la reserva:", error.message);
+    res.status(500).json({ error: error.message });
   }
 });
 
 // Obtener todas las reservas
 app.get("/api/reservas", async (req, res) => {
   try {
-    const reservas = await Reserva.find().sort({ fechaRegistro: -1 }); // Orden descendente
+    const reservas = await Reserva.find().sort({ fechaRegistro: -1 });
     res.json(reservas);
   } catch (error) {
-    console.error("❌ Error al obtener reservas:", error);
-    res.status(500).json({ error: "Error al obtener reservas" });
+    console.error("❌ Error al obtener reservas:", error.message);
+    res.status(500).json({ error: error.message });
   }
 });
 
 // Endpoint de test
 app.get("/", (req, res) => res.send("Servidor activo 🚀"));
 
-// === Puerto ===
+// ==============================
+// PUERTO
+// ==============================
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => console.log(`🧠 Servidor corriendo en http://localhost:${PORT}`));

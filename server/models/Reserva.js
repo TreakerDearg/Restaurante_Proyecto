@@ -7,7 +7,7 @@ const reservaSchema = new mongoose.Schema({
   comensales: { type: Number, required: true },
   fecha: { type: Date, required: true },
   sena: { type: Number, default: 0 },
-  comentarios: { type: String },
+  comentarios: { type: String, default: "" },
   vip: { type: Boolean, default: false },
   fechaRegistro: { type: Date, default: Date.now }
 });
